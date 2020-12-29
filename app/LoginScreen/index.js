@@ -1,22 +1,17 @@
 import React, { useState } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { login } from 'shared/store/auth/actions';
 import useFormState from 'shared/hooks/useFormState';
+import KeyboardDismissArea from 'shared/components/KeyboardDismissArea';
 import IconTextInput from 'shared/components/IconTextInput';
 import GreenBtn from 'shared/components/GreenBtn';
 import TouchableText from 'shared/components/TouchableText';
 import TouchableTextIcon from 'shared/components/TouchableTextIcon';
-import CityCropBanner from './CityCropBanner';
+import CityCropBanner from 'shared/components/CityCropBanner';
 
-function LoginScreen() {
+function LoginScreen({ navigation }) {
   const [formState, setFormState] = useFormState({
     email: '',
     password: '',
@@ -29,7 +24,7 @@ function LoginScreen() {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <KeyboardDismissArea>
       <View style={styles.container}>
         <CityCropBanner />
 
@@ -38,9 +33,9 @@ function LoginScreen() {
           iconImage={require('assets/icons/mail.png')}
           placeholder="Email"
           value={formState.email}
+          keyboardType="email-address"
           autoCapitalize="none"
           autoCompleteType="email"
-          keyboardType="visible-password"
           onChangeText={(text) => setFormState({ email: text })}
         />
         <IconTextInput
@@ -58,6 +53,7 @@ function LoginScreen() {
         <TouchableText
           style={styles.forgotPasswordTextContainer}
           textStyle={styles.forgotPasswordText}
+          onPress={() => navigation.navigate('Forgot Password')}
         >
           Forgot password?
         </TouchableText>
@@ -68,12 +64,13 @@ function LoginScreen() {
             style={styles.registerCtaTextContainer}
             textStyle={styles.registerCtaText}
             icon="chevron-forward"
+            onPress={() => navigation.navigate('Register')}
           >
             Register here
           </TouchableTextIcon>
         </View>
       </View>
-    </TouchableWithoutFeedback>
+    </KeyboardDismissArea>
   );
 }
 

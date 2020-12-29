@@ -9,6 +9,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { tryGetStoredUserToken } from 'shared/store/auth/actions';
 import LoginScreen from './LoginScreen';
+import RegisterScreen from './RegisterScreen';
+import ForgotPasswordScreen from './ForgotPasswordScreen';
 import HomeScreen from './HomeScreen';
 
 // Stack global options
@@ -37,7 +39,14 @@ const AuthNavigator = () => {
       <Stack.Navigator screenOptions={stackScreenOptions}>
         {userToken === null ? (
           // Logged Out
-          <Stack.Screen name="Login" component={LoginScreen} />
+          <Fragment>
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen
+              name="Forgot Password"
+              component={ForgotPasswordScreen}
+            />
+          </Fragment>
         ) : (
           // Logged In
           <Stack.Screen name="Home" component={HomeScreen} />
