@@ -15,7 +15,9 @@ import HomeScreen from './HomeScreen';
 
 // Stack global options
 const stackScreenOptions = {
-  headerShown: false,
+  headerTransparent: true,
+  headerTitle: '',
+  headerTintColor: '#0B7B03',
   ...TransitionPresets.SlideFromRightIOS,
 };
 
