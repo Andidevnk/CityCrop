@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Modal } from 'react-native';
 
 import KeyboardDismissArea from 'shared/components/KeyboardDismissArea';
 import IconTextInput from 'shared/components/IconTextInput';
+import IconButton from 'shared/components/IconButton';
 import GreenBtn from 'shared/components/GreenBtn';
 
 const ForgotPasswordScreen = ({ navigation }) => {
@@ -52,6 +53,13 @@ const ForgotPasswordScreen = ({ navigation }) => {
         >
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
+              <IconButton
+                style={styles.closeIcon}
+                name="close"
+                size={30}
+                color="#0B7B03"
+                onPress={() => setModalVisible(false)}
+              />
               <Text style={styles.modalText}>
                 We have sent you an email. Please check your inbox.
               </Text>
@@ -111,6 +119,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+  },
+  closeIcon: {
+    position: 'absolute',
+    top: 18,
+    right: 20,
   },
   modalText: {
     marginTop: 40,
