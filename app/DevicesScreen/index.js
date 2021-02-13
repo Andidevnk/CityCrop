@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { logout } from 'shared/store/auth/actions';
 
-function HomeScreen() {
+function DevicesScreen() {
   const dispatch = useDispatch();
 
   const logoutUser = () => {
@@ -21,4 +21,4 @@ function HomeScreen() {
 
 const styles = StyleSheet.create({});
 
-export default HomeScreen;
+export default DevicesScreen;
