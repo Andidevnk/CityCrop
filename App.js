@@ -13,7 +13,7 @@ export default function App() {
       <SafeAreaView
         style={{
           flex: 1,
-          backgroundColor: '#F2F2F2',
+          backgroundColor: '#F5F8F5',
           paddingTop: Platform.OS === 'android' ? RNStatusBar.currentHeight : 0,
         }}
       >
