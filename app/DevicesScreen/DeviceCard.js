@@ -14,19 +14,24 @@ const getDeviceImageSource = (modulesCount) =>
     ? require('assets/imgs/1-module-device-front.png')
     : require('assets/imgs/2-module-device-front.png');
 
-const DeviceCard = ({ device }) => (
+const DeviceCard = ({ device, onSettingsIconPress }) => (
   <View
     style={{
       ...cardStyles.card,
       ...styles.cardPadding,
     }}
   >
-    <Image
-      style={styles.settingsIcon}
-      source={require('assets/icons/settings.png')}
-      resizeMode="contain"
-    />
-    <Image
+    <TouchableOpacity
+      style={styles.settingsIconContainer}
+      onPress={onSettingsIconPress}
+    >
+      <Image
+        style={styles.settingsIcon}
+        source={require('assets/icons/settings.png')}
+        resizeMode="contain"
+      />
+    </TouchableOpacity>
+    <ScalableImage
       style={getDeviceImageStyle(device.modulesCount)}
       source={getDeviceImageSource(device.modulesCount)}
       resizeMode="contain"
@@ -75,10 +80,12 @@ const styles = StyleSheet.create({
   dualModuleImage: {
     height: 180,
   },
-  settingsIcon: {
+  settingsIconContainer: {
     position: 'absolute',
     top: 20,
-    right: 25,
+    right: 20,
+  },
+  settingsIcon: {
     height: 22,
     width: 22,
   },

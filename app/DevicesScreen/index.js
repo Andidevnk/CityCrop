@@ -85,20 +85,30 @@ const devices = [
   },
 ];
 
-function DevicesScreen() {
+function DevicesScreen({ navigation }) {
   const dispatch = useDispatch();
 
   const logoutUser = () => {
     dispatch(logout());
   };
 
+  const navigateToSettings = () => {
+    navigation.navigate('Settings');
+  };
+
   return (
     <View style={styles.container}>
       <FlatList
-        contentContainerStyle={{ paddingVertical: 4, paddingHorizontal: 4 }}
+        contentContainerStyle={{
+          paddingTop: 4,
+          paddingHorizontal: 4,
+          paddingBottom: 20,
+        }}
         showsVerticalScrollIndicator={false}
         data={devices}
-        renderItem={({ item }) => <DeviceCard device={item} />}
+        renderItem={({ item }) => (
+          <DeviceCard device={item} onSettingsIconPress={navigateToSettings} />
+        )}
         ListFooterComponent={() => (
           <TouchableOpacity style={styles.addDeviceBtn}>
             <Text style={styles.addDeviceText}>Add a new device</Text>
