@@ -27,62 +27,6 @@ const devices = [
     plantsCount: 5,
     status: 'connected',
   },
-  {
-    key: 'Dominic',
-    name: 'Dominic',
-    modulesCount: 2,
-    plantsCount: 5,
-    status: 'connected',
-  },
-  {
-    key: 'Jackson',
-    name: 'Jackson',
-    modulesCount: 2,
-    plantsCount: 5,
-    status: 'connected',
-  },
-  {
-    key: 'James',
-    name: 'James',
-    modulesCount: 2,
-    plantsCount: 5,
-    status: 'connected',
-  },
-  {
-    key: 'Joel',
-    name: 'Joel',
-    modulesCount: 2,
-    plantsCount: 5,
-    status: 'connected',
-  },
-  {
-    key: 'John',
-    name: 'John',
-    modulesCount: 2,
-    plantsCount: 5,
-    status: 'connected',
-  },
-  {
-    key: 'Jillian',
-    name: 'Jillian',
-    modulesCount: 2,
-    plantsCount: 5,
-    status: 'connected',
-  },
-  {
-    key: 'Jimmy',
-    name: 'Jimmy',
-    modulesCount: 2,
-    plantsCount: 5,
-    status: 'connected',
-  },
-  {
-    key: 'Julie',
-    name: 'Julie',
-    modulesCount: 2,
-    plantsCount: 5,
-    status: 'connected',
-  },
 ];
 
 function DevicesScreen({ navigation }) {
