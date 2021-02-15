@@ -2,6 +2,9 @@ import React, { useMemo } from 'react';
 import { Image } from 'react-native';
 
 const ScalableImage = ({ style, source, ...restProps }) => {
+  // Transform array styles into object to have uniform handling
+  if (Array.isArray(style)) style = Object.assign({}, ...style);
+
   const extraStyle = useMemo(() => {
     const { width, height } = Image.resolveAssetSource(source);
     const aspectRatio = width / height;
