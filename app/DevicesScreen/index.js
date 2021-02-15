@@ -1,8 +1,15 @@
 import React from 'react';
-import { StyleSheet, View, FlatList, Button } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { logout } from 'shared/store/auth/actions';
+import ScalableImage from 'shared/components/ScalableImage';
 import DeviceCard from './DeviceCard';
 
 const devices = [
@@ -92,8 +99,18 @@ function DevicesScreen() {
         showsVerticalScrollIndicator={false}
         data={devices}
         renderItem={({ item }) => <DeviceCard device={item} />}
+        ListFooterComponent={() => (
+          <TouchableOpacity style={styles.addDeviceBtn}>
+            <Text style={styles.addDeviceText}>Add a new device</Text>
+            <ScalableImage
+              style={styles.addDeviceIcon}
+              source={require('assets/icons/plus.png')}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
+        )}
       />
-      <Button onPress={logoutUser} title="Logout" />
+      {/* <Button onPress={logoutUser} title="Logout" /> */}
     </View>
   );
 }
@@ -103,6 +120,23 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     backgroundColor: '#F5F8F5',
+  },
+  addDeviceBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 15,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 8,
+    borderWidth: 1.5,
+    borderColor: '#0B7B03',
+  },
+  addDeviceText: {
+    fontSize: 16,
+    color: '#0B7B03',
+  },
+  addDeviceIcon: {
+    height: 24,
   },
 });
 
