@@ -9,6 +9,7 @@ import { ScreenOptions } from 'shared/constants';
 import WelcomeScreen from './WelcomeScreen';
 import DevicesScreen from './DevicesScreen';
 import DeviceSettingsScreen from './DeviceSettingsScreen';
+import WiFiSettingsScreen from './WiFiSettingsScreen';
 
 // Stack global options
 const stackScreenOptions = {
@@ -43,6 +44,11 @@ const HomeNavigator = () => {
           <Stack.Screen
             name="Device Settings"
             component={DeviceSettingsScreen}
+            options={ScreenOptions.greenHeader}
+          />
+          <Stack.Screen
+            name="WiFi Settings"
+            component={WiFiSettingsScreen}
             options={ScreenOptions.greenHeader}
           />
         </>
