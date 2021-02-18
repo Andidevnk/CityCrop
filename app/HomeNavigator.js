@@ -5,13 +5,13 @@ import {
   TransitionPresets,
 } from '@react-navigation/stack';
 
+import { ScreenOptions } from 'shared/constants';
 import WelcomeScreen from './WelcomeScreen';
 import DevicesScreen from './DevicesScreen';
 import DeviceSettingsScreen from './DeviceSettingsScreen';
 
 // Stack global options
 const stackScreenOptions = {
-  headerShown: false,
   ...TransitionPresets.SlideFromRightIOS,
 };
 
@@ -23,40 +23,27 @@ const HomeNavigator = () => {
   return (
     <Stack.Navigator screenOptions={stackScreenOptions}>
       {devices.length === 0 ? (
-        <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        <Stack.Screen
+          name="Welcome"
+          component={WelcomeScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
       ) : (
         <>
           <Stack.Screen
             name="Devices"
             component={DevicesScreen}
             options={{
-              headerShown: true,
+              ...ScreenOptions.transparentHeader,
               headerTitle: 'Welcome back Amy!',
-              headerTitleAlign: 'center',
-              headerStyle: {
-                backgroundColor: '#F5F8F5',
-                elevation: 0,
-                shadowOpacity: 0,
-              },
-              // headerLeft: () => (
-              //   <TouchableHighlight
-              //     activeOpacity={0.9}
-              //     underlayColor="#EEEEEE"
-              //     onPress={() => console.log('left')}
-              //   >
-              //     <Image
-              //       style={{ height: 50, width: 50 }}
-              //       source={require('assets/icons/key.png')}
-              //       fadeDuration={0}
-              //       resizeMode="contain"
-              //     />
-              //   </TouchableHighlight>
-              // ),
             }}
           />
           <Stack.Screen
             name="Device Settings"
             component={DeviceSettingsScreen}
+            options={ScreenOptions.greenHeader}
           />
         </>
       )}
