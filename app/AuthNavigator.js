@@ -51,7 +51,13 @@ const AuthNavigator = () => {
           </Fragment>
         ) : (
           // Logged In
-          <Stack.Screen name="Home" component={HomeNavigator} />
+          <Stack.Screen
+            name="Home"
+            component={HomeNavigator}
+            options={{
+              headerShown: false,
+            }}
+          />
         )}
       </Stack.Navigator>
     </NavigationContainer>
