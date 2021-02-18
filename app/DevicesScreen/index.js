@@ -37,7 +37,7 @@ function DevicesScreen({ navigation }) {
   };
 
   const navigateToSettings = () => {
-    navigation.navigate('Settings');
+    navigation.navigate('Device Settings');
   };
 
   return (

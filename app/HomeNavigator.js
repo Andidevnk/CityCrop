@@ -7,7 +7,7 @@ import {
 
 import WelcomeScreen from './WelcomeScreen';
 import DevicesScreen from './DevicesScreen';
-import SettingsScreen from './SettingsScreen';
+import DeviceSettingsScreen from './DeviceSettingsScreen';
 
 // Stack global options
 const stackScreenOptions = {
@@ -54,7 +54,10 @@ const HomeNavigator = () => {
               // ),
             }}
           />
-          <Stack.Screen name="Settings" component={SettingsScreen} />
+          <Stack.Screen
+            name="Device Settings"
+            component={DeviceSettingsScreen}
+          />
         </>
       )}
     </Stack.Navigator>
