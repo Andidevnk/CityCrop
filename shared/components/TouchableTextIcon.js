@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-function TouchableTextIcon({ style, textStyle, children, ...restProps }) {
+function TouchableTextIcon({ style, textStyle, icon, children, ...restProps }) {
   return (
     <TouchableOpacity
       style={{
@@ -13,7 +13,7 @@ function TouchableTextIcon({ style, textStyle, children, ...restProps }) {
       {...restProps}
     >
       <Text style={textStyle}>{children}</Text>
-      <Ionicons name="chevron-forward" size={22} color="#59C901" />
+      <Ionicons name={icon} size={22} color="#59C901" />
     </TouchableOpacity>
   );
 }
