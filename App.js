@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, Platform, StatusBar as RNStatusBar } from 'react-native';
+import { Platform } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Provider } from 'react-redux';
 
@@ -10,15 +10,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <StatusBar style="auto" />
-      <SafeAreaView
-        style={{
-          flex: 1,
-          backgroundColor: '#F5F8F5',
-          paddingTop: Platform.OS === 'android' ? RNStatusBar.currentHeight : 0,
-        }}
-      >
-        <AuthNavigator />
-      </SafeAreaView>
+      <AuthNavigator />
     </Provider>
   );
 }
