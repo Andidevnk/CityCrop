@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 const KeyboardDismissArea = ({ children, ...restProps }) => (

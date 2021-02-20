@@ -5,7 +5,6 @@ import {
   createStackNavigator,
   TransitionPresets,
 } from '@react-navigation/stack';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { tryGetStoredUserToken } from 'shared/store/auth/actions';
 import LoginScreen from './LoginScreen';

@@ -1,5 +1,4 @@
 import React from 'react';
-import { View, Text } from 'react-native';
 import {
   createStackNavigator,
   TransitionPresets,
@@ -11,18 +10,17 @@ import DevicesScreen from './DevicesScreen';
 import DeviceSettingsScreen from './DeviceSettingsScreen';
 import WiFiSettingsScreen from './WiFiSettingsScreen';
 
-// Stack global options
-const stackScreenOptions = {
-  ...TransitionPresets.SlideFromRightIOS,
-};
-
 const Stack = createStackNavigator();
 
 const HomeNavigator = () => {
   const devices = ['asdasd'];
 
   return (
-    <Stack.Navigator screenOptions={stackScreenOptions}>
+    <Stack.Navigator
+      screenOptions={{
+        ...TransitionPresets.SlideFromRightIOS,
+      }}
+    >
       {devices.length === 0 ? (
         <Stack.Screen
           name="Welcome"

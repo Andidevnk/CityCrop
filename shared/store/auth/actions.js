@@ -26,7 +26,7 @@ export const register = (name, surname, email, password) => (dispatch) => {
 
   return axios
     .post('https://api.citycrop.io/v1/auth/signup', data)
-    .then(
+    .then((response) =>
       AsyncStorage.setItem('token', response.data.token).then(() =>
         dispatch(setUserToken(response.data.token))
       )

@@ -8,16 +8,6 @@ import {
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-import ScalableImage from 'shared/components/ScalableImage';
-
-const device = {
-  id: '1',
-  name: 'City Crop Device',
-  modulesCount: 2,
-  plantsCount: 5,
-  status: 'connected',
-};
-
 const WiFiSettingsScreen = () => (
   <View style={styles.container}>
     <Text style={styles.title}>Change WiFi settings</Text>

@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const cardStyles = StyleSheet.create({
   card: {

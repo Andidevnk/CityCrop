@@ -1,1 +1,1 @@
-export ScreenOptions from './screenOptions';
+export { default as ScreenOptions } from './screenOptions';
