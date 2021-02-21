@@ -14,7 +14,12 @@ const getDeviceImageSource = (modulesCount) =>
     ? require('assets/imgs/1-module-device-front.png')
     : require('assets/imgs/2-module-device-front.png');
 
-const DeviceCard = ({ device, onSettingsIconPress }) => (
+const DeviceCard = ({
+  device,
+  onEmptyTankPress,
+  onReplaceNutrientPress,
+  onSettingsIconPress,
+}) => (
   <View
     style={{
       ...cardStyles.card,
@@ -57,10 +62,12 @@ const DeviceCard = ({ device, onSettingsIconPress }) => (
         style={styles.actionBtnMargin}
         iconSource={require('assets/icons/watering-can.png')}
         title="Empty tank"
+        onPress={onEmptyTankPress}
       />
       <ActionButton
         iconSource={require('assets/icons/bottle.png')}
         title="Replace Nutrient"
+        onPress={onReplaceNutrientPress}
       />
     </View>
   </View>

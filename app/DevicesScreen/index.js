@@ -36,6 +36,14 @@ function DevicesScreen({ navigation }) {
   //   dispatch(logout());
   // };
 
+  const navigateToEmptyTank = () => {
+    navigation.navigate('Water Wizard');
+  };
+
+  const navigateToReplaceNutrients = () => {
+    navigation.navigate('Replace Nutrients');
+  };
+
   const navigateToSettings = () => {
     navigation.navigate('Device Settings');
   };
@@ -51,7 +59,12 @@ function DevicesScreen({ navigation }) {
         showsVerticalScrollIndicator={false}
         data={devices}
         renderItem={({ item }) => (
-          <DeviceCard device={item} onSettingsIconPress={navigateToSettings} />
+          <DeviceCard
+            device={item}
+            onEmptyTankPress={navigateToEmptyTank}
+            onReplaceNutrientPress={navigateToReplaceNutrients}
+            onSettingsIconPress={navigateToSettings}
+          />
         )}
         ListFooterComponent={() => (
           <TouchableOpacity style={styles.addDeviceBtn}>

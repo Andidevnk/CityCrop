@@ -9,6 +9,7 @@ import WelcomeScreen from './WelcomeScreen';
 import DevicesScreen from './DevicesScreen';
 import DeviceSettingsScreen from './DeviceSettingsScreen';
 import WiFiSettingsScreen from './WiFiSettingsScreen';
+import ReplaceNutrientsScreen from './ReplaceNutrientsScreen';
 
 const Stack = createStackNavigator();
 
@@ -47,6 +48,11 @@ const HomeNavigator = () => {
           <Stack.Screen
             name="WiFi Settings"
             component={WiFiSettingsScreen}
+            options={ScreenOptions.greenHeader}
+          />
+          <Stack.Screen
+            name="Replace Nutrients"
+            component={ReplaceNutrientsScreen}
             options={ScreenOptions.greenHeader}
           />
         </>
