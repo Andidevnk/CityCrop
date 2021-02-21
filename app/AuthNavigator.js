@@ -28,7 +28,7 @@ const AuthNavigator = () => {
 
   useEffect(() => {
     dispatch(tryGetStoredUserToken());
-  }, []);
+  }, [dispatch]);
 
   // Waiting until token is fetched
   if (isAuthLoading) {
