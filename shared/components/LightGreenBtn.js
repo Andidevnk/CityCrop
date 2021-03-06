@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, TouchableHighlight, Text } from 'react-native';
 
-function LightGreenBtn({ style, title, ...restProps }) {
+function LightGreenBtn({ style, title, disabled = false, ...restProps }) {
   return (
     <TouchableHighlight
       style={{
@@ -10,6 +10,7 @@ function LightGreenBtn({ style, title, ...restProps }) {
       }}
       activeOpacity={0.9}
       underlayColor="#4bad01"
+      disabled={disabled}
       {...restProps}
     >
       <Text style={styles.text}>{title}</Text>
