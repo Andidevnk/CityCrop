@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import useArrayToggleState from 'shared/hooks/useArrayToggleState';
+import useToggleMultipleState from 'shared/hooks/useToggleMultipleState';
 import TextStyles from 'shared/styles/text';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import NutrientButton from './NutrientButton';
+import ConfirmationModal from './ConfirmationModal';
 
 const nutrients = [
   {
@@ -39,10 +40,22 @@ const nutrients = [
   },
 ];
 
-const ReplaceNutrientsScreen = () => {
-  const [selectedNutrients, toggleSelectedNutrient] = useArrayToggleState([]);
+const sortOutOfPlace = (array, compareFunction) =>
+  [...array].sort(compareFunction);
+const compareNutrientIds = (a, b) => parseInt(a.id) - parseInt(b.id);
 
-  const isSelected = (id) => selectedNutrients.includes(id);
+const ReplaceNutrientsScreen = () => {
+  const [
+    selectedNutrients,
+    toggleSelectedNutrient,
+    isNutrientSelected,
+  ] = useToggleMultipleState([], (a, b) => a.id === b.id);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const selectedNutrientsSorted = useMemo(
+    () => sortOutOfPlace(selectedNutrients, compareNutrientIds),
+    [selectedNutrients]
+  );
 
   return (
     <View style={styles.container}>
@@ -50,18 +63,36 @@ const ReplaceNutrientsScreen = () => {
         <Text style={[TextStyles.subtitleCenter, { marginBottom: 30 }]}>
           Select nutrients to replace
         </Text>
-        {nutrients.map(({ id, name, icon, level }) => (
-          <NutrientButton
-            style={[styles.nutrientBtn, isSelected(id) && styles.selected]}
-            key={id}
-            title={name}
-            iconSource={icon}
-            level={level}
-            onPress={() => toggleSelectedNutrient(id)}
-          />
-        ))}
+        {nutrients.map((nutrient) => {
+          const { id, name, icon, level } = nutrient;
+          return (
+            <NutrientButton
+              style={[
+                styles.nutrientBtn,
+                isNutrientSelected(nutrient) && styles.selected,
+              ]}
+              key={id}
+              title={name}
+              iconSource={icon}
+              level={level}
+              onPress={() => toggleSelectedNutrient(nutrient)}
+            />
+          );
+        })}
       </View>
-      <LightGreenBtn title="Submit" onPress={() => console.log('btn')} />
+      <LightGreenBtn
+        title="Submit"
+        disabled={selectedNutrients.length === 0}
+        onPress={() => setModalVisible(true)}
+      />
+
+      <ConfirmationModal
+        visible={modalVisible}
+        selectedNutrients={selectedNutrientsSorted}
+        onConfirmPress={() => setModalVisible(false)}
+        onCancelPress={() => setModalVisible(false)}
+        onRequestClose={() => setModalVisible(false)}
+      />
     </View>
   );
 };
