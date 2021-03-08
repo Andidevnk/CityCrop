@@ -1,19 +1,17 @@
 import React from 'react';
 import { StyleSheet, TouchableHighlight, Text } from 'react-native';
 
-function LightGreenBtn({ style, title, disabled = false, ...restProps }) {
+function LightGreenBtn({ style, title, outlined = false, ...restProps }) {
   return (
     <TouchableHighlight
-      style={{
-        ...styles.button,
-        ...style,
-      }}
+      style={[styles.button, outlined && styles.buttonOutlined, style]}
       activeOpacity={0.9}
-      underlayColor="#4bad01"
-      disabled={disabled}
+      underlayColor={outlined ? '#DDDDDD' : '#4bad01'}
       {...restProps}
     >
-      <Text style={styles.text}>{title}</Text>
+      <Text style={[styles.text, outlined && styles.textOutlined]}>
+        {title}
+      </Text>
     </TouchableHighlight>
   );
 }
@@ -26,10 +24,19 @@ const styles = StyleSheet.create({
     borderRadius: 27,
     alignSelf: 'center',
   },
+  buttonOutlined: {
+    padding: 16 - 1.5,
+    borderWidth: 1.5,
+    borderColor: '#59C901',
+    backgroundColor: 'transparent',
+  },
   text: {
     textAlign: 'center',
     fontSize: 18,
     color: '#FFFFFF',
+  },
+  textOutlined: {
+    color: '#000000',
   },
 });
 
