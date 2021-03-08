@@ -9,7 +9,7 @@ const ScalableImage = ({ style, source, ...restProps }) => {
     const { width, height } = Image.resolveAssetSource(source);
     const aspectRatio = width / height;
 
-    let extraStyle;
+    let extraStyle = {};
     if (style.width && !style.height) {
       extraStyle = {
         height: style.width / aspectRatio,
@@ -18,8 +18,6 @@ const ScalableImage = ({ style, source, ...restProps }) => {
       extraStyle = {
         width: style.height * aspectRatio,
       };
-    } else {
-      extraStyle = {};
     }
 
     return extraStyle;
