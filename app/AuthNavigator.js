@@ -10,7 +10,7 @@ import { tryGetStoredUserToken } from 'shared/store/auth/actions';
 import LoginScreen from './LoginScreen';
 import RegisterScreen from './RegisterScreen';
 import ForgotPasswordScreen from './ForgotPasswordScreen';
-import HomeNavigator from './HomeNavigator';
+import DrawerNavigator from './DrawerNavigator';
 
 // Stack global options
 const stackScreenOptions = {
@@ -51,8 +51,8 @@ const AuthNavigator = () => {
         ) : (
           // Logged In
           <Stack.Screen
-            name="Home"
-            component={HomeNavigator}
+            name="Drawer"
+            component={DrawerNavigator}
             options={{
               headerShown: false,
             }}
