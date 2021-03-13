@@ -11,8 +11,8 @@ const getDeviceImageStyle = (modulesCount) => [
 ];
 const getDeviceImageSource = (modulesCount) =>
   modulesCount === 1
-    ? require('assets/imgs/1-module-device-front.png')
-    : require('assets/imgs/2-module-device-front.png');
+    ? require('assets/imgs/devices/1-module-device-front.png')
+    : require('assets/imgs/devices/2-module-device-front.png');
 
 const DeviceCard = ({
   device,
@@ -52,7 +52,7 @@ const DeviceCard = ({
     <View style={styles.plantsContainer}>
       <Image
         style={styles.plantImage}
-        source={require('assets/icons/plant.png')}
+        source={require('assets/icons/leaves.png')}
         resizeMode="contain"
       />
       <Text style={styles.plantsText}>{device.plantsCount} plants</Text>
