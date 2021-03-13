@@ -6,9 +6,7 @@ import {
   TouchableOpacity,
   Text,
 } from 'react-native';
-// import { useDispatch } from 'react-redux';
 
-// import { logout } from 'shared/store/auth/actions';
 import ScalableImage from 'shared/components/ScalableImage';
 import DeviceCard from './DeviceCard';
 
@@ -30,12 +28,6 @@ const devices = [
 ];
 
 function DevicesScreen({ navigation }) {
-  // const dispatch = useDispatch();
-
-  // const logoutUser = () => {
-  //   dispatch(logout());
-  // };
-
   const navigateToEmptyTank = () => {
     navigation.navigate('Water Wizard');
   };
@@ -77,7 +69,6 @@ function DevicesScreen({ navigation }) {
           </TouchableOpacity>
         )}
       />
-      {/* <Button onPress={logoutUser} title="Logout" /> */}
     </View>
   );
 }
