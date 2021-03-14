@@ -1,20 +1,19 @@
 import React from 'react';
-import { StyleSheet, View, TextInput, Image } from 'react-native';
+import { StyleSheet, View, TextInput } from 'react-native';
+
+import ScalableImage from 'shared/components/ScalableImage';
 
 function IconTextInput({ style, iconImage, ...restProps }) {
   return (
-    <View
-      style={{
-        ...styles.container,
-        ...style,
-      }}
-    >
-      <Image
-        style={styles.iconImage}
-        source={iconImage}
-        fadeDuration={0}
-        resizeMode="contain"
-      />
+    <View style={[styles.container, style]}>
+      {iconImage && (
+        <ScalableImage
+          style={styles.iconImage}
+          source={iconImage}
+          resizeMode="contain"
+          fadeDuration={0}
+        />
+      )}
       <TextInput style={styles.input} {...restProps} />
     </View>
   );
@@ -22,21 +21,20 @@ function IconTextInput({ style, iconImage, ...restProps }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'transparent',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 20,
+    paddingHorizontal: 28,
+    borderRadius: 15,
+    backgroundColor: '#FFFFFF',
   },
   iconImage: {
+    width: 20,
     height: 20,
-    position: 'absolute',
-    left: 30,
-    zIndex: 1,
+    marginRight: 20,
   },
   input: {
-    borderRadius: 15,
-    paddingVertical: 18,
-    paddingLeft: 75,
-    paddingRight: 30,
-    backgroundColor: '#FFFFFF',
+    flex: 1,
     fontSize: 16,
   },
 });
