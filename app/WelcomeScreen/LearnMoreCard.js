@@ -7,7 +7,7 @@ const LearnMoreCard = () => (
   <View style={cardStyles.card}>
     <Image
       style={styles.image}
-      source={require('assets/icons/cart.png')}
+      source={require('assets/icons/cart-large.png')}
       fadeDuration={0}
       resizeMode="contain"
     />

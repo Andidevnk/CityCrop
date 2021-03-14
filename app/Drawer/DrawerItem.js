@@ -13,6 +13,7 @@ const DrawerItem = ({ label, icon, ...restProps }) => {
           marginLeft: 5,
         }}
         source={icon}
+        resizeMode="contain"
       />
       <Text style={{ fontSize: 15, color: '#18191F' }}>{label}</Text>
     </Pressable>
