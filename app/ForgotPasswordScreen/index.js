@@ -64,7 +64,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
                 We have sent you an email. Please check your inbox.
               </Text>
               <GreenBtn
-                title="Go back to login"
+                title="Go back"
                 onPress={closeModalAndNavigateToLogin}
               />
             </View>
