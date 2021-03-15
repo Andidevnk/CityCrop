@@ -9,9 +9,9 @@ const cardStyles = StyleSheet.create({
     elevation: 2,
     shadowColor: '#000000',
     shadowOffset: {
-      height: 3,
+      height: 2,
     },
-    shadowOpacity: 0.05,
+    shadowOpacity: 0.1,
     marginBottom: 25,
   },
 });

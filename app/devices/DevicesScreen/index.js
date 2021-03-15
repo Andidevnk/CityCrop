@@ -28,6 +28,13 @@ const devices = [
 ];
 
 function DevicesScreen({ navigation }) {
+  const navigateToModules = (device) => {
+    navigation.navigate('Modules', {
+      deviceName: device.name,
+      deviceId: device.id,
+    });
+  };
+
   const navigateToEmptyTank = () => {
     navigation.navigate('Water Wizard');
   };
@@ -53,6 +60,7 @@ function DevicesScreen({ navigation }) {
         renderItem={({ item }) => (
           <DeviceCard
             device={item}
+            onCardPress={navigateToModules}
             onEmptyTankPress={navigateToEmptyTank}
             onReplaceNutrientPress={navigateToReplaceNutrients}
             onSettingsIconPress={navigateToSettings}

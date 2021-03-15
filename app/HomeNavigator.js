@@ -6,11 +6,14 @@ import {
 
 import { ScreenOptions } from 'shared/constants';
 import WelcomeScreen from './WelcomeScreen';
-import DevicesScreen from './DevicesScreen';
-import DeviceSettingsScreen from './DeviceSettingsScreen';
-import WiFiSettingsScreen from './WiFiSettingsScreen';
-import WaterWizardStep1Screen from './WaterWizardScreen/WaterWizardStep1Screen';
-import ReplaceNutrientsScreen from './ReplaceNutrientsScreen';
+import DevicesScreen from './devices/DevicesScreen';
+import DeviceSettingsScreen from './devices/DeviceSettingsScreen';
+import WiFiSettingsScreen from './drawer/WiFiSettingsScreen';
+import WaterWizardStep1Screen from './devices/WaterWizardScreen/WaterWizardStep1Screen';
+import ReplaceNutrientsScreen from './devices/ReplaceNutrientsScreen';
+import ModulesScreen from './modules/ModulesScreen';
+import ModuleScreen from './modules/ModuleScreen';
+import ModuleSettingsScreen from './modules/ModuleSettingsScreen';
 
 const Stack = createStackNavigator();
 
@@ -59,6 +62,27 @@ const HomeNavigator = () => {
           <Stack.Screen
             name="Replace Nutrients"
             component={ReplaceNutrientsScreen}
+            options={ScreenOptions.greenHeader}
+          />
+          <Stack.Screen
+            name="Modules"
+            component={ModulesScreen}
+            options={({ route }) => ({
+              ...ScreenOptions.transparentHeader,
+              title: route.params.deviceName,
+            })}
+          />
+          <Stack.Screen
+            name="Module"
+            component={ModuleScreen}
+            options={({ route }) => ({
+              ...ScreenOptions.transparentHeader,
+              title: route.params.module.name,
+            })}
+          />
+          <Stack.Screen
+            name="Module Settings"
+            component={ModuleSettingsScreen}
             options={ScreenOptions.greenHeader}
           />
         </>

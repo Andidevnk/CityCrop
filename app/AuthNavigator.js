@@ -7,9 +7,9 @@ import {
 } from '@react-navigation/stack';
 
 import { tryGetStoredUserToken } from 'shared/store/auth/actions';
-import LoginScreen from './LoginScreen';
-import RegisterScreen from './RegisterScreen';
-import ForgotPasswordScreen from './ForgotPasswordScreen';
+import LoginScreen from './auth/LoginScreen';
+import RegisterScreen from './auth/RegisterScreen';
+import ForgotPasswordScreen from './auth/ForgotPasswordScreen';
 import DrawerNavigator from './DrawerNavigator';
 
 // Stack global options

@@ -1,5 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  Pressable,
+  TouchableOpacity,
+} from 'react-native';
 
 import cardStyles from 'shared/styles/card';
 import ScalableImage from 'shared/components/ScalableImage';
@@ -16,15 +23,17 @@ const getDeviceImageSource = (modulesCount) =>
 
 const DeviceCard = ({
   device,
+  onCardPress,
   onEmptyTankPress,
   onReplaceNutrientPress,
   onSettingsIconPress,
 }) => (
-  <View
+  <Pressable
     style={{
       ...cardStyles.card,
       ...styles.cardPadding,
     }}
+    onPress={() => onCardPress(device)}
   >
     <TouchableOpacity
       style={styles.settingsIconContainer}
@@ -70,7 +79,7 @@ const DeviceCard = ({
         onPress={onReplaceNutrientPress}
       />
     </View>
-  </View>
+  </Pressable>
 );
 
 const styles = StyleSheet.create({

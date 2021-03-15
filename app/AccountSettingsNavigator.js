@@ -5,7 +5,7 @@ import {
 } from '@react-navigation/stack';
 
 import { ScreenOptions } from 'shared/constants';
-import AccountSettingsScreen from './AccountSettingsScreen';
+import AccountSettingsScreen from './drawer/AccountSettingsScreen';
 
 const Stack = createStackNavigator();
 

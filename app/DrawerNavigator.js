@@ -1,10 +1,10 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import DrawerContent from './Drawer';
+import DrawerContent from './drawer/Drawer';
 import HomeNavigator from './HomeNavigator';
 import AccountSettingsNavigator from './AccountSettingsNavigator';
-import NotificationsScreen from './NotificationsScreen';
+import NotificationsScreen from './drawer/NotificationsScreen';
 
 const Drawer = createDrawerNavigator();
 
