@@ -5,7 +5,7 @@ import {
 } from '@react-navigation/stack';
 
 import { ScreenOptions } from 'shared/constants';
-import WelcomeScreen from './WelcomeScreen';
+import WelcomeScreen from './devices/WelcomeScreen';
 import DevicesScreen from './devices/DevicesScreen';
 import DeviceSettingsScreen from './devices/DeviceSettingsScreen';
 import WiFiSettingsScreen from './drawer/WiFiSettingsScreen';
