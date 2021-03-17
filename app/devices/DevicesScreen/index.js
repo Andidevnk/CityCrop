@@ -29,10 +29,7 @@ const devices = [
 
 function DevicesScreen({ navigation }) {
   const navigateToModules = (device) => {
-    navigation.navigate('Modules', {
-      deviceName: device.name,
-      deviceId: device.id,
-    });
+    navigation.navigate('Modules', { device });
   };
 
   const navigateToEmptyTank = () => {

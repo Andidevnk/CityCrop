@@ -14,6 +14,7 @@ import ReplaceNutrientsScreen from './devices/ReplaceNutrientsScreen';
 import ModulesScreen from './modules/ModulesScreen';
 import ModuleScreen from './modules/ModuleScreen';
 import ModuleSettingsScreen from './modules/ModuleSettingsScreen';
+import AddModuleScreen from './modules/AddModuleScreen';
 
 const Stack = createStackNavigator();
 
@@ -69,7 +70,7 @@ const HomeNavigator = () => {
             component={ModulesScreen}
             options={({ route }) => ({
               ...ScreenOptions.transparentHeader,
-              title: route.params.deviceName,
+              title: route.params.device.name,
             })}
           />
           <Stack.Screen
@@ -83,6 +84,11 @@ const HomeNavigator = () => {
           <Stack.Screen
             name="Module Settings"
             component={ModuleSettingsScreen}
+            options={ScreenOptions.greenHeader}
+          />
+          <Stack.Screen
+            name="Add New Module"
+            component={AddModuleScreen}
             options={ScreenOptions.greenHeader}
           />
         </>

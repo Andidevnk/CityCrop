@@ -25,7 +25,9 @@ const modules = [
   },
 ];
 
-const ModulesScreen = ({ navigation }) => {
+const ModulesScreen = ({ navigation, route }) => {
+  const { device } = route.params;
+
   const navigateToModule = (module) => {
     navigation.navigate('Module', {
       module: module,
@@ -36,6 +38,10 @@ const ModulesScreen = ({ navigation }) => {
     navigation.navigate('Module Settings', {
       module: module,
     });
+  };
+
+  const navigateToAddModule = () => {
+    navigation.navigate('Add New Module', { device });
   };
 
   return (
@@ -56,7 +62,10 @@ const ModulesScreen = ({ navigation }) => {
           />
         )}
         ListFooterComponent={() => (
-          <TouchableOpacity style={styles.addDeviceBtn}>
+          <TouchableOpacity
+            style={styles.addDeviceBtn}
+            onPress={navigateToAddModule}
+          >
             <Text style={styles.addDeviceText}>Add a new module</Text>
             <ScalableImage
               style={styles.addDeviceIcon}
