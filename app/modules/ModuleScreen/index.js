@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
 import Measurements from './Measurements';
@@ -27,18 +27,25 @@ const plants = [
     img: null,
   },
 ];
-const gridType = 'greens';
 
-const ModuleScreen = () => {
+const ModuleScreen = ({ navigation, gridType = 'greens' }) => {
+  const PlantsGrid = useMemo(
+    () => (gridType === 'greens' ? GreensGrid : MicroGreensGrid),
+    [gridType]
+  );
+
+  const navigateToPlantCategories = () => {
+    navigation.navigate('Plant Categories');
+  };
+
   return (
     <View style={styles.container}>
       <Measurements />
       <Text style={styles.plantsGridTitle}>Your plants</Text>
-      {gridType === 'greens' ? (
-        <GreensGrid plants={plants} />
-      ) : (
-        <MicroGreensGrid plants={plants} />
-      )}
+      <PlantsGrid
+        plants={plants}
+        onEmptyGridSlotPress={navigateToPlantCategories}
+      />
     </View>
   );
 };

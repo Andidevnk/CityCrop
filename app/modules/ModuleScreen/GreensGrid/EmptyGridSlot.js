@@ -1,15 +1,15 @@
 import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, Image, Pressable } from 'react-native';
 
-const EmptyGridSlot = ({ style }) => {
+const EmptyGridSlot = ({ style, ...restProps }) => {
   return (
-    <View style={[styles.container, style]}>
+    <Pressable style={[styles.container, style]} {...restProps}>
       <Image
         style={styles.icon}
         source={require('assets/icons/plus.png')}
         resizeMode="contain"
       />
-    </View>
+    </Pressable>
   );
 };
 

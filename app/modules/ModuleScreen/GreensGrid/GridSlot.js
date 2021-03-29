@@ -4,15 +4,16 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import { ShadowStyles } from 'shared/styles';
 import EmptyGridSlot from './EmptyGridSlot';
 
-const GridSlot = ({ style, name }) => {
-  if (!name) return <EmptyGridSlot style={style} />;
+const GridSlot = ({ style, name, onEmptyGridSlotPress }) => {
+  if (!name)
+    return <EmptyGridSlot style={style} onPress={onEmptyGridSlotPress} />;
   return (
     <View style={style}>
       <View style={[styles.contentContainer, ShadowStyles.shadow2]}>
         <View style={styles.plantImageContainer}>
           <Image
             style={styles.image}
-            source={require('assets/imgs/plants/roquette.png')}
+            source={require('assets/imgs/plants/herbs/thai_basil.png')}
             resizeMode="contain"
           />
         </View>
