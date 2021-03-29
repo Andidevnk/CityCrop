@@ -15,6 +15,7 @@ import ModulesScreen from './modules/ModulesScreen';
 import ModuleScreen from './modules/ModuleScreen';
 import ModuleSettingsScreen from './modules/ModuleSettingsScreen';
 import AddModuleScreen from './modules/AddModuleScreen';
+import PlantCategoriesScreen from './plants/PlantCategoriesScreen';
 
 const Stack = createStackNavigator();
 
@@ -90,6 +91,14 @@ const HomeNavigator = () => {
             name="Add New Module"
             component={AddModuleScreen}
             options={ScreenOptions.greenHeader}
+          />
+          <Stack.Screen
+            name="Plant Categories"
+            component={PlantCategoriesScreen}
+            options={{
+              ...ScreenOptions.greenHeader,
+              title: 'Add Plant',
+            }}
           />
         </>
       )}
