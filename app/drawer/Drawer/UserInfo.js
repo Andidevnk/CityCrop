@@ -10,7 +10,7 @@ const UserInfo = ({ name }) => {
           height: 60,
           marginRight: 15,
         }}
-        source={require('assets/imgs/user-profile.png')}
+        source={require('assets/imgs/user-profile/user-profile.png')}
         resizeMode="contain"
       />
       <Text style={styles.userInfoText} numberOfLines={1}>

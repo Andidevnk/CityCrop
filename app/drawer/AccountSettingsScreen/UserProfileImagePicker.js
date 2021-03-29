@@ -6,7 +6,7 @@ const UserProfileImagePicker = ({ style, onPickImagePress, ...restProps }) => {
     <View style={[{ alignSelf: 'flex-start' }, style]} {...restProps}>
       <Image
         style={styles.image}
-        source={require('assets/imgs/user-profile-placeholder.png')}
+        source={require('assets/imgs/user-profile/user-profile-placeholder.png')}
       />
       <Pressable style={styles.iconButton} onPress={onPickImagePress}>
         <Image
