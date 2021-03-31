@@ -1,15 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, Pressable, Image } from 'react-native';
 
 import { ShadowStyles } from 'shared/styles';
 
-const CategoryCard = ({ style, category }) => {
-  const { name, image } = category;
+const CategoryCard = ({ style, category, onPress }) => {
+  const { id, name, image } = category;
   return (
-    <View style={[styles.container, ShadowStyles.shadow2, style]}>
+    <Pressable
+      style={[styles.container, ShadowStyles.shadow2, style]}
+      onPress={() => onPress(id)}
+    >
       <Image style={styles.image} source={image} />
       <Text style={styles.name}>{name}</Text>
-    </View>
+    </Pressable>
   );
 };
 

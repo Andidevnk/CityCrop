@@ -4,9 +4,14 @@ import { StyleSheet, View } from 'react-native';
 import { CATEGORIES } from 'shared/constants';
 import CategoryCard from './CategoryCard';
 
-const PlantCategoriesScreen = () => {
+const PlantCategoriesScreen = ({ navigation }) => {
   const moduleType = 'greens';
   const categories = CATEGORIES.filter(({ type }) => type === moduleType);
+
+  const navigateToPlants = (categoryId) => {
+    navigation.navigate('Category Plants', { categoryId });
+  };
+
   return (
     <View style={styles.container}>
       {categories.map((category, index) => (
@@ -17,6 +22,7 @@ const PlantCategoriesScreen = () => {
             ...(index !== categories.length - 1 && { marginBottom: 25 }),
           }}
           category={category}
+          onPress={navigateToPlants}
         />
       ))}
     </View>

@@ -16,6 +16,8 @@ import ModuleScreen from './modules/ModuleScreen';
 import ModuleSettingsScreen from './modules/ModuleSettingsScreen';
 import AddModuleScreen from './modules/AddModuleScreen';
 import PlantCategoriesScreen from './plants/PlantCategoriesScreen';
+import CategoryPlantsScreen from './plants/CategoryPlantsScreen';
+import AddPlantScreen from './plants/AddPlantScreen';
 
 const Stack = createStackNavigator();
 
@@ -99,6 +101,19 @@ const HomeNavigator = () => {
               ...ScreenOptions.greenHeader,
               title: 'Add Plant',
             }}
+          />
+          <Stack.Screen
+            name="Category Plants"
+            component={CategoryPlantsScreen}
+            options={ScreenOptions.greenHeader}
+          />
+          <Stack.Screen
+            name="Add Plant"
+            component={AddPlantScreen}
+            options={({ route }) => ({
+              ...ScreenOptions.greenHeader,
+              title: route.params.plantName,
+            })}
           />
         </>
       )}
