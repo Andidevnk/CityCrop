@@ -1,58 +1,40 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  FlatList,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
+import { useSelector } from 'react-redux';
 
-import ScalableImage from 'shared/components/ScalableImage';
 import ModuleCard from './ModuleCard';
+import AddNewModuleBtn from './AddNewModuleBtn';
 
-const modules = [
-  {
-    key: 'Craft’s Module',
-    name: 'Craft’s Module',
-    plantsCount: 4,
-    status: 'on',
+const selectDevice = (deviceId) => (state) =>
+  state.devices.devices.find((device) => device.id === deviceId);
+const selectModules = (deviceId) => (state) =>
+  selectDevice(deviceId)(state).modules;
+
+const ModulesScreen = ({
+  navigation,
+  route: {
+    params: { deviceId },
   },
-  {
-    key: 'Module D41',
-    name: 'Module D41',
-    plantsCount: 10,
-    status: 'off',
-  },
-];
+}) => {
+  const modules = useSelector(selectModules(deviceId));
 
-const ModulesScreen = ({ navigation, route }) => {
-  const { device } = route.params;
+  console.log(JSON.stringify(modules));
 
-  const navigateToModule = (module) => {
+  const navigateToModule = (module) =>
     navigation.navigate('Module', {
-      module: module,
+      module,
     });
-  };
-
-  const navigateToModuleSettings = (module) => {
+  const navigateToModuleSettings = (module) =>
     navigation.navigate('Module Settings', {
-      module: module,
+      module,
     });
-  };
-
-  const navigateToAddModule = () => {
-    navigation.navigate('Add New Module', { device });
-  };
+  const navigateToAddModule = (module) =>
+    navigation.navigate('Add New Module', { module });
 
   return (
     <View style={styles.container}>
       <FlatList
-        contentContainerStyle={{
-          paddingTop: 25,
-          paddingHorizontal: 25,
-          paddingBottom: 25,
-        }}
-        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.listContainer}
         data={modules}
         renderItem={({ item }) => (
           <ModuleCard
@@ -62,18 +44,9 @@ const ModulesScreen = ({ navigation, route }) => {
           />
         )}
         ListFooterComponent={() => (
-          <TouchableOpacity
-            style={styles.addDeviceBtn}
-            onPress={navigateToAddModule}
-          >
-            <Text style={styles.addDeviceText}>Add a new module</Text>
-            <ScalableImage
-              style={styles.addDeviceIcon}
-              source={require('assets/icons/plus.png')}
-              resizeMode="contain"
-            />
-          </TouchableOpacity>
+          <AddNewModuleBtn onPress={navigateToAddModule} />
         )}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
@@ -84,22 +57,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F5F8F5',
   },
-  addDeviceBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 15,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 8,
-    borderWidth: 1.5,
-    borderColor: '#0B7B03',
-  },
-  addDeviceText: {
-    fontSize: 16,
-    color: '#0B7B03',
-  },
-  addDeviceIcon: {
-    height: 24,
+  listContainer: {
+    paddingTop: 25,
+    paddingHorizontal: 25,
+    paddingBottom: 25,
   },
 });
 

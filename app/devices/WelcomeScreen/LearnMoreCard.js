@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 
-import cardStyles from 'shared/styles/card';
+import { CardStyles } from 'shared/styles';
 
 const LearnMoreCard = () => (
-  <View style={cardStyles.card}>
+  <View style={CardStyles.card}>
     <Image
       style={styles.image}
       source={require('assets/icons/cart-large.png')}

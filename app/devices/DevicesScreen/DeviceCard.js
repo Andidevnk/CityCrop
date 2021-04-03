@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import cardStyles from 'shared/styles/card';
+import { CardStyles } from 'shared/styles';
 import ScalableImage from 'shared/components/ScalableImage';
 import ActionButton from './ActionButton';
 
@@ -27,60 +27,60 @@ const DeviceCard = ({
   onEmptyTankPress,
   onReplaceNutrientPress,
   onSettingsIconPress,
-}) => (
-  <Pressable
-    style={{
-      ...cardStyles.card,
-      ...styles.cardPadding,
-    }}
-    onPress={() => onCardPress(device)}
-  >
-    <TouchableOpacity
-      style={styles.settingsIconContainer}
-      onPress={onSettingsIconPress}
+}) => {
+  const { name, modulesCount, plantsCount } = device;
+  return (
+    <Pressable
+      style={[CardStyles.card, styles.cardPadding]}
+      onPress={() => onCardPress(device)}
     >
-      <Image
-        style={styles.settingsIcon}
-        source={require('assets/icons/settings.png')}
-        resizeMode="contain"
-      />
-    </TouchableOpacity>
-    <ScalableImage
-      style={getDeviceImageStyle(device.modulesCount)}
-      source={getDeviceImageSource(device.modulesCount)}
-      resizeMode="contain"
-    />
-    <View style={styles.nameContainer}>
-      <Text style={styles.name}>{device.name}</Text>
+      <TouchableOpacity
+        style={styles.settingsIconContainer}
+        onPress={onSettingsIconPress}
+      >
+        <Image
+          style={styles.settingsIcon}
+          source={require('assets/icons/settings.png')}
+          resizeMode="contain"
+        />
+      </TouchableOpacity>
       <ScalableImage
-        style={styles.connectionStatusIcon}
-        source={require('assets/icons/connected.png')}
+        style={getDeviceImageStyle(modulesCount)}
+        source={getDeviceImageSource(modulesCount)}
         resizeMode="contain"
       />
-    </View>
-    <View style={styles.plantsContainer}>
-      <Image
-        style={styles.plantImage}
-        source={require('assets/icons/leaves.png')}
-        resizeMode="contain"
-      />
-      <Text style={styles.plantsText}>{device.plantsCount} plants</Text>
-    </View>
-    <View style={styles.actionsContainer}>
-      <ActionButton
-        style={styles.actionBtnMargin}
-        iconSource={require('assets/icons/watering-can.png')}
-        title="Empty tank"
-        onPress={onEmptyTankPress}
-      />
-      <ActionButton
-        iconSource={require('assets/icons/bottle.png')}
-        title="Replace Nutrient"
-        onPress={onReplaceNutrientPress}
-      />
-    </View>
-  </Pressable>
-);
+      <View style={styles.nameContainer}>
+        <Text style={styles.name}>{name}</Text>
+        <ScalableImage
+          style={styles.connectionStatusIcon}
+          source={require('assets/icons/connected.png')}
+          resizeMode="contain"
+        />
+      </View>
+      <View style={styles.plantsContainer}>
+        <Image
+          style={styles.plantImage}
+          source={require('assets/icons/leaves.png')}
+          resizeMode="contain"
+        />
+        <Text style={styles.plantsText}>{plantsCount} plants</Text>
+      </View>
+      <View style={styles.actionsContainer}>
+        <ActionButton
+          style={styles.actionBtnMargin}
+          iconSource={require('assets/icons/watering-can.png')}
+          title="Empty tank"
+          onPress={onEmptyTankPress}
+        />
+        <ActionButton
+          iconSource={require('assets/icons/bottle.png')}
+          title="Replace Nutrient"
+          onPress={onReplaceNutrientPress}
+        />
+      </View>
+    </Pressable>
+  );
+};
 
 const styles = StyleSheet.create({
   cardPadding: {

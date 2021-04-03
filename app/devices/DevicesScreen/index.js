@@ -1,58 +1,27 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  FlatList,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
+import { useSelector } from 'react-redux';
 
-import ScalableImage from 'shared/components/ScalableImage';
 import DeviceCard from './DeviceCard';
-
-const devices = [
-  {
-    key: 'City Crop Device',
-    name: 'City Crop Device',
-    modulesCount: 2,
-    plantsCount: 5,
-    status: 'connected',
-  },
-  {
-    key: 'Dan',
-    name: 'Dan',
-    modulesCount: 1,
-    plantsCount: 5,
-    status: 'connected',
-  },
-];
+import AddNewDeviceBtn from './AddNewDeviceBtn';
 
 function DevicesScreen({ navigation }) {
-  const navigateToModules = (device) => {
-    navigation.navigate('Modules', { device });
-  };
+  const devices = useSelector((state) => state.devices.devices);
 
-  const navigateToEmptyTank = () => {
-    navigation.navigate('Water Wizard');
-  };
-
-  const navigateToReplaceNutrients = () => {
+  const navigateToModules = (device) =>
+    navigation.navigate('Modules', {
+      deviceId: device.id,
+      deviceName: device.name,
+    });
+  const navigateToEmptyTank = () => navigation.navigate('Water Wizard');
+  const navigateToReplaceNutrients = () =>
     navigation.navigate('Replace Nutrients');
-  };
-
-  const navigateToSettings = () => {
-    navigation.navigate('Device Settings');
-  };
+  const navigateToSettings = () => navigation.navigate('Device Settings');
 
   return (
     <View style={styles.container}>
       <FlatList
-        contentContainerStyle={{
-          paddingTop: 4,
-          paddingHorizontal: 4,
-          paddingBottom: 20,
-        }}
-        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.listContainer}
         data={devices}
         renderItem={({ item }) => (
           <DeviceCard
@@ -63,16 +32,8 @@ function DevicesScreen({ navigation }) {
             onSettingsIconPress={navigateToSettings}
           />
         )}
-        ListFooterComponent={() => (
-          <TouchableOpacity style={styles.addDeviceBtn}>
-            <Text style={styles.addDeviceText}>Add a new device</Text>
-            <ScalableImage
-              style={styles.addDeviceIcon}
-              source={require('assets/icons/plus.png')}
-              resizeMode="contain"
-            />
-          </TouchableOpacity>
-        )}
+        ListFooterComponent={AddNewDeviceBtn}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
@@ -84,22 +45,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: '#F5F8F5',
   },
-  addDeviceBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 15,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 8,
-    borderWidth: 1.5,
-    borderColor: '#0B7B03',
-  },
-  addDeviceText: {
-    fontSize: 16,
-    color: '#0B7B03',
-  },
-  addDeviceIcon: {
-    height: 24,
+  listContainer: {
+    paddingTop: 4,
+    paddingHorizontal: 4,
+    paddingBottom: 20,
   },
 });
 

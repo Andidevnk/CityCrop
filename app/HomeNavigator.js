@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   createStackNavigator,
   TransitionPresets,
 } from '@react-navigation/stack';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ScreenOptions } from 'shared/constants';
+import { loadDevicesAsync } from 'shared/store/devices/actions';
 import WelcomeScreen from './devices/WelcomeScreen';
 import DevicesScreen from './devices/DevicesScreen';
 import DeviceSettingsScreen from './devices/DeviceSettingsScreen';
@@ -15,6 +17,7 @@ import ModulesScreen from './modules/ModulesScreen';
 import ModuleScreen from './modules/ModuleScreen';
 import ModuleSettingsScreen from './modules/ModuleSettingsScreen';
 import AddModuleScreen from './modules/AddModuleScreen';
+import PlantScreen from './plants/PlantScreen';
 import PlantCategoriesScreen from './plants/PlantCategoriesScreen';
 import CategoryPlantsScreen from './plants/CategoryPlantsScreen';
 import AddPlantScreen from './plants/AddPlantScreen';
@@ -22,7 +25,16 @@ import AddPlantScreen from './plants/AddPlantScreen';
 const Stack = createStackNavigator();
 
 const HomeNavigator = () => {
-  const devices = ['asdasd'];
+  const [isLoadingDevices, setIsLoadingDevices] = useState(false);
+  const devicesCount = useSelector((state) => state.devices.devices.length);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setIsLoadingDevices(true);
+    dispatch(loadDevicesAsync()).finally(() => setIsLoadingDevices(false));
+  }, [dispatch]);
+
+  if (isLoadingDevices) return null;
 
   return (
     <Stack.Navigator
@@ -30,7 +42,7 @@ const HomeNavigator = () => {
         ...TransitionPresets.SlideFromRightIOS,
       }}
     >
-      {devices.length === 0 ? (
+      {devicesCount === 0 ? (
         <Stack.Screen
           name="Welcome"
           component={WelcomeScreen}
@@ -73,7 +85,7 @@ const HomeNavigator = () => {
             component={ModulesScreen}
             options={({ route }) => ({
               ...ScreenOptions.transparentHeader,
-              title: route.params.device.name,
+              title: route.params.deviceName,
             })}
           />
           <Stack.Screen
@@ -93,6 +105,14 @@ const HomeNavigator = () => {
             name="Add New Module"
             component={AddModuleScreen}
             options={ScreenOptions.greenHeader}
+          />
+          <Stack.Screen
+            name="Plant"
+            component={PlantScreen}
+            options={({ route }) => ({
+              ...ScreenOptions.greenHeader,
+              title: route.params.plantName,
+            })}
           />
           <Stack.Screen
             name="Plant Categories"

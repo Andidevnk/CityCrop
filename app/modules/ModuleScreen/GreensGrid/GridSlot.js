@@ -1,15 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 
 import { ShadowStyles } from 'shared/styles';
 import EmptyGridSlot from './EmptyGridSlot';
 
-const GridSlot = ({ style, name, onEmptyGridSlotPress }) => {
+const GridSlot = ({ style, name, onGridSlotPress, onEmptyGridSlotPress }) => {
   if (!name)
     return <EmptyGridSlot style={style} onPress={onEmptyGridSlotPress} />;
   return (
     <View style={style}>
-      <View style={[styles.contentContainer, ShadowStyles.shadow2]}>
+      <Pressable
+        style={[styles.contentContainer, ShadowStyles.shadow2]}
+        onPress={onGridSlotPress}
+      >
         <View style={styles.plantImageContainer}>
           <Image
             style={styles.image}
@@ -18,7 +21,7 @@ const GridSlot = ({ style, name, onEmptyGridSlotPress }) => {
           />
         </View>
         <Text style={styles.name}>{name}</Text>
-      </View>
+      </Pressable>
     </View>
   );
 };

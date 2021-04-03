@@ -34,6 +34,10 @@ const ModuleScreen = ({ navigation, gridType = 'greens' }) => {
     [gridType]
   );
 
+  const navigateToPlant = () => {
+    navigation.navigate('Plant');
+  };
+
   const navigateToPlantCategories = () => {
     navigation.navigate('Plant Categories');
   };
@@ -44,6 +48,7 @@ const ModuleScreen = ({ navigation, gridType = 'greens' }) => {
       <Text style={styles.plantsGridTitle}>Your plants</Text>
       <PlantsGrid
         plants={plants}
+        onGridSlotPress={navigateToPlant}
         onEmptyGridSlotPress={navigateToPlantCategories}
       />
     </View>

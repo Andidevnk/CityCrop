@@ -3,23 +3,26 @@ import { StyleSheet, View } from 'react-native';
 
 import GridSlot from './GridSlot';
 
-const GreensGrid = ({ plants, onEmptyGridSlotPress }) => {
+const GreensGrid = ({ plants, onGridSlotPress, onEmptyGridSlotPress }) => {
   return (
     <View>
       <View style={styles.row}>
         <GridSlot
           style={styles.gridSlot}
           name={plants[0].name}
+          onGridSlotPress={onGridSlotPress}
           onEmptyGridSlotPress={onEmptyGridSlotPress}
         />
         <GridSlot
           style={styles.gridSlot}
           name={plants[0].name}
+          onGridSlotPress={onGridSlotPress}
           onEmptyGridSlotPress={onEmptyGridSlotPress}
         />
         <GridSlot
           style={styles.gridSlot}
           name={plants[0].name}
+          onGridSlotPress={onGridSlotPress}
           onEmptyGridSlotPress={onEmptyGridSlotPress}
         />
       </View>
@@ -27,48 +30,58 @@ const GreensGrid = ({ plants, onEmptyGridSlotPress }) => {
         <GridSlot
           style={styles.leftGridSlot}
           name={plants[0].name}
+          onGridSlotPress={onGridSlotPress}
           onEmptyGridSlotPress={onEmptyGridSlotPress}
         />
         <GridSlot
           style={styles.rightGridSlot}
+          onGridSlotPress={onGridSlotPress}
           onEmptyGridSlotPress={onEmptyGridSlotPress}
         />
       </View>
       <View style={[styles.row, { marginTop: -20 }]}>
         <GridSlot
           style={styles.gridSlot}
+          onGridSlotPress={onGridSlotPress}
           onEmptyGridSlotPress={onEmptyGridSlotPress}
         />
         <GridSlot
           style={styles.gridSlot}
+          onGridSlotPress={onGridSlotPress}
           onEmptyGridSlotPress={onEmptyGridSlotPress}
         />
         <GridSlot
           style={styles.gridSlot}
+          onGridSlotPress={onGridSlotPress}
           onEmptyGridSlotPress={onEmptyGridSlotPress}
         />
       </View>
       <View style={[styles.row, { marginTop: -20 }]}>
         <GridSlot
           style={styles.leftGridSlot}
+          onGridSlotPress={onGridSlotPress}
           onEmptyGridSlotPress={onEmptyGridSlotPress}
         />
         <GridSlot
           style={styles.rightGridSlot}
+          onGridSlotPress={onGridSlotPress}
           onEmptyGridSlotPress={onEmptyGridSlotPress}
         />
       </View>
       <View style={[styles.row, { marginTop: -20 }]}>
         <GridSlot
           style={styles.gridSlot}
+          onGridSlotPress={onGridSlotPress}
           onEmptyGridSlotPress={onEmptyGridSlotPress}
         />
         <GridSlot
           style={styles.gridSlot}
+          onGridSlotPress={onGridSlotPress}
           onEmptyGridSlotPress={onEmptyGridSlotPress}
         />
         <GridSlot
           style={styles.gridSlot}
+          onGridSlotPress={onGridSlotPress}
           onEmptyGridSlotPress={onEmptyGridSlotPress}
         />
       </View>

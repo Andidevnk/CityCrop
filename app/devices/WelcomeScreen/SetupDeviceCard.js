@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 
-import cardStyles from 'shared/styles/card';
+import { CardStyles } from 'shared/styles';
 
 const SetupDeviceCard = () => (
-  <View style={cardStyles.card}>
+  <View style={CardStyles.card}>
     <Image
       style={styles.image}
       source={require('assets/imgs/devices/2-module-device-side.png')}

@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import cardStyles from 'shared/styles/card';
+import { CardStyles } from 'shared/styles';
 import ScalableImage from 'shared/components/ScalableImage';
 
 const STATUS_TO_IMAGE = {
@@ -20,44 +20,47 @@ const STATUS_TO_ICON = {
   off: require('assets/icons/off.png'),
 };
 
-const ModuleCard = ({ module, onCardPress, onSettingsIconPress }) => (
-  <Pressable
-    style={[cardStyles.card, styles.cardPadding]}
-    onPress={() => onCardPress(module)}
-  >
-    <TouchableOpacity
-      style={styles.settingsIconContainer}
-      onPress={() => onSettingsIconPress(module)}
+const ModuleCard = ({ module, onCardPress, onSettingsIconPress }) => {
+  const { name, plants, status } = module;
+  return (
+    <Pressable
+      style={[CardStyles.card, styles.cardPadding]}
+      onPress={() => onCardPress(module)}
     >
-      <Image
-        style={styles.settingsIcon}
-        source={require('assets/icons/settings.png')}
-        resizeMode="contain"
-      />
-    </TouchableOpacity>
-    <ScalableImage
-      style={styles.moduleImage}
-      source={STATUS_TO_IMAGE[module.status]}
-      resizeMode="contain"
-    />
-    <View style={styles.nameContainer}>
-      <Text style={styles.name}>{module.name}</Text>
+      <TouchableOpacity
+        style={styles.settingsIconContainer}
+        onPress={() => onSettingsIconPress(module)}
+      >
+        <Image
+          style={styles.settingsIcon}
+          source={require('assets/icons/settings.png')}
+          resizeMode="contain"
+        />
+      </TouchableOpacity>
       <ScalableImage
-        style={styles.connectionStatusIcon}
-        source={STATUS_TO_ICON[module.status]}
+        style={styles.moduleImage}
+        source={STATUS_TO_IMAGE[status]}
         resizeMode="contain"
       />
-    </View>
-    <View style={styles.plantsContainer}>
-      <ScalableImage
-        style={styles.plantImage}
-        source={require('assets/icons/leaves.png')}
-        resizeMode="contain"
-      />
-      <Text style={styles.plantsText}>{module.plantsCount} plants</Text>
-    </View>
-  </Pressable>
-);
+      <View style={styles.nameContainer}>
+        <Text style={styles.name}>{name}</Text>
+        <ScalableImage
+          style={styles.connectionStatusIcon}
+          source={STATUS_TO_ICON[status]}
+          resizeMode="contain"
+        />
+      </View>
+      <View style={styles.plantsContainer}>
+        <ScalableImage
+          style={styles.plantImage}
+          source={require('assets/icons/leaves.png')}
+          resizeMode="contain"
+        />
+        <Text style={styles.plantsText}>{plants.length} plants</Text>
+      </View>
+    </Pressable>
+  );
+};
 
 const styles = StyleSheet.create({
   cardPadding: {

@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import useToggleMultipleState from 'shared/hooks/useToggleMultipleState';
-import TextStyles from 'shared/styles/text';
+import { TextStyles } from 'shared/styles';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import NutrientButton from './NutrientButton';
 import ConfirmationModal from './ConfirmationModal';
