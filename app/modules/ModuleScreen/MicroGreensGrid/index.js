@@ -3,41 +3,43 @@ import { StyleSheet, View } from 'react-native';
 
 import GridSlot from './GridSlot';
 
-const MicroGreensGrid = ({ plants, onGridSlotPress, onEmptyGridSlotPress }) => {
-  return (
-    <>
-      <View style={[styles.row, { marginBottom: 30 }]}>
-        <GridSlot
-          style={{ marginRight: 30 }}
-          name={plants[0].name}
-          cutoffPosition="bottom-right"
-          onGridSlotPress={onGridSlotPress}
-          onEmptyGridSlotPress={onEmptyGridSlotPress}
-        />
-        <GridSlot
-          name={plants[1].name}
-          cutoffPosition="bottom-left"
-          onGridSlotPress={onGridSlotPress}
-          onEmptyGridSlotPress={onEmptyGridSlotPress}
-        />
-      </View>
-      <View style={styles.row}>
-        <GridSlot
-          style={{ marginRight: 30 }}
-          name={plants[2].name}
-          cutoffPosition="top-right"
-          onGridSlotPress={onGridSlotPress}
-          onEmptyGridSlotPress={onEmptyGridSlotPress}
-        />
-        <GridSlot
-          cutoffPosition="top-left"
-          onGridSlotPress={onGridSlotPress}
-          onEmptyGridSlotPress={onEmptyGridSlotPress}
-        />
-      </View>
-    </>
-  );
-};
+const findPlantByPosition = (plants, position) =>
+  plants.find((plant) => plant.position === position);
+
+const MicroGreensGrid = ({ plants, onUsedSlotPress, onEmptySlotPress }) => (
+  <>
+    <View style={[styles.row, { marginBottom: 30 }]}>
+      <GridSlot
+        style={{ marginRight: 30 }}
+        plant={findPlantByPosition(plants, 1)}
+        cutoffPosition="bottom-right"
+        onUsedSlotPress={onUsedSlotPress}
+        onEmptySlotPress={onEmptySlotPress}
+      />
+      <GridSlot
+        plant={findPlantByPosition(plants, 2)}
+        cutoffPosition="bottom-left"
+        onUsedSlotPress={onUsedSlotPress}
+        onEmptySlotPress={onEmptySlotPress}
+      />
+    </View>
+    <View style={styles.row}>
+      <GridSlot
+        style={{ marginRight: 30 }}
+        plant={findPlantByPosition(plants, 3)}
+        cutoffPosition="top-right"
+        onUsedSlotPress={onUsedSlotPress}
+        onEmptySlotPress={onEmptySlotPress}
+      />
+      <GridSlot
+        plant={findPlantByPosition(plants, 4)}
+        cutoffPosition="top-left"
+        onUsedSlotPress={onUsedSlotPress}
+        onEmptySlotPress={onEmptySlotPress}
+      />
+    </View>
+  </>
+);
 
 const styles = StyleSheet.create({
   row: {

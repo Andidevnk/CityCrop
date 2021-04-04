@@ -93,7 +93,7 @@ const HomeNavigator = () => {
             component={ModuleScreen}
             options={({ route }) => ({
               ...ScreenOptions.transparentHeader,
-              title: route.params.module.name,
+              title: route.params.moduleName,
             })}
           />
           <Stack.Screen

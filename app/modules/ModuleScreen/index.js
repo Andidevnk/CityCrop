@@ -1,55 +1,37 @@
 import React, { useMemo } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import { useSelector } from 'react-redux';
 
+import { selectModule } from 'shared/store/modules/selectors';
 import Measurements from './Measurements';
 import GreensGrid from './GreensGrid';
 import MicroGreensGrid from './MicroGreensGrid';
 
-const plants = [
-  {
-    id: 0,
-    name: 'Arugula',
-    img: null,
+const ModuleScreen = ({
+  navigation,
+  route: {
+    params: { deviceId, moduleId },
   },
-  {
-    id: 1,
-    name: 'Swiss Chard',
-    img: null,
-  },
-  {
-    id: 2,
-    name: 'Parsley',
-    img: null,
-  },
-  {
-    id: 3,
-    name: 'Lettuce',
-    img: null,
-  },
-];
+}) => {
+  const module = useSelector(selectModule(deviceId, moduleId));
 
-const ModuleScreen = ({ navigation, gridType = 'greens' }) => {
-  const PlantsGrid = useMemo(
-    () => (gridType === 'greens' ? GreensGrid : MicroGreensGrid),
-    [gridType]
-  );
-
-  const navigateToPlant = () => {
-    navigation.navigate('Plant');
-  };
-
-  const navigateToPlantCategories = () => {
+  const navigateToPlant = () => navigation.navigate('Plant');
+  const navigateToPlantCategories = () =>
     navigation.navigate('Plant Categories');
-  };
+
+  const PlantsGrid = useMemo(
+    () => (module.tray === 'greens' ? GreensGrid : MicroGreensGrid),
+    [module.tray]
+  );
 
   return (
     <View style={styles.container}>
-      <Measurements />
+      <Measurements measurements={module.measurements} />
       <Text style={styles.plantsGridTitle}>Your plants</Text>
       <PlantsGrid
-        plants={plants}
-        onGridSlotPress={navigateToPlant}
-        onEmptyGridSlotPress={navigateToPlantCategories}
+        plants={module.plants}
+        onUsedSlotPress={navigateToPlant}
+        onEmptySlotPress={navigateToPlantCategories}
       />
     </View>
   );

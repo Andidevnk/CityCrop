@@ -2,13 +2,9 @@ import React from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
 
+import { selectModules } from 'shared/store/modules/selectors';
 import ModuleCard from './ModuleCard';
 import AddNewModuleBtn from './AddNewModuleBtn';
-
-const selectDevice = (deviceId) => (state) =>
-  state.devices.devices.find((device) => device.id === deviceId);
-const selectModules = (deviceId) => (state) =>
-  selectDevice(deviceId)(state).modules;
 
 const ModulesScreen = ({
   navigation,
@@ -18,24 +14,26 @@ const ModulesScreen = ({
 }) => {
   const modules = useSelector(selectModules(deviceId));
 
-  console.log(JSON.stringify(modules));
-
   const navigateToModule = (module) =>
     navigation.navigate('Module', {
-      module,
+      deviceId,
+      moduleId: module.id,
+      moduleName: module.name,
     });
   const navigateToModuleSettings = (module) =>
     navigation.navigate('Module Settings', {
-      module,
+      deviceId,
+      moduleId: module.id,
+      moduleName: module.name,
     });
-  const navigateToAddModule = (module) =>
-    navigation.navigate('Add New Module', { module });
+  const navigateToAddModule = () =>
+    navigation.navigate('Add New Module', { deviceId });
 
   return (
     <View style={styles.container}>
       <FlatList
         contentContainerStyle={styles.listContainer}
-        data={modules}
+        data={[...modules].reverse()} // Reverse modules array
         renderItem={({ item }) => (
           <ModuleCard
             module={item}

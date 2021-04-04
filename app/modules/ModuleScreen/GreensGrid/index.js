@@ -3,86 +3,98 @@ import { StyleSheet, View } from 'react-native';
 
 import GridSlot from './GridSlot';
 
-const GreensGrid = ({ plants, onGridSlotPress, onEmptyGridSlotPress }) => {
+const findPlantByPosition = (plants, position) =>
+  plants.find((plant) => plant.position === position);
+
+const GreensGrid = ({ plants, onUsedSlotPress, onEmptySlotPress }) => {
   return (
     <View>
       <View style={styles.row}>
         <GridSlot
           style={styles.gridSlot}
-          name={plants[0].name}
-          onGridSlotPress={onGridSlotPress}
-          onEmptyGridSlotPress={onEmptyGridSlotPress}
+          plant={findPlantByPosition(plants, 1)}
+          onUsedSlotPress={onUsedSlotPress}
+          onEmptySlotPress={onEmptySlotPress}
         />
         <GridSlot
           style={styles.gridSlot}
-          name={plants[0].name}
-          onGridSlotPress={onGridSlotPress}
-          onEmptyGridSlotPress={onEmptyGridSlotPress}
+          plant={findPlantByPosition(plants, 2)}
+          onUsedSlotPress={onUsedSlotPress}
+          onEmptySlotPress={onEmptySlotPress}
         />
         <GridSlot
           style={styles.gridSlot}
-          name={plants[0].name}
-          onGridSlotPress={onGridSlotPress}
-          onEmptyGridSlotPress={onEmptyGridSlotPress}
+          plant={findPlantByPosition(plants, 3)}
+          onUsedSlotPress={onUsedSlotPress}
+          onEmptySlotPress={onEmptySlotPress}
         />
       </View>
       <View style={[styles.row, { marginTop: -20 }]}>
         <GridSlot
           style={styles.leftGridSlot}
-          name={plants[0].name}
-          onGridSlotPress={onGridSlotPress}
-          onEmptyGridSlotPress={onEmptyGridSlotPress}
+          plant={findPlantByPosition(plants, 4)}
+          onUsedSlotPress={onUsedSlotPress}
+          onEmptySlotPress={onEmptySlotPress}
         />
         <GridSlot
           style={styles.rightGridSlot}
-          onGridSlotPress={onGridSlotPress}
-          onEmptyGridSlotPress={onEmptyGridSlotPress}
+          plant={findPlantByPosition(plants, 5)}
+          onUsedSlotPress={onUsedSlotPress}
+          onEmptySlotPress={onEmptySlotPress}
         />
       </View>
       <View style={[styles.row, { marginTop: -20 }]}>
         <GridSlot
           style={styles.gridSlot}
-          onGridSlotPress={onGridSlotPress}
-          onEmptyGridSlotPress={onEmptyGridSlotPress}
+          plant={findPlantByPosition(plants, 6)}
+          onUsedSlotPress={onUsedSlotPress}
+          onEmptySlotPress={onEmptySlotPress}
         />
         <GridSlot
           style={styles.gridSlot}
-          onGridSlotPress={onGridSlotPress}
-          onEmptyGridSlotPress={onEmptyGridSlotPress}
+          plant={findPlantByPosition(plants, 7)}
+          onUsedSlotPress={onUsedSlotPress}
+          onEmptySlotPress={onEmptySlotPress}
         />
         <GridSlot
           style={styles.gridSlot}
-          onGridSlotPress={onGridSlotPress}
-          onEmptyGridSlotPress={onEmptyGridSlotPress}
+          plant={findPlantByPosition(plants, 8)}
+          onUsedSlotPress={onUsedSlotPress}
+          onEmptySlotPress={onEmptySlotPress}
         />
       </View>
       <View style={[styles.row, { marginTop: -20 }]}>
         <GridSlot
           style={styles.leftGridSlot}
-          onGridSlotPress={onGridSlotPress}
-          onEmptyGridSlotPress={onEmptyGridSlotPress}
+          plant={findPlantByPosition(plants, 9)}
+          onUsedSlotPress={onUsedSlotPress}
+          onEmptySlotPress={onEmptySlotPress}
         />
         <GridSlot
           style={styles.rightGridSlot}
-          onGridSlotPress={onGridSlotPress}
-          onEmptyGridSlotPress={onEmptyGridSlotPress}
+          plant={findPlantByPosition(plants, 10)}
+          onUsedSlotPress={onUsedSlotPress}
+          onEmptySlotPress={onEmptySlotPress}
         />
       </View>
       <View style={[styles.row, { marginTop: -20 }]}>
         <GridSlot
           style={styles.gridSlot}
-          onGridSlotPress={onGridSlotPress}
-          onEmptyGridSlotPress={onEmptyGridSlotPress}
+          plant={findPlantByPosition(plants, 11)}
+          onUsedSlotPress={onUsedSlotPress}
+          onEmptySlotPress={onEmptySlotPress}
         />
         <GridSlot
           style={styles.gridSlot}
-          onGridSlotPress={onGridSlotPress}
-          onEmptyGridSlotPress={onEmptyGridSlotPress}
+          plant={findPlantByPosition(plants, 12)}
+          onUsedSlotPress={onUsedSlotPress}
+          onEmptySlotPress={onEmptySlotPress}
         />
         <GridSlot
           style={styles.gridSlot}
-          onGridSlotPress={onGridSlotPress}
-          onEmptyGridSlotPress={onEmptyGridSlotPress}
+          plant={findPlantByPosition(plants, 13)}
+          onUsedSlotPress={onUsedSlotPress}
+          onEmptySlotPress={onEmptySlotPress}
         />
       </View>
     </View>
@@ -95,7 +107,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    // alignItems: 'center',
   },
   gridSlot: {
     width: `${GRID_SLOT_WIDTH}%`,

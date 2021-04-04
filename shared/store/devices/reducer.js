@@ -5,24 +5,34 @@ const initialState = {
   devices: [],
 };
 
+// TODO: Send this from backend
 const prepareDevices = (devices) =>
   devices.map((device) => ({
     ...device,
-    // TODO: Send this from backend
     id: device._id,
     modulesCount: device.modules.length,
     plantsCount: device.modules.reduce(
       (acc, module) => acc + module.grid.length,
       0
     ),
-    modules: prepareModules(device.modules),
+    modules: prepareModules(device.modules, device.measurements),
   }));
-const prepareModules = (modules) =>
+const prepareModules = (modules, deviceMeasurements) =>
   modules.map((module) => ({
     ...module,
     id: module._id,
-    plants: module.grid,
+    plants: preparePlants(module.grid),
     status: 'on', // TODO: Make this functional
+    measurements: {
+      ...module.measurements,
+      ...deviceMeasurements,
+    },
+  }));
+const preparePlants = (plants) =>
+  plants.map((plant) => ({
+    ...plant,
+    id: plant._id,
+    plantId: plant.plant_id,
   }));
 
 const devicesReducer = (state = initialState, action) => {

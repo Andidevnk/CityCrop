@@ -1,22 +1,24 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
 
 import { ShadowStyles } from 'shared/styles';
-import EmptyGridSlot from './EmptyGridSlot';
+import { PLANTS } from 'shared/constants';
 
-const GridSlot = ({ style, name, onGridSlotPress, onEmptyGridSlotPress }) => {
-  if (!name)
-    return <EmptyGridSlot style={style} onPress={onEmptyGridSlotPress} />;
+const getPlantImage = (plantId) =>
+  PLANTS.find((plant) => plant.id === plantId).image;
+
+const UsedGridSlot = ({ style, plant, onPress }) => {
+  const { name, plantId } = plant;
   return (
     <View style={style}>
       <Pressable
         style={[styles.contentContainer, ShadowStyles.shadow2]}
-        onPress={onGridSlotPress}
+        onPress={onPress}
       >
         <View style={styles.plantImageContainer}>
           <Image
             style={styles.image}
-            source={require('assets/imgs/plants/herbs/thai_basil.png')}
+            source={getPlantImage(plantId)}
             resizeMode="contain"
           />
         </View>
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   plantImageContainer: {
-    height: 54,
+    height: 50,
     padding: 5,
     justifyContent: 'center',
     backgroundColor: '#FFFFFF',
@@ -47,9 +49,9 @@ const styles = StyleSheet.create({
   name: {
     paddingVertical: 3,
     paddingLeft: 5,
-    fontSize: 11,
+    fontSize: 10,
     color: '#000000',
   },
 });
 
-export default GridSlot;
+export default UsedGridSlot;
