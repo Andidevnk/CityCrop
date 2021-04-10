@@ -110,7 +110,7 @@ const HomeNavigator = () => {
             name="Plant"
             component={PlantScreen}
             options={({ route }) => ({
-              ...ScreenOptions.greenHeader,
+              ...ScreenOptions.transparentHeader,
               title: route.params.plantName,
             })}
           />

@@ -4,12 +4,23 @@ import { StyleSheet, View } from 'react-native';
 import { CATEGORIES } from 'shared/constants';
 import CategoryCard from './CategoryCard';
 
-const PlantCategoriesScreen = ({ navigation }) => {
+const PlantCategoriesScreen = ({
+  navigation,
+  route: {
+    params: { deviceId, moduleId, gridPosition },
+  },
+}) => {
   const moduleType = 'greens';
   const categories = CATEGORIES.filter(({ type }) => type === moduleType);
 
   const navigateToPlants = (categoryId) => {
-    navigation.navigate('Category Plants', { categoryId });
+    navigation.navigate('Category Plants', {
+      categoryId,
+      // Props for Add Plant screen
+      deviceId,
+      moduleId,
+      gridPosition,
+    });
   };
 
   return (

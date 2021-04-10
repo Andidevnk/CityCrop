@@ -1,33 +1,60 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { useDispatch } from 'react-redux';
 
+import { addPlantAsync } from 'shared/store/plants/actions';
 import { PLANTS } from 'shared/constants';
 import { ShadowStyles } from 'shared/styles';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import HarvestInfo from './HarvestInfo';
 
+const BUTTON_TITLE = {
+  add: 'Add',
+  loading: 'Adding...',
+  added: 'Added!',
+};
+
 const AddPlantScreen = ({
+  navigation,
   route: {
-    params: { plantId },
+    params: { deviceId, moduleId, plantId, gridPosition },
   },
 }) => {
   const plant = PLANTS.find((plant) => plant.id === plantId);
   const { name, image, characteristics, commonUse, duration } = plant;
+  const [requestStatus, setRequestStatus] = useState('add');
+  const dispatch = useDispatch();
+
+  const addPlant = () => {
+    setRequestStatus('loading');
+    dispatch(addPlantAsync(deviceId, moduleId, plantId, gridPosition)).then(
+      () => {
+        setRequestStatus('added');
+        setTimeout(() => navigation.navigate('Module'), 2000);
+      }
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View style={[styles.imageContainer, ShadowStyles.shadow2]}>
         <Image style={styles.image} source={image} resizeMode="contain" />
       </View>
       <Text style={styles.name}>{name}</Text>
-      <Text style={[styles.description, { marginBottom: 10 }]}>
-        {characteristics}
-      </Text>
-      <Text style={styles.description}>{commonUse}</Text>
-      <HarvestInfo style={{ marginTop: 'auto' }} days={duration} />
+      <View style={{ flex: 1 }}>
+        <ScrollView>
+          <Text style={[styles.description, { marginBottom: 10 }]}>
+            {characteristics}
+          </Text>
+          <Text style={styles.description}>{commonUse}</Text>
+        </ScrollView>
+      </View>
+      <HarvestInfo style={{ marginVertical: 30 }} days={duration} />
       <LightGreenBtn
         style={{ marginTop: 'auto' }}
-        title="Add"
-        onPress={() => console.log('add plant')}
+        title={BUTTON_TITLE[requestStatus]}
+        disabled={requestStatus !== 'add'}
+        onPress={addPlant}
       />
     </View>
   );

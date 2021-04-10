@@ -7,17 +7,19 @@ import PlantCard from './PlantCard';
 const CategoryPlantsScreen = ({
   navigation,
   route: {
-    params: { categoryId },
+    params: { categoryId, deviceId, moduleId, gridPosition },
   },
 }) => {
   const plants = PLANTS.filter((plant) => plant.categoryId === categoryId);
 
-  const navigateToAddPlant = (plant) => {
+  const navigateToAddPlant = (plant) =>
     navigation.navigate('Add Plant', {
+      deviceId,
+      moduleId,
+      gridPosition,
       plantId: plant.id,
       plantName: plant.name,
     });
-  };
 
   return (
     <View style={styles.container}>

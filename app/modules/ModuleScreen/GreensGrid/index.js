@@ -14,19 +14,19 @@ const GreensGrid = ({ plants, onUsedSlotPress, onEmptySlotPress }) => {
           style={styles.gridSlot}
           plant={findPlantByPosition(plants, 1)}
           onUsedSlotPress={onUsedSlotPress}
-          onEmptySlotPress={onEmptySlotPress}
+          onEmptySlotPress={() => onEmptySlotPress(1)}
         />
         <GridSlot
           style={styles.gridSlot}
           plant={findPlantByPosition(plants, 2)}
           onUsedSlotPress={onUsedSlotPress}
-          onEmptySlotPress={onEmptySlotPress}
+          onEmptySlotPress={() => onEmptySlotPress(2)}
         />
         <GridSlot
           style={styles.gridSlot}
           plant={findPlantByPosition(plants, 3)}
           onUsedSlotPress={onUsedSlotPress}
-          onEmptySlotPress={onEmptySlotPress}
+          onEmptySlotPress={() => onEmptySlotPress(3)}
         />
       </View>
       <View style={[styles.row, { marginTop: -20 }]}>
@@ -34,13 +34,13 @@ const GreensGrid = ({ plants, onUsedSlotPress, onEmptySlotPress }) => {
           style={styles.leftGridSlot}
           plant={findPlantByPosition(plants, 4)}
           onUsedSlotPress={onUsedSlotPress}
-          onEmptySlotPress={onEmptySlotPress}
+          onEmptySlotPress={() => onEmptySlotPress(4)}
         />
         <GridSlot
           style={styles.rightGridSlot}
           plant={findPlantByPosition(plants, 5)}
           onUsedSlotPress={onUsedSlotPress}
-          onEmptySlotPress={onEmptySlotPress}
+          onEmptySlotPress={() => onEmptySlotPress(5)}
         />
       </View>
       <View style={[styles.row, { marginTop: -20 }]}>
@@ -48,19 +48,19 @@ const GreensGrid = ({ plants, onUsedSlotPress, onEmptySlotPress }) => {
           style={styles.gridSlot}
           plant={findPlantByPosition(plants, 6)}
           onUsedSlotPress={onUsedSlotPress}
-          onEmptySlotPress={onEmptySlotPress}
+          onEmptySlotPress={() => onEmptySlotPress(6)}
         />
         <GridSlot
           style={styles.gridSlot}
           plant={findPlantByPosition(plants, 7)}
           onUsedSlotPress={onUsedSlotPress}
-          onEmptySlotPress={onEmptySlotPress}
+          onEmptySlotPress={() => onEmptySlotPress(7)}
         />
         <GridSlot
           style={styles.gridSlot}
           plant={findPlantByPosition(plants, 8)}
           onUsedSlotPress={onUsedSlotPress}
-          onEmptySlotPress={onEmptySlotPress}
+          onEmptySlotPress={() => onEmptySlotPress(8)}
         />
       </View>
       <View style={[styles.row, { marginTop: -20 }]}>
@@ -68,13 +68,13 @@ const GreensGrid = ({ plants, onUsedSlotPress, onEmptySlotPress }) => {
           style={styles.leftGridSlot}
           plant={findPlantByPosition(plants, 9)}
           onUsedSlotPress={onUsedSlotPress}
-          onEmptySlotPress={onEmptySlotPress}
+          onEmptySlotPress={() => onEmptySlotPress(9)}
         />
         <GridSlot
           style={styles.rightGridSlot}
           plant={findPlantByPosition(plants, 10)}
           onUsedSlotPress={onUsedSlotPress}
-          onEmptySlotPress={onEmptySlotPress}
+          onEmptySlotPress={() => onEmptySlotPress(10)}
         />
       </View>
       <View style={[styles.row, { marginTop: -20 }]}>
@@ -82,19 +82,19 @@ const GreensGrid = ({ plants, onUsedSlotPress, onEmptySlotPress }) => {
           style={styles.gridSlot}
           plant={findPlantByPosition(plants, 11)}
           onUsedSlotPress={onUsedSlotPress}
-          onEmptySlotPress={onEmptySlotPress}
+          onEmptySlotPress={() => onEmptySlotPress(11)}
         />
         <GridSlot
           style={styles.gridSlot}
           plant={findPlantByPosition(plants, 12)}
           onUsedSlotPress={onUsedSlotPress}
-          onEmptySlotPress={onEmptySlotPress}
+          onEmptySlotPress={() => onEmptySlotPress(12)}
         />
         <GridSlot
           style={styles.gridSlot}
           plant={findPlantByPosition(plants, 13)}
           onUsedSlotPress={onUsedSlotPress}
-          onEmptySlotPress={onEmptySlotPress}
+          onEmptySlotPress={() => onEmptySlotPress(13)}
         />
       </View>
     </View>

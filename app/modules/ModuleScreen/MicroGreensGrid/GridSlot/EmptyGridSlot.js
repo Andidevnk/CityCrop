@@ -1,13 +1,13 @@
 import React from 'react';
-import { Image, View } from 'react-native';
+import { Image, Pressable } from 'react-native';
 
-const EmptyGridSlot = ({ style }) => (
-  <View style={style}>
+const EmptyGridSlot = ({ style, onPress }) => (
+  <Pressable style={style} onPress={onPress}>
     <Image
       style={{ width: 50, height: 50 }}
       source={require('assets/icons/large-plus.png')}
     />
-  </View>
+  </Pressable>
 );
 
 export default EmptyGridSlot;

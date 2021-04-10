@@ -15,14 +15,25 @@ const ModuleScreen = ({
 }) => {
   const module = useSelector(selectModule(deviceId, moduleId));
 
-  const navigateToPlant = () => navigation.navigate('Plant');
-  const navigateToPlantCategories = () =>
-    navigation.navigate('Plant Categories');
-
   const PlantsGrid = useMemo(
     () => (module.tray === 'greens' ? GreensGrid : MicroGreensGrid),
     [module.tray]
   );
+
+  const navigateToPlant = (plant) =>
+    navigation.navigate('Plant', {
+      deviceId,
+      moduleId,
+      plantId: plant.id,
+      plantName: plant.name,
+    });
+  const navigateToPlantCategories = (gridPosition) =>
+    navigation.navigate('Plant Categories', {
+      // Props for Add Plant screen
+      deviceId,
+      moduleId,
+      gridPosition,
+    });
 
   return (
     <View style={styles.container}>

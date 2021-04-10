@@ -2,10 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
 
 import { ShadowStyles } from 'shared/styles';
-import { PLANTS } from 'shared/constants';
-
-const getPlantImage = (plantId) =>
-  PLANTS.find((plant) => plant.id === plantId).image;
+import { getPlantImage } from 'shared/utilities';
 
 const UsedGridSlot = ({ style, plant, onPress }) => {
   const { name, plantId } = plant;
@@ -13,7 +10,7 @@ const UsedGridSlot = ({ style, plant, onPress }) => {
     <View style={style}>
       <Pressable
         style={[styles.contentContainer, ShadowStyles.shadow2]}
-        onPress={onPress}
+        onPress={() => onPress(plant)}
       >
         <View style={styles.plantImageContainer}>
           <Image
@@ -22,7 +19,9 @@ const UsedGridSlot = ({ style, plant, onPress }) => {
             resizeMode="contain"
           />
         </View>
-        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.name} numberOfLines={2}>
+          {name}
+        </Text>
       </Pressable>
     </View>
   );
@@ -36,7 +35,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   plantImageContainer: {
-    height: 50,
+    height: 48,
     padding: 5,
     justifyContent: 'center',
     backgroundColor: '#FFFFFF',
@@ -47,8 +46,8 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   name: {
-    paddingVertical: 3,
-    paddingLeft: 5,
+    paddingVertical: 4,
+    paddingHorizontal: 6,
     fontSize: 10,
     color: '#000000',
   },

@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   name: {
+    flex: 1, // Overflow break text in new line
     fontSize: 18,
     color: '#18191F',
   },
