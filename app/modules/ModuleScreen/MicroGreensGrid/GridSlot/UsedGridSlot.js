@@ -1,30 +1,27 @@
 import React from 'react';
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 
-import RectangleWithCutoff from '../RectangleWithCutoff';
+import { getPlantImage } from 'shared/utilities';
+import PlantImage from './PlantImage';
 
 const UsedGridSlot = ({
   style,
   plant,
   cardHeight,
-  cutoffPosition,
+  // cutoffPosition, // TODO: Add triangle on appropriate position
   onPress,
 }) => {
-  const { name } = plant;
-  const showTitleOnTop =
-    cutoffPosition === 'bottom-right' || cutoffPosition === 'bottom-left';
+  const { name, plantId } = plant;
   return (
     <Pressable
       style={[style, { height: cardHeight }]}
       onPress={() => onPress(plant)}
     >
-      {showTitleOnTop && <PlantName name={name} />}
-      <RectangleWithCutoff
-        cutoffPosition={cutoffPosition}
-        height={cardHeight - 36}
-        backgroundColor="#FFFFFF"
+      <PlantImage
+        style={{ height: cardHeight - 36 }}
+        source={getPlantImage(plantId)}
       />
-      {!showTitleOnTop && <PlantName name={name} />}
+      <PlantName name={name} />
     </Pressable>
   );
 };
