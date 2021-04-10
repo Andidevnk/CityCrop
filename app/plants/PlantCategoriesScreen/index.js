@@ -1,7 +1,9 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import { CATEGORIES } from 'shared/constants';
+import { selectModule } from 'shared/store/modules/selectors';
 import CategoryCard from './CategoryCard';
 
 const PlantCategoriesScreen = ({
@@ -10,7 +12,7 @@ const PlantCategoriesScreen = ({
     params: { deviceId, moduleId, gridPosition },
   },
 }) => {
-  const moduleType = 'greens';
+  const moduleType = useSelector(selectModule(deviceId, moduleId)).tray;
   const categories = CATEGORIES.filter(({ type }) => type === moduleType);
 
   const navigateToPlants = (categoryId) => {
