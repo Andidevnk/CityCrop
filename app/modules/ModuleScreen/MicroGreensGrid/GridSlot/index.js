@@ -23,7 +23,7 @@ const GridSlot = ({
     />
   ) : (
     <EmptyGridSlot
-      style={[styles.card, styles.centerContent, style]}
+      style={[styles.card, styles.centerContent, { height: cardHeight }, style]}
       onPress={onEmptySlotPress}
     />
   );
