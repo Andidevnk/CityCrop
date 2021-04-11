@@ -36,7 +36,7 @@ const DeviceCard = ({
     >
       <TouchableOpacity
         style={styles.settingsIconContainer}
-        onPress={onSettingsIconPress}
+        onPress={() => onSettingsIconPress(device)}
       >
         <Image
           style={styles.settingsIcon}

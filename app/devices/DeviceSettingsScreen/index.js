@@ -1,58 +1,78 @@
-import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { StyleSheet, View, Text, TextInput, Pressable } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
-import ScalableImage from 'shared/components/ScalableImage';
+import useFormState from 'shared/hooks/useFormState';
+import { updateDeviceAsync } from 'shared/store/devices/actions';
+import { selectDevice } from 'shared/store/devices/selectors';
+import LightGreenBtn from 'shared/components/LightGreenBtn';
+import TimezonesModal from './TimezonesModal';
+import WifiSettingsBtn from './WifiSettingsBtn';
 
-const device = {
-  id: '1',
-  name: 'City Crop Device',
-  modulesCount: 2,
-  plantsCount: 5,
-  status: 'connected',
-};
+const DeviceSettingsScreen = ({
+  navigation,
+  route: {
+    params: { deviceId },
+  },
+}) => {
+  const device = useSelector(selectDevice(deviceId));
+  const [formState, setFormState] = useFormState({
+    name: device.name,
+    timezone: device.timezone,
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [isTimezoneModalVisible, setIsTimezoneModalVisible] = useState(false);
+  const dispatch = useDispatch();
 
-const DeviceSettingsScreen = ({ navigation }) => {
   const navigateToWiFiSettings = () => {
     navigation.navigate('WiFi Settings');
   };
 
+  const updateDevice = () => {
+    const { name, timezone } = formState;
+    setIsLoading(true);
+    dispatch(updateDeviceAsync(deviceId, name, timezone))
+      .then(() => navigation.goBack())
+      .finally(() => setIsLoading(false));
+  };
+
+  const closeTimezonesModal = () => setIsTimezoneModalVisible(false);
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{device.name}</Text>
+      <Text style={styles.title}>Edit your device settings</Text>
       <TextInput
         style={[styles.input, { marginBottom: 15 }]}
         placeholder="Name"
+        value={formState.name}
+        onChangeText={(text) => setFormState({ name: text })}
       />
-      <TextInput style={styles.input} placeholder="Timezone" />
-      <TouchableOpacity
-        style={styles.wifiSettingsBtn}
-        onPress={navigateToWiFiSettings}
-      >
-        <ScalableImage
-          style={styles.wifiSettingsBtnLeftIcon}
-          source={require('assets/icons/wifi.png')}
+      <Pressable onPress={() => setIsTimezoneModalVisible(true)}>
+        <TextInput
+          style={styles.input}
+          placeholder="Timezone"
+          value={formState.timezone}
+          pointerEvents="none"
+          editable={false}
         />
-        <Text style={styles.wifiSettingsBtnText}>WiFi Setting</Text>
-        <Ionicons
-          style={styles.wifiSettingsBtnArrowIcon}
-          name="chevron-forward"
-          size={24}
-          color="#59C901"
-        />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.saveBtn}
-        onPress={() => console.log('save')}
-      >
-        <Text style={styles.saveBtnText}>Save</Text>
-      </TouchableOpacity>
+      </Pressable>
+      <WifiSettingsBtn onPress={navigateToWiFiSettings} />
+      <LightGreenBtn
+        style={{ marginTop: 'auto' }}
+        title="Save"
+        loading={isLoading}
+        onPress={updateDevice}
+      />
+
+      <TimezonesModal
+        visible={isTimezoneModalVisible}
+        onItemPress={(timezone) => {
+          setFormState({ timezone });
+          closeTimezonesModal();
+        }}
+        onOutsidePress={closeTimezonesModal}
+        onRequestClose={closeTimezonesModal} // Back button press
+      />
     </View>
   );
 };
@@ -83,43 +103,6 @@ const styles = StyleSheet.create({
       height: 1,
     },
     shadowOpacity: 0.1,
-  },
-  wifiSettingsBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 20,
-    paddingHorizontal: 25,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 15,
-    borderWidth: 1.5,
-    borderColor: '#0B7B03',
-    marginTop: 60,
-  },
-  wifiSettingsBtnLeftIcon: {
-    height: 18,
-    marginRight: 20,
-  },
-  wifiSettingsBtnText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#18191F',
-  },
-  wifiSettingsBtnArrowIcon: {
-    marginLeft: 'auto',
-  },
-  saveBtn: {
-    width: '90%',
-    marginTop: 'auto',
-    alignSelf: 'center',
-    alignItems: 'center',
-    paddingVertical: 16,
-    paddingHorizontal: 80,
-    backgroundColor: '#59C901',
-    borderRadius: 27,
-  },
-  saveBtnText: {
-    fontSize: 18,
-    color: '#FFFFFF',
   },
 });
 

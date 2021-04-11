@@ -13,7 +13,8 @@ function LightGreenBtn({
   loading = false,
   ...restProps
 }) {
-  if (loading) return <ActivityIndicator size="large" color="green" />;
+  if (loading)
+    return <ActivityIndicator style={style} size="large" color="green" />;
   return (
     <TouchableHighlight
       style={[styles.button, outlined && styles.buttonOutlined, style]}

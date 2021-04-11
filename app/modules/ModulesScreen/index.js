@@ -24,7 +24,6 @@ const ModulesScreen = ({
     navigation.navigate('Module Settings', {
       deviceId,
       moduleId: module.id,
-      moduleName: module.name,
     });
   const navigateToAddModule = () =>
     navigation.navigate('Add New Module', { deviceId });

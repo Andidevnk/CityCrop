@@ -23,6 +23,7 @@ const prepareModules = (modules, deviceMeasurements) =>
     id: module._id,
     plants: preparePlants(module.grid),
     status: 'on', // TODO: Make this functional
+    serialNumber: module.serial_number,
     measurements: {
       ...module.measurements,
       ...deviceMeasurements,
