@@ -111,7 +111,7 @@ const HomeNavigator = () => {
             component={PlantScreen}
             options={({ route }) => ({
               ...ScreenOptions.transparentHeader,
-              title: route.params.plantName,
+              title: route.params.plant.name,
             })}
           />
           <Stack.Screen

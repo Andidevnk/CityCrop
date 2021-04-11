@@ -24,8 +24,7 @@ const ModuleScreen = ({
     navigation.navigate('Plant', {
       deviceId,
       moduleId,
-      plantId: plant.id,
-      plantName: plant.name,
+      plant,
     });
   const navigateToPlantCategories = (gridPosition) =>
     navigation.navigate('Plant Categories', {

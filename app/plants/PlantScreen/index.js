@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback, useLayoutEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -6,30 +6,49 @@ import {
   useWindowDimensions,
   Text,
 } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { selectPlant } from 'shared/store/plants/selectors';
 import { ShadowStyles } from 'shared/styles';
 import { getPlantImage } from 'shared/utilities';
+import { deletePlantAsync } from 'shared/store/plants/actions';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import ProgressRing from './ProgressRing';
+import DeletePlantBtnIcon from './DeletePlantBtnIcon';
 
 const PlantScreen = ({
+  navigation,
   route: {
-    params: { deviceId, moduleId, plantId },
+    params: { deviceId, moduleId, plant },
   },
 }) => {
-  const plant = useSelector(selectPlant(deviceId, moduleId, plantId));
+  const { plantId, position } = plant;
   const windowHeight = useWindowDimensions().height;
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
-  console.log(plant);
+  const deletePlant = useCallback(() => {
+    setIsLoading(true);
+    dispatch(deletePlantAsync(deviceId, moduleId, position))
+      .then(() => navigation.goBack())
+      .finally(() => setIsLoading(false));
+  }, [deviceId, dispatch, moduleId, navigation, position]);
+
+  // Set delete btn icon on header before painting
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      // eslint-disable-next-line react/display-name
+      headerRight: () => (
+        <DeletePlantBtnIcon loading={isLoading} onPress={deletePlant} />
+      ),
+    });
+  }, [navigation, deletePlant, isLoading]);
 
   return (
     <View style={styles.container}>
       <View style={[styles.imageContainer, ShadowStyles.shadow2]}>
         <Image
           style={{ width: '100%', height: '100%' }}
-          source={getPlantImage(plant.plantId)}
+          source={getPlantImage(plantId)}
           resizeMode="contain"
         />
       </View>

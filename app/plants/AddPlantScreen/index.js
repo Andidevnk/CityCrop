@@ -8,12 +8,6 @@ import { ShadowStyles } from 'shared/styles';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import HarvestInfo from './HarvestInfo';
 
-const BUTTON_TITLE = {
-  add: 'Add',
-  loading: 'Adding...',
-  added: 'Added!',
-};
-
 const AddPlantScreen = ({
   navigation,
   route: {
@@ -22,17 +16,14 @@ const AddPlantScreen = ({
 }) => {
   const plant = PLANTS.find((plant) => plant.id === plantId);
   const { name, image, characteristics, commonUse, duration } = plant;
-  const [requestStatus, setRequestStatus] = useState('add');
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
   const addPlant = () => {
-    setRequestStatus('loading');
-    dispatch(addPlantAsync(deviceId, moduleId, plantId, gridPosition)).then(
-      () => {
-        setRequestStatus('added');
-        setTimeout(() => navigation.navigate('Module'), 2000);
-      }
-    );
+    setIsLoading(true);
+    dispatch(addPlantAsync(deviceId, moduleId, plantId, gridPosition))
+      .then(() => navigation.navigate('Module'))
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -41,7 +32,7 @@ const AddPlantScreen = ({
         <Image style={styles.image} source={image} resizeMode="contain" />
       </View>
       <Text style={styles.name}>{name}</Text>
-      <View style={{ flex: 1 }}>
+      <View style={{ maxHeight: '24%' }}>
         <ScrollView>
           <Text style={[styles.description, { marginBottom: 10 }]}>
             {characteristics}
@@ -49,11 +40,14 @@ const AddPlantScreen = ({
           <Text style={styles.description}>{commonUse}</Text>
         </ScrollView>
       </View>
-      <HarvestInfo style={{ marginVertical: 30 }} days={duration} />
+      <HarvestInfo
+        style={{ height: '24%', marginVertical: 30 }}
+        days={duration}
+      />
       <LightGreenBtn
         style={{ marginTop: 'auto' }}
-        title={BUTTON_TITLE[requestStatus]}
-        disabled={requestStatus !== 'add'}
+        title="Add"
+        loading={isLoading}
         onPress={addPlant}
       />
     </View>
@@ -71,7 +65,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     width: '100%',
-    height: '25%',
+    height: '24%',
     alignItems: 'center',
     padding: 5,
     backgroundColor: '#FFFFFF',

@@ -1,7 +1,19 @@
 import React from 'react';
-import { StyleSheet, TouchableHighlight, Text } from 'react-native';
+import {
+  StyleSheet,
+  TouchableHighlight,
+  Text,
+  ActivityIndicator,
+} from 'react-native';
 
-function LightGreenBtn({ style, title, outlined = false, ...restProps }) {
+function LightGreenBtn({
+  style,
+  title,
+  outlined = false,
+  loading = false,
+  ...restProps
+}) {
+  if (loading) return <ActivityIndicator size="large" color="green" />;
   return (
     <TouchableHighlight
       style={[styles.button, outlined && styles.buttonOutlined, style]}
