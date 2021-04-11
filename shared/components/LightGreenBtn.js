@@ -6,9 +6,12 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
+import ScalableImage from 'shared/components/ScalableImage';
+
 function LightGreenBtn({
   style,
   title,
+  icon,
   outlined = false,
   loading = false,
   ...restProps
@@ -22,9 +25,18 @@ function LightGreenBtn({
       underlayColor={outlined ? '#DDDDDD' : '#4bad01'}
       {...restProps}
     >
-      <Text style={[styles.text, outlined && styles.textOutlined]}>
-        {title}
-      </Text>
+      <>
+        {icon && (
+          <ScalableImage
+            style={{ height: 25, marginRight: 10 }}
+            source={icon}
+            resizeMode="contain"
+          />
+        )}
+        <Text style={[styles.text, outlined && styles.textOutlined]}>
+          {title}
+        </Text>
+      </>
     </TouchableHighlight>
   );
 }
@@ -32,6 +44,9 @@ function LightGreenBtn({
 const styles = StyleSheet.create({
   button: {
     width: '90%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     padding: 16,
     backgroundColor: '#59C901',
     borderRadius: 27,

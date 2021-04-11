@@ -69,6 +69,7 @@ const PlantScreen = ({
       </View>
       <LightGreenBtn
         style={{ marginTop: 'auto' }}
+        icon={require('assets/icons/harvest-leaves.png')}
         title="Harvest"
         onPress={() => console.log('Harvest')}
       />
