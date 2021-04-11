@@ -23,25 +23,33 @@ const PlantScreen = ({
 }) => {
   const { plantId, position } = plant;
   const windowHeight = useWindowDimensions().height;
-  const [isLoading, setIsLoading] = useState(false);
+  const [isDeleteLoading, setIsDeleteLoading] = useState(false);
+  const [isHarvestLoading, setIsHarvestLoading] = useState(false);
   const dispatch = useDispatch();
 
   const deletePlant = useCallback(() => {
-    setIsLoading(true);
+    setIsDeleteLoading(true);
     dispatch(deletePlantAsync(deviceId, moduleId, position))
       .then(() => navigation.goBack())
-      .finally(() => setIsLoading(false));
+      .finally(() => setIsDeleteLoading(false));
   }, [deviceId, dispatch, moduleId, navigation, position]);
+
+  const harvestPlant = () => {
+    setIsHarvestLoading(true);
+    dispatch(deletePlantAsync(deviceId, moduleId, position))
+      .then(() => navigation.goBack())
+      .finally(() => setIsHarvestLoading(false));
+  };
 
   // Set delete btn icon on header before painting
   useLayoutEffect(() => {
     navigation.setOptions({
       // eslint-disable-next-line react/display-name
       headerRight: () => (
-        <DeletePlantBtnIcon loading={isLoading} onPress={deletePlant} />
+        <DeletePlantBtnIcon loading={isDeleteLoading} onPress={deletePlant} />
       ),
     });
-  }, [navigation, deletePlant, isLoading]);
+  }, [navigation, deletePlant, isDeleteLoading]);
 
   return (
     <View style={styles.container}>
@@ -68,10 +76,11 @@ const PlantScreen = ({
         </View>
       </View>
       <LightGreenBtn
-        style={{ marginTop: 'auto' }}
+        style={{ height: 60, marginTop: 'auto' }}
         icon={require('assets/icons/harvest-leaves.png')}
         title="Harvest"
-        onPress={() => console.log('Harvest')}
+        loading={isHarvestLoading}
+        onPress={harvestPlant}
       />
     </View>
   );
