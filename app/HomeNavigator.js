@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   createStackNavigator,
   TransitionPresets,
 } from '@react-navigation/stack';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { ScreenOptions } from 'shared/constants';
-import { loadDevicesAsync } from 'shared/store/devices/actions';
+import { selectMe } from 'shared/store/users/selectors';
+import { selectDevices } from 'shared/store/devices/selectors';
 import WelcomeScreen from './devices/WelcomeScreen';
 import DevicesScreen from './devices/DevicesScreen';
 import DeviceSettingsScreen from './devices/DeviceSettingsScreen';
@@ -25,7 +26,8 @@ import AddPlantScreen from './plants/AddPlantScreen';
 const Stack = createStackNavigator();
 
 const HomeNavigator = () => {
-  const devicesCount = useSelector((state) => state.devices.devices.length);
+  const devicesCount = useSelector(selectDevices()).length;
+  const { name } = useSelector(selectMe());
 
   return (
     <Stack.Navigator
@@ -48,7 +50,7 @@ const HomeNavigator = () => {
             component={DevicesScreen}
             options={{
               ...ScreenOptions.transparentHeader,
-              headerTitle: 'Welcome back Amy!',
+              headerTitle: `Welcome back ${name}!`,
             }}
           />
           <Stack.Screen
