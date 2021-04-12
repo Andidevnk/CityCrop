@@ -25,12 +25,11 @@ import AddPlantScreen from './plants/AddPlantScreen';
 const Stack = createStackNavigator();
 
 const HomeNavigator = () => {
-  const [isLoadingDevices, setIsLoadingDevices] = useState(false);
   const devicesCount = useSelector((state) => state.devices.devices.length);
+  const [isLoadingDevices, setIsLoadingDevices] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setIsLoadingDevices(true);
     dispatch(loadDevicesAsync()).finally(() => setIsLoadingDevices(false));
   }, [dispatch]);
 
