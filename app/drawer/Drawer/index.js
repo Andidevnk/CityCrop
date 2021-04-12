@@ -10,7 +10,7 @@ import DrawerItems from './DrawerItems';
 import LogoutText from './LogoutText';
 
 const Drawer = ({ state, navigation }) => {
-  const { name } = useSelector(selectMe());
+  const { fullName } = useSelector(selectMe());
   const dispatch = useDispatch();
   const activeRouteIndex = state.index - 1;
 
@@ -19,7 +19,7 @@ const Drawer = ({ state, navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.userInfoContainer}>
-        <UserInfo name={name} />
+        <UserInfo name={fullName} />
       </View>
       <View style={styles.drawerContentContainer}>
         <DrawerItems

@@ -1,23 +1,36 @@
-import React from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { StyleSheet, View, ScrollView } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { selectMe } from 'shared/store/users/selectors';
+import { updateMeAsync } from 'shared/store/users/actions';
 import useFormState from 'shared/hooks/useFormState';
 import IconTextInput from 'shared/components/IconTextInput';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
-import ScalableImage from 'shared/components/ScalableImage';
 import UserProfileImagePicker from './UserProfileImagePicker';
 
 const AccountSettingsScreen = () => {
   const me = useSelector(selectMe());
+  console.log(me);
   const [formState, setFormState] = useFormState({
-    name: me.name,
-    email: me.email,
-    oldPassword: '',
-    newPassword: '',
-    newPasswordConfirm: '',
+    name: me.fullName,
+    // TODO: Uncomment when endpoint 'users/me/password' is ready
+    // oldPassword: '',
+    // newPassword: '',
+    // newPasswordConfirm: '',
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  const updateMe = () => {
+    setIsLoading(true);
+    dispatch(
+      updateMeAsync({
+        name: formState.name.split(' ')[0],
+        surname: formState.name.split(' ')[1] || '',
+      })
+    ).finally(() => setIsLoading(false));
+  };
 
   return (
     <View
@@ -49,10 +62,11 @@ const AccountSettingsScreen = () => {
           style={[styles.input, { marginBottom: 0 }]}
           placeholder="Email"
           iconImage={require('assets/icons/mail.png')}
-          value={formState.email}
-          onChangeText={(text) => setFormState({ email: text })}
+          editable={false}
+          value={me.email}
         />
-        <View
+        {/* TODO: Uncomment when endpoint 'users/me/password' is ready */}
+        {/* <View
           style={{
             flexDirection: 'row',
             alignItems: 'center',
@@ -89,12 +103,13 @@ const AccountSettingsScreen = () => {
           placeholder="Confirm password"
           value={formState.newPasswordConfirm}
           onChangeText={(text) => setFormState({ newPasswordConfirm: text })}
-        />
+        /> */}
       </ScrollView>
       <LightGreenBtn
         style={{ position: 'absolute', bottom: 50 }}
         title="Save"
-        onPress={() => console.log('Save')}
+        loading={isLoading}
+        onPress={updateMe}
       />
     </View>
   );
