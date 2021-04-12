@@ -11,7 +11,6 @@ import UserProfileImagePicker from './UserProfileImagePicker';
 
 const AccountSettingsScreen = () => {
   const me = useSelector(selectMe());
-  console.log(me);
   const [formState, setFormState] = useFormState({
     name: me.fullName,
     // TODO: Uncomment when endpoint 'users/me/password' is ready
