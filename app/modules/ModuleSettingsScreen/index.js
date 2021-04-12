@@ -1,34 +1,40 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Pressable } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import useFormState from 'shared/hooks/useFormState';
 import { selectModule } from 'shared/store/modules/selectors';
-import { updateModuleAsync } from 'shared/store/modules/actions';
+import {
+  deleteModuleAsync,
+  updateModuleAsync,
+} from 'shared/store/modules/actions';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import ModuleTypeToggler from './ModuleTypeToggler';
 
 const ModuleSettingsScreen = ({
   navigation,
   route: {
-    params: { deviceId, moduleId },
+    params: { module },
   },
 }) => {
-  const module = useSelector(selectModule(deviceId, moduleId));
   const [formState, setFormState] = useFormState({
     name: module.name,
     serialNumber: module.serialNumber,
     type: module.tray,
   });
-  const [isLoading, setIsLoading] = useState(false);
+  const [isUpdateLoading, setIsUpdateLoading] = useState(false);
   const dispatch = useDispatch();
 
   const updateModule = () => {
     const { name, type } = formState;
-    setIsLoading(true);
-    dispatch(updateModuleAsync(moduleId, name, type))
+    setIsUpdateLoading(true);
+    dispatch(updateModuleAsync(module.id, name, type))
       .then(() => navigation.goBack())
-      .finally(() => setIsLoading(false));
+      .finally(() => setIsUpdateLoading(false));
+  };
+
+  const deleteModule = () => {
+    dispatch(deleteModuleAsync(module.id)).then(() => navigation.goBack());
   };
 
   return (
@@ -54,9 +60,15 @@ const ModuleSettingsScreen = ({
       <LightGreenBtn
         style={{ marginTop: 'auto' }}
         title="Save"
-        loading={isLoading}
+        loading={isUpdateLoading}
         onPress={updateModule}
       />
+      <Pressable
+        style={{ marginTop: 20, alignItems: 'center' }}
+        onPress={deleteModule}
+      >
+        <Text style={{ fontSize: 16, color: 'red' }}>Delete</Text>
+      </Pressable>
     </View>
   );
 };

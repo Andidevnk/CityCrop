@@ -21,10 +21,7 @@ const ModulesScreen = ({
       moduleName: module.name,
     });
   const navigateToModuleSettings = (module) =>
-    navigation.navigate('Module Settings', {
-      deviceId,
-      moduleId: module.id,
-    });
+    navigation.navigate('Module Settings', { module });
   const navigateToAddModule = () =>
     navigation.navigate('Add New Module', { deviceId });
 
@@ -40,9 +37,11 @@ const ModulesScreen = ({
             onSettingsIconPress={navigateToModuleSettings}
           />
         )}
-        ListFooterComponent={() => (
-          <AddNewModuleBtn onPress={navigateToAddModule} />
-        )}
+        ListFooterComponent={() =>
+          modules.length < 2 && (
+            <AddNewModuleBtn onPress={navigateToAddModule} />
+          )
+        }
         showsVerticalScrollIndicator={false}
       />
     </View>

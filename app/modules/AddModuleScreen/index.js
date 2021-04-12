@@ -1,18 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { selectDevice } from 'shared/store/devices/selectors';
+import { addModuleAsync } from 'shared/store/modules/actions';
 import useFormState from 'shared/hooks/useFormState';
 import IconTextInput from 'shared/components/IconTextInput';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
-import ToggleButtons from './ToggleButtons';
+import ModuleTypeToggler from '../ModuleSettingsScreen/ModuleTypeToggler';
 
-const AddModuleScreen = ({ route }) => {
-  const { device } = route.params;
+const AddModuleScreen = ({
+  navigation,
+  route: {
+    params: { deviceId },
+  },
+}) => {
+  const device = useSelector(selectDevice(deviceId));
   const [formState, setFormState] = useFormState({
     name: '',
     serialNumber: '',
-    plantsGrid: 'microgreens',
+    type: 'greens',
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  const addModule = () => {
+    const { name, serialNumber, type } = formState;
+    const nextPosition = device.modules.length;
+    setIsLoading(true);
+    dispatch(addModuleAsync(deviceId, serialNumber, name, type, nextPosition))
+      .then(() => navigation.goBack())
+      .finally(() => setIsLoading(false));
+  };
 
   return (
     <View style={styles.container}>
@@ -34,14 +53,15 @@ const AddModuleScreen = ({ route }) => {
         value={formState.serialNumber}
         onChangeText={(text) => setFormState({ serialNumber: text })}
       />
-      <ToggleButtons
-        selection={formState.plantsGrid}
-        onPress={(selection) => setFormState({ plantsGrid: selection })}
+      <ModuleTypeToggler
+        value={formState.type}
+        onOptionPress={(type) => setFormState({ type })}
       />
       <LightGreenBtn
-        style={{ position: 'absolute', bottom: 50 }}
+        style={{ marginTop: 'auto' }}
         title="Save"
-        onPress={() => console.log('Save')}
+        loading={isLoading}
+        onPress={addModule}
       />
     </View>
   );
@@ -50,7 +70,7 @@ const AddModuleScreen = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 40,
+    paddingVertical: 40,
     paddingHorizontal: 20,
     backgroundColor: '#F5F8F5',
   },
