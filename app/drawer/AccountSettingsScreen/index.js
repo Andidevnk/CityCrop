@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { useSelector } from 'react-redux';
 
+import { selectMe } from 'shared/store/users/selectors';
 import useFormState from 'shared/hooks/useFormState';
 import IconTextInput from 'shared/components/IconTextInput';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
@@ -8,9 +10,10 @@ import ScalableImage from 'shared/components/ScalableImage';
 import UserProfileImagePicker from './UserProfileImagePicker';
 
 const AccountSettingsScreen = () => {
+  const me = useSelector(selectMe());
   const [formState, setFormState] = useFormState({
-    name: '',
-    email: '',
+    name: me.name,
+    email: me.email,
     oldPassword: '',
     newPassword: '',
     newPasswordConfirm: '',

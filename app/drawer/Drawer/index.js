@@ -1,22 +1,20 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useDispatch } from 'react-redux';
 import * as Linking from 'expo-linking';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { selectMe } from 'shared/store/users/selectors';
 import { logout } from 'shared/store/auth/actions';
 import UserInfo from './UserInfo';
 import DrawerItems from './DrawerItems';
 import LogoutText from './LogoutText';
 
-const name = 'Panagiotis Plytas';
-
 const Drawer = ({ state, navigation }) => {
+  const { name } = useSelector(selectMe());
   const dispatch = useDispatch();
   const activeRouteIndex = state.index - 1;
 
-  const logoutUser = () => {
-    dispatch(logout());
-  };
+  const logoutUser = () => dispatch(logout());
 
   return (
     <View style={{ flex: 1 }}>
