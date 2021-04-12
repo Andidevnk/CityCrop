@@ -26,14 +26,6 @@ const Stack = createStackNavigator();
 
 const HomeNavigator = () => {
   const devicesCount = useSelector((state) => state.devices.devices.length);
-  const [isLoadingDevices, setIsLoadingDevices] = useState(true);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(loadDevicesAsync()).finally(() => setIsLoadingDevices(false));
-  }, [dispatch]);
-
-  if (isLoadingDevices) return null;
 
   return (
     <Stack.Navigator
