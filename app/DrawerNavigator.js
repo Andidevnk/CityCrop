@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useDispatch } from 'react-redux';
 
-import { getMyUserAsync } from 'shared/store/users/actions';
+import { getMeAsync } from 'shared/store/users/actions';
 import { loadDevicesAsync } from 'shared/store/devices/actions';
 import DrawerContent from './drawer/Drawer';
 import HomeNavigator from './HomeNavigator';
@@ -19,7 +19,7 @@ const DrawerNavigator = () => {
   useEffect(() => {
     Promise.all([
       dispatch(loadDevicesAsync()),
-      dispatch(getMyUserAsync()),
+      dispatch(getMeAsync()),
     ]).then(() => setIsLoading(false));
   }, [dispatch]);
 

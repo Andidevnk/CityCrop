@@ -3,7 +3,7 @@ import AuthAxios from 'shared/axios/AuthAxios';
 
 export const SET_USER_ME = 'SET_USER_ME';
 
-export const getMyUserAsync = () => (dispatch) => {
+export const getMeAsync = () => (dispatch) => {
   return AuthAxios.get(
     'https://api.citycrop.io/v1/users/get'
   ).then((response) => dispatch(setUserMe(response.data)));
