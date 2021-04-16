@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { ScreenOptions } from 'shared/constants';
 import { selectMe } from 'shared/store/users/selectors';
 import { selectDevices } from 'shared/store/devices/selectors';
+import HeaderBtn from 'shared/components/HeaderBtn';
 import WelcomeScreen from './devices/WelcomeScreen';
 import DevicesScreen from './devices/DevicesScreen';
 import DeviceSettingsScreen from './devices/DeviceSettingsScreen';
@@ -25,7 +26,7 @@ import AddPlantScreen from './plants/AddPlantScreen';
 
 const Stack = createStackNavigator();
 
-const HomeNavigator = () => {
+const HomeNavigator = ({ navigation }) => {
   const devicesCount = useSelector(selectDevices()).length;
   const { name } = useSelector(selectMe());
 
@@ -51,6 +52,10 @@ const HomeNavigator = () => {
             options={{
               ...ScreenOptions.transparentHeader,
               headerTitle: `Welcome back ${name}!`,
+              // eslint-disable-next-line react/display-name
+              headerLeft: () => (
+                <HeaderBtn onPress={() => navigation.openDrawer()} />
+              ),
             }}
           />
           <Stack.Screen
