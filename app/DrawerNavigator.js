@@ -7,7 +7,6 @@ import { loadDevicesAsync } from 'shared/store/devices/actions';
 import DrawerContent from './drawer/Drawer';
 import HomeNavigator from './HomeNavigator';
 import AccountSettingsNavigator from './AccountSettingsNavigator';
-import NotificationsScreen from './drawer/NotificationsScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -32,7 +31,7 @@ const DrawerNavigator = () => {
         name="Account Settings"
         component={AccountSettingsNavigator}
       />
-      <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+      {/* <Drawer.Screen name="Notifications" component={NotificationsScreen} /> */}
     </Drawer.Navigator>
   );
 };

@@ -7,10 +7,10 @@ const screens = [
     name: 'Account Settings',
     icon: require('assets/icons/user.png'),
   },
-  {
-    name: 'Notifications',
-    icon: require('assets/icons/bell.png'),
-  },
+  // {
+  //   name: 'Notifications',
+  //   icon: require('assets/icons/bell.png'),
+  // },
 ];
 const links = [
   {
