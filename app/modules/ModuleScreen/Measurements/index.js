@@ -36,17 +36,18 @@ const Measurements = ({ style, measurements }) => {
         />
       </View>
       <View style={styles.row}>
-        {/* <Measurement
-          style={styles.measurement}
-          icon={require('assets/icons/ec.png')}
-          name="EC"
-          formattedValue={`${ec}ms`}
-        /> */}
         <Measurement
           style={styles.measurement}
           icon={require('assets/icons/wave.png')}
           name="WATER LEVEL"
           formattedValue={`${tank_level}%`}
+        />
+        <Measurement
+          style={styles.measurement}
+          icon={require('assets/icons/ec.png')}
+          name="EC"
+          formattedValue="Coming Soon"
+          future
         />
       </View>
     </View>
