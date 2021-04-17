@@ -98,8 +98,9 @@ const styles = StyleSheet.create({
   },
   settingsIconContainer: {
     position: 'absolute',
-    top: 20,
-    right: 20,
+    top: 5,
+    right: 5,
+    padding: 15,
   },
   settingsIcon: {
     height: 22,
