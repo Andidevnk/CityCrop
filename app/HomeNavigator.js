@@ -41,7 +41,20 @@ const HomeNavigator = ({ navigation }) => {
           name="Welcome"
           component={WelcomeScreen}
           options={{
-            headerShown: false,
+            ...ScreenOptions.transparentHeader,
+            headerTitle: `Welcome!`,
+            headerTitleStyle: {
+              fontSize: 26,
+              fontWeight: 'bold',
+              color: '#0B7B03',
+            },
+            // eslint-disable-next-line react/display-name
+            headerLeft: () => (
+              <HeaderBtn
+                source={require('assets/icons/toggle-lines.png')}
+                onPress={() => navigation.openDrawer()}
+              />
+            ),
           }}
         />
       ) : (
