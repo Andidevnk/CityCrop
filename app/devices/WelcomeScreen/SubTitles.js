@@ -10,7 +10,7 @@ const SubTitles = () => (
     </Text>
     <Text style={{ ...styles.subtitle, marginBottom: 0 }}>
       If you have any questions feel free to contact us at{' '}
-      <Anchor href="mailto:support@CityCrop.io">support@CityCrop.io</Anchor>
+      <Anchor href="mailto:support@citycrop.io">support@citycrop.io</Anchor>
     </Text>
   </View>
 );
