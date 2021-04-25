@@ -14,7 +14,7 @@ const DrawerNavigator = () => {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
 
-  // Fetch devices and me before rendering screens
+  // Fetch devices and user info before rendering screens
   useEffect(() => {
     Promise.all([
       dispatch(loadDevicesAsync()),

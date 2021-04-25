@@ -4,6 +4,10 @@ import DrawerItem from './DrawerItem';
 
 const screens = [
   {
+    name: 'Home',
+    icon: require('assets/icons/home.png'),
+  },
+  {
     name: 'Account Settings',
     icon: require('assets/icons/user.png'),
   },
