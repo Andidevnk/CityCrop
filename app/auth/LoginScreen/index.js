@@ -50,13 +50,13 @@ function LoginScreen({ navigation }) {
         <View style={styles.loginButtonContainer}>
           <GreenBtn title="Login" onPress={loginUser} />
         </View>
-        <TouchableText
+        {/* <TouchableText
           style={styles.forgotPasswordTextContainer}
           textStyle={styles.forgotPasswordText}
           onPress={() => navigation.navigate('Forgot Password')}
         >
           Forgot password?
-        </TouchableText>
+        </TouchableText> */}
 
         <View style={styles.registerSectionContainer}>
           <Text style={styles.registerText}>Not a CityCropper yet?</Text>
