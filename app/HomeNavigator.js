@@ -54,7 +54,10 @@ const HomeNavigator = ({ navigation }) => {
               headerTitle: `Welcome back ${name}!`,
               // eslint-disable-next-line react/display-name
               headerLeft: () => (
-                <HeaderBtn onPress={() => navigation.openDrawer()} />
+                <HeaderBtn
+                  source={require('assets/icons/toggle-lines.png')}
+                  onPress={() => navigation.openDrawer()}
+                />
               ),
             }}
           />
