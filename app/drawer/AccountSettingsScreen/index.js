@@ -36,6 +36,7 @@ const AccountSettingsScreen = () => {
       style={{
         flex: 1,
         backgroundColor: '#FFFFFF',
+        paddingBottom: 40,
       }}
     >
       <ScrollView
@@ -104,12 +105,7 @@ const AccountSettingsScreen = () => {
           onChangeText={(text) => setFormState({ newPasswordConfirm: text })}
         /> */}
       </ScrollView>
-      <LightGreenBtn
-        style={{ position: 'absolute', bottom: 50 }}
-        title="Save"
-        loading={isLoading}
-        onPress={updateMe}
-      />
+      <LightGreenBtn title="Save" loading={isLoading} onPress={updateMe} />
     </View>
   );
 };
