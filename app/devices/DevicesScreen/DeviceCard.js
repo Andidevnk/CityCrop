@@ -25,7 +25,6 @@ const DeviceCard = ({
   device,
   onCardPress,
   onEmptyTankPress,
-  onReplaceNutrientPress,
   onSettingsIconPress,
 }) => {
   const { name, modulesCount, plantsCount } = device;
@@ -65,19 +64,12 @@ const DeviceCard = ({
         />
         <Text style={styles.plantsText}>{plantsCount} plants</Text>
       </View>
-      <View style={styles.actionsContainer}>
-        <ActionButton
-          style={styles.actionBtnMargin}
-          iconSource={require('assets/icons/watering-can.png')}
-          title="Empty tank"
-          onPress={() => onEmptyTankPress(device)}
-        />
-        <ActionButton
-          iconSource={require('assets/icons/bottle.png')}
-          title="Replace Nutrient"
-          onPress={() => onReplaceNutrientPress(device)}
-        />
-      </View>
+      <ActionButton
+        style={{ width: '50%', alignSelf: 'flex-start' }}
+        iconSource={require('assets/icons/watering-can.png')}
+        title="Empty tank"
+        onPress={() => onEmptyTankPress(device)}
+      />
     </Pressable>
   );
 };
@@ -134,13 +126,6 @@ const styles = StyleSheet.create({
   },
   plantsText: {
     color: '#18191F',
-  },
-  actionsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  actionBtnMargin: {
-    marginRight: 15,
   },
 });
 
