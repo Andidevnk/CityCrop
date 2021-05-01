@@ -13,7 +13,8 @@ function DevicesScreen({ navigation }) {
       deviceId: device.id,
       deviceName: device.name,
     });
-  const navigateToEmptyTank = () => navigation.navigate('Water Wizard');
+  const navigateToEmptyTank = (device) =>
+    navigation.navigate('Water Wizard', { deviceId: device.id });
   const navigateToReplaceNutrients = () =>
     navigation.navigate('Replace Nutrients');
   const navigateToSettings = (device) =>

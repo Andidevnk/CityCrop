@@ -70,12 +70,12 @@ const DeviceCard = ({
           style={styles.actionBtnMargin}
           iconSource={require('assets/icons/watering-can.png')}
           title="Empty tank"
-          onPress={onEmptyTankPress}
+          onPress={() => onEmptyTankPress(device)}
         />
         <ActionButton
           iconSource={require('assets/icons/bottle.png')}
           title="Replace Nutrient"
-          onPress={onReplaceNutrientPress}
+          onPress={() => onReplaceNutrientPress(device)}
         />
       </View>
     </Pressable>
