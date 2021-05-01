@@ -49,10 +49,10 @@ export const setDevices = (devices) => ({
   },
 });
 
-export const updateDeviceMeasurements = (id, newMeasurements) => ({
+export const updateDeviceMeasurements = (deviceId, newMeasurements) => ({
   type: UPDATE_DEVICE_MEASUREMENTS,
   payload: {
-    id: id,
-    newMeasurements: newMeasurements,
+    deviceId,
+    newMeasurements,
   },
 });

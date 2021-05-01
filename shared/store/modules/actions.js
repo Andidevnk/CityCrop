@@ -38,11 +38,9 @@ export const getModuleMeasurementsAsync = (deviceId, moduleId) => (
   return AuthAxios.post(
     'https://api.citycrop.io/v1/modules/realtime',
     data
-  ).then((response) => {
-    dispatch(updateDeviceMeasurements(deviceId, response.data.device));
-    dispatch(
-      updateModuleMeasurements(deviceId, moduleId, response.data.module)
-    );
+  ).then(({ data: { device, module } }) => {
+    dispatch(updateDeviceMeasurements(deviceId, device));
+    dispatch(updateModuleMeasurements(deviceId, moduleId, module));
   });
 };
 
@@ -68,7 +66,7 @@ export const deleteModuleAsync = (id) => (dispatch) => {
   ).then(() => dispatch(loadDevicesAsync()));
 };
 
-export const startGetModuleMeasurementsInterval = (deviceId, moduleId) => (
+export const setModuleMeasurementsInterval = (deviceId, moduleId) => (
   dispatch
 ) =>
   setInterval(() => {

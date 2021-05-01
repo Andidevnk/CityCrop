@@ -1,8 +1,10 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useFocusEffect } from '@react-navigation/native';
 
 import { selectModule } from 'shared/store/modules/selectors';
+import { setModuleMeasurementsInterval } from 'shared/store/modules/actions';
 import Measurements from './Measurements';
 import GreensGrid from './GreensGrid';
 import MicroGreensGrid from './MicroGreensGrid';
@@ -14,6 +16,17 @@ const ModuleScreen = ({
   },
 }) => {
   const module = useSelector(selectModule(deviceId, moduleId));
+  const dispatch = useDispatch();
+
+  // Fetch measurements every 10 seconds
+  useFocusEffect(
+    useCallback(() => {
+      const intervalId = dispatch(
+        setModuleMeasurementsInterval(deviceId, moduleId)
+      );
+      return () => clearInterval(intervalId);
+    }, [deviceId, dispatch, moduleId])
+  );
 
   const PlantsGrid = useMemo(
     () => (module.tray === 'greens' ? GreensGrid : MicroGreensGrid),

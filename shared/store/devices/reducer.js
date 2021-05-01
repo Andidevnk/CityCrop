@@ -46,34 +46,62 @@ const devicesReducer = (state = initialState, action) => {
       };
     }
     case UPDATE_DEVICE_MEASUREMENTS: {
-      const selectedDevice = state.devices.find(
-        (device) => device.id === action.payload.id
+      const {
+        deviceId,
+        newMeasurements: { measurements },
+      } = action.payload;
+
+      const updatedDevices = state.devices.map((device) =>
+        device.id === deviceId
+          ? {
+              ...device,
+              measurements: {
+                ...device.measurements,
+                ph: measurements.ph,
+                tank_level: measurements.tank_level,
+              },
+            }
+          : device
       );
-      selectedDevice.measurements.tank_level =
-        action.payload.newMeasurements.measurements.tank_level;
-      selectedDevice.ecosystem.watering =
-        action.payload.newMeasurements.ecosystem.watering;
+
       return {
         ...state,
+        devices: updatedDevices,
       };
     }
     case UPDATE_MODULE_MEASUREMENTS: {
-      const selectedDevice = state.devices.find(
-        (device) => device.id === action.payload.deviceId
-      );
-      const selectedModule = selectedDevice.modules.find(
-        (module) => module._id === action.payload.moduleId
-      );
-      selectedModule.measurements.humidity =
-        action.payload.newMeasurements.measurements.humidity;
-      selectedModule.measurements.temperature =
-        action.payload.newMeasurements.measurements.temperature;
-      selectedModule.measurements.lighting =
-        action.payload.newMeasurements.measurements.lighting;
-      selectedModule.ecosystem.custom.lighting.intensity =
-        action.payload.newMeasurements.ecosystem.custom.lighting.red;
+      const {
+        deviceId,
+        moduleId,
+        newMeasurements: { measurements },
+      } = action.payload;
+
+      const updatedDevices = state.devices.map((device) => {
+        if (device.id !== deviceId) return device;
+
+        const updatedModules = device.modules.map((module) =>
+          module.id === moduleId
+            ? {
+                ...module,
+                measurements: {
+                  ...module.measurements,
+                  co2: measurements.co2,
+                  temperature: measurements.temperature,
+                  humidity: measurements.humidity,
+                },
+              }
+            : module
+        );
+
+        return {
+          ...device,
+          modules: updatedModules,
+        };
+      });
+
       return {
         ...state,
+        devices: updatedDevices,
       };
     }
     default:
