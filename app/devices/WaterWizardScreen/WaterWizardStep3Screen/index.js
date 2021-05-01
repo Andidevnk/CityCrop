@@ -8,11 +8,11 @@ import {
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 
-import { emptyWaterTankAsync } from 'shared/store/water-tank/actions';
+import { addNutrientsAsync } from 'shared/store/water-tank/actions';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import ScalableImage from 'shared/components/ScalableImage';
 
-const WaterWizardStep1Screen = ({
+const WaterWizardStep3Screen = ({
   navigation,
   route: {
     params: { deviceId },
@@ -21,9 +21,9 @@ const WaterWizardStep1Screen = ({
   const windowHeight = useWindowDimensions().height;
   const dispatch = useDispatch();
 
-  const emptyWaterTank = () =>
-    dispatch(emptyWaterTankAsync(deviceId)).then(() =>
-      navigation.navigate('Water Wizard 2', { deviceId })
+  const addNutrients = () =>
+    dispatch(addNutrientsAsync(deviceId)).then(() =>
+      navigation.navigate('Devices')
     );
 
   return (
@@ -32,34 +32,28 @@ const WaterWizardStep1Screen = ({
       style={styles.content}
       showsVerticalScrollIndicator={false}
     >
-      <Text style={styles.title}>Step 1</Text>
-      <Text style={styles.subtitle}>How to open the water valve</Text>
+      <Text style={styles.title}>Step 3</Text>
+      <Text style={styles.subtitle}>How to add new water</Text>
       <ScalableImage
         style={[styles.image, { height: windowHeight * 0.35 }]}
-        source={require('assets/imgs/water-tank/step-1.gif')}
+        source={require('assets/imgs/water-tank/step-3.gif')}
       />
       <View style={styles.listContainer}>
         <View style={styles.listItem}>
           <Text style={styles.listNumber}>1.</Text>
-          <Text style={styles.listItemText}>
-            Connect the blue hose to the device and place the other end in a
-            container (at least 8lt)
-          </Text>
+          <Text style={styles.listItemText}>Open the cap</Text>
         </View>
         <View style={styles.listItem}>
           <Text style={styles.listNumber}>2.</Text>
-          <Text style={styles.listItemText}>Remove the CC01 nutrient</Text>
-        </View>
-        <View style={[styles.listItem, { marginBottom: 0 }]}>
-          <Text style={styles.listNumber}>3.</Text>
-          <Text style={styles.listItemText}>Open the water valve</Text>
+          <Text style={styles.listItemText}>
+            Add 8lt of fresh water for your plants
+          </Text>
         </View>
       </View>
       <LightGreenBtn
         style={{ marginTop: 'auto' }}
-        icon={require('assets/icons/play.png')}
-        title="Start Emptying Tank"
-        onPress={emptyWaterTank}
+        title="Done!"
+        onPress={addNutrients}
       />
     </ScrollView>
   );
@@ -114,4 +108,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WaterWizardStep1Screen;
+export default WaterWizardStep3Screen;

@@ -14,6 +14,8 @@ import DevicesScreen from './devices/DevicesScreen';
 import DeviceSettingsScreen from './devices/DeviceSettingsScreen';
 import WiFiSettingsScreen from './drawer/WiFiSettingsScreen';
 import WaterWizardStep1Screen from './devices/WaterWizardScreen/WaterWizardStep1Screen';
+import WaterWizardStep2Screen from './devices/WaterWizardScreen/WaterWizardStep2Screen';
+import WaterWizardStep3Screen from './devices/WaterWizardScreen/WaterWizardStep3Screen';
 import ReplaceNutrientsScreen from './devices/ReplaceNutrientsScreen';
 import ModulesScreen from './modules/ModulesScreen';
 import ModuleScreen from './modules/ModuleScreen';
@@ -88,6 +90,22 @@ const HomeNavigator = ({ navigation }) => {
             name="Water Wizard"
             component={WaterWizardStep1Screen}
             options={ScreenOptions.greenHeader}
+          />
+          <Stack.Screen
+            name="Water Wizard 2"
+            component={WaterWizardStep2Screen}
+            options={{
+              ...ScreenOptions.greenHeader,
+              title: 'Water Wizard',
+            }}
+          />
+          <Stack.Screen
+            name="Water Wizard 3"
+            component={WaterWizardStep3Screen}
+            options={{
+              ...ScreenOptions.greenHeader,
+              title: 'Water Wizard',
+            }}
           />
           <Stack.Screen
             name="Replace Nutrients"
