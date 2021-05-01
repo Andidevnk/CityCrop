@@ -15,9 +15,9 @@ const prepareDevices = (devices) =>
       (acc, module) => acc + module.grid.length,
       0
     ),
-    modules: prepareModules(device.modules, device.measurements),
+    modules: prepareModules(device.modules, device),
   }));
-const prepareModules = (modules, deviceMeasurements) =>
+const prepareModules = (modules, device) =>
   modules.map((module) => ({
     ...module,
     id: module._id,
@@ -26,7 +26,7 @@ const prepareModules = (modules, deviceMeasurements) =>
     serialNumber: module.serial_number,
     measurements: {
       ...module.measurements,
-      ...deviceMeasurements,
+      ...device.measurements,
     },
   }));
 const preparePlants = (plants) =>
