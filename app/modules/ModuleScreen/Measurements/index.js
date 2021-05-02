@@ -3,6 +3,9 @@ import { StyleSheet, View } from 'react-native';
 
 import Measurement from './Measurement';
 
+const formatIfEmpty = (value, formattedValue) =>
+  value === null || value === undefined ? '--' : formattedValue;
+
 const Measurements = ({ style, measurements }) => {
   const { ph, tank_level, co2, humidity, temperature } = measurements;
   return (
@@ -12,13 +15,16 @@ const Measurements = ({ style, measurements }) => {
           style={styles.measurement}
           icon={require('assets/icons/temperature.png')}
           name="TEMPERATURE"
-          formattedValue={`${Math.floor(temperature)}°C`}
+          formattedValue={formatIfEmpty(
+            temperature,
+            `${Math.floor(temperature)}°C`
+          )}
         />
         <Measurement
           style={styles.measurement}
           icon={require('assets/icons/droplet.png')}
           name="HUMIDITY"
-          formattedValue={`${humidity}%`}
+          formattedValue={formatIfEmpty(humidity, `${humidity}%`)}
         />
       </View>
       <View style={styles.row}>
@@ -26,13 +32,13 @@ const Measurements = ({ style, measurements }) => {
           style={styles.measurement}
           icon={require('assets/icons/clouds.png')}
           name="CO2"
-          formattedValue={`${co2}ppm`}
+          formattedValue={formatIfEmpty(co2, `${co2}ppm`)}
         />
         <Measurement
           style={styles.measurement}
           icon={require('assets/icons/ph.png')}
           name="PH"
-          formattedValue={`${ph}`}
+          formattedValue={formatIfEmpty(ph, `${ph}`)} // Convert to string
         />
       </View>
       <View style={styles.row}>
@@ -40,7 +46,7 @@ const Measurements = ({ style, measurements }) => {
           style={styles.measurement}
           icon={require('assets/icons/wave.png')}
           name="WATER LEVEL"
-          formattedValue={`${tank_level}%`}
+          formattedValue={formatIfEmpty(tank_level, `${tank_level}%`)}
         />
         <Measurement
           style={styles.measurement}
