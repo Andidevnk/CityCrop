@@ -16,8 +16,8 @@ const Step4 = ({ navigation }) => (
       <View style={styles.listItem}>
         <Text style={styles.listNumber}>2.</Text>
         <Text style={styles.listItemText}>
-          Connect to <Text style={{ fontWeight: 'bold' }}>CityCrop</Text>{' '}
-          network
+          Connect to the <Text style={{ fontWeight: 'bold' }}>CityCrop</Text>{' '}
+          WiFi network
         </Text>
       </View>
       <View style={styles.listItem}>
