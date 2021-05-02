@@ -4,9 +4,9 @@ export const SET_DEVICES = 'SET_DEVICES';
 export const UPDATE_DEVICE_MEASUREMENTS = 'UPDATE_DEVICE_MEASUREMENTS';
 
 export const loadDevicesAsync = () => (dispatch) => {
-  return AuthAxios.get('https://api.citycrop.io/v1/devices/all')
-    .then((response) => dispatch(setDevices(response.data.devices)))
-    .catch((error) => console.log('loadDevicesAsync failed', error));
+  return AuthAxios.get(
+    'https://api.citycrop.io/v1/devices/all'
+  ).then((response) => dispatch(setDevices(response.data.devices)));
 };
 
 export const addDeviceAsync = (name, timezone) => (dispatch) => {
