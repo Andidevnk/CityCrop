@@ -3,8 +3,8 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 import ScalableImage from 'shared/components/ScalableImage';
 
-const AddNewDeviceBtn = () => (
-  <TouchableOpacity style={styles.addDeviceBtn}>
+const AddNewDeviceBtn = ({ ...restProps }) => (
+  <TouchableOpacity style={styles.addDeviceBtn} {...restProps}>
     <Text style={styles.addDeviceText}>Add a new device</Text>
     <ScalableImage
       style={styles.addDeviceIcon}
