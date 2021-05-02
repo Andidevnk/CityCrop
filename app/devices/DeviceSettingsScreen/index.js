@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, Pressable } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment-timezone';
 
 import useFormState from 'shared/hooks/useFormState';
 import { updateDeviceAsync } from 'shared/store/devices/actions';
 import { selectDevice } from 'shared/store/devices/selectors';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
-import TimezonesModal from './TimezonesModal';
+import ListModal from 'shared/components/ListModal';
 import WifiSettingsBtn from './WifiSettingsBtn';
 
 const DeviceSettingsScreen = ({
@@ -21,7 +22,7 @@ const DeviceSettingsScreen = ({
     timezone: device.timezone,
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [isTimezoneModalVisible, setIsTimezoneModalVisible] = useState(false);
+  const [isTimezonesModalVisible, setIsTimezonesModalVisible] = useState(false);
   const dispatch = useDispatch();
 
   const navigateToWiFiSettings = () => {
@@ -36,7 +37,7 @@ const DeviceSettingsScreen = ({
       .finally(() => setIsLoading(false));
   };
 
-  const closeTimezonesModal = () => setIsTimezoneModalVisible(false);
+  const closeTimezonesModal = () => setIsTimezonesModalVisible(false);
 
   return (
     <View style={styles.container}>
@@ -47,7 +48,7 @@ const DeviceSettingsScreen = ({
         value={formState.name}
         onChangeText={(text) => setFormState({ name: text })}
       />
-      <Pressable onPress={() => setIsTimezoneModalVisible(true)}>
+      <Pressable onPress={() => setIsTimezonesModalVisible(true)}>
         <TextInput
           style={styles.input}
           placeholder="Timezone"
@@ -64,8 +65,9 @@ const DeviceSettingsScreen = ({
         onPress={updateDevice}
       />
 
-      <TimezonesModal
-        visible={isTimezoneModalVisible}
+      <ListModal
+        visible={isTimezonesModalVisible}
+        data={moment.tz.names()}
         onItemPress={(timezone) => {
           setFormState({ timezone });
           closeTimezonesModal();
