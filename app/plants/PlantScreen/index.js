@@ -9,11 +9,18 @@ import {
 import { useDispatch } from 'react-redux';
 
 import { ShadowStyles } from 'shared/styles';
-import { getPlantImage } from 'shared/utilities';
+import { getPlant, getPlantImage } from 'shared/utilities';
 import { deletePlantAsync } from 'shared/store/plants/actions';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import ProgressRing from './ProgressRing';
 import DeletePlantBtnIcon from './DeletePlantBtnIcon';
+
+const dateDiffInDays = (date1, date2) => {
+  // Discard the time and time-zone information.
+  const utc1 = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
+  const utc2 = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
+  return Math.floor((utc1 - utc2) / (1000 * 60 * 60 * 24));
+};
 
 const PlantScreen = ({
   navigation,
@@ -51,6 +58,17 @@ const PlantScreen = ({
     });
   }, [navigation, deletePlant, isDeleteLoading]);
 
+  const daysSincePlanted = dateDiffInDays(
+    new Date(),
+    new Date(plant.planted_at)
+  );
+  const harvestDuration = getPlant(plantId).duration;
+  const daysUntilHarvest = harvestDuration - daysSincePlanted;
+  const progressPercentage =
+    daysUntilHarvest > 0
+      ? ((harvestDuration - daysUntilHarvest) / harvestDuration) * 100
+      : 100;
+
   return (
     <View style={styles.container}>
       <View style={[styles.imageContainer, ShadowStyles.shadow2]}>
@@ -62,17 +80,31 @@ const PlantScreen = ({
       </View>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ProgressRing
-          progress={80}
+          progress={progressPercentage}
           height={windowHeight * 0.3}
           strokeWidth={14}
         />
         <View style={{ position: 'absolute', alignItems: 'center' }}>
-          <Text style={{ fontSize: 14, color: '#18191F', fontWeight: '300' }}>
-            Ready to harvest in
-          </Text>
-          <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#0B7B03' }}>
-            6 day
-          </Text>
+          {daysUntilHarvest > 0 ? (
+            <>
+              <Text
+                style={{ fontSize: 14, color: '#18191F', fontWeight: '300' }}
+              >
+                Ready to harvest in
+              </Text>
+              <Text
+                style={{ fontSize: 16, fontWeight: 'bold', color: '#0B7B03' }}
+              >
+                {daysUntilHarvest} days
+              </Text>
+            </>
+          ) : (
+            <Text
+              style={{ fontSize: 16, fontWeight: 'bold', color: '#0B7B03' }}
+            >
+              Ready to harvest
+            </Text>
+          )}
         </View>
       </View>
       <LightGreenBtn

@@ -1,1 +1,1 @@
-export { default as getPlantImage } from './getPlantImage';
+export * from './getPlant';
