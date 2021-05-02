@@ -12,6 +12,11 @@ import HeaderBtn from 'shared/components/HeaderBtn';
 import WelcomeScreen from './devices/WelcomeScreen';
 import DevicesScreen from './devices/DevicesScreen';
 import DeviceSettingsScreen from './devices/DeviceSettingsScreen';
+import AddDeviceStep1Screen from './devices/AddDeviceScreens/Step1';
+import AddDeviceStep2Screen from './devices/AddDeviceScreens/Step2';
+import AddDeviceStep3Screen from './devices/AddDeviceScreens/Step3';
+import AddDeviceStep4Screen from './devices/AddDeviceScreens/Step4';
+import AddDeviceStep5Screen from './devices/AddDeviceScreens/Step5';
 import WiFiSettingsScreen from './drawer/WiFiSettingsScreen';
 import WaterWizardStep1Screen from './devices/WaterWizardScreen/WaterWizardStep1Screen';
 import WaterWizardStep2Screen from './devices/WaterWizardScreen/WaterWizardStep2Screen';
@@ -80,6 +85,31 @@ const HomeNavigator = ({ navigation }) => {
             name="Device Settings"
             component={DeviceSettingsScreen}
             options={ScreenOptions.greenHeader}
+          />
+          <Stack.Screen
+            name="Add New Device"
+            component={AddDeviceStep1Screen}
+            options={ScreenOptions.greenHeader}
+          />
+          <Stack.Screen
+            name="Add New Device - Step 2"
+            component={AddDeviceStep2Screen}
+            options={{ ...ScreenOptions.greenHeader, title: 'Add New Device' }}
+          />
+          <Stack.Screen
+            name="Add New Device - Step 3"
+            component={AddDeviceStep3Screen}
+            options={{ ...ScreenOptions.greenHeader, title: 'Add New Device' }}
+          />
+          <Stack.Screen
+            name="Add New Device - Step 4"
+            component={AddDeviceStep4Screen}
+            options={{ ...ScreenOptions.greenHeader, title: 'Add New Device' }}
+          />
+          <Stack.Screen
+            name="Add New Device - Step 5"
+            component={AddDeviceStep5Screen}
+            options={{ ...ScreenOptions.greenHeader, title: 'Add New Device' }}
           />
           <Stack.Screen
             name="WiFi Settings"

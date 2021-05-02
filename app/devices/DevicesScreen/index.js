@@ -15,10 +15,9 @@ function DevicesScreen({ navigation }) {
     });
   const navigateToEmptyTank = (device) =>
     navigation.navigate('Water Wizard', { deviceId: device.id });
-  const navigateToReplaceNutrients = () =>
-    navigation.navigate('Replace Nutrients');
   const navigateToSettings = (device) =>
     navigation.navigate('Device Settings', { deviceId: device.id });
+  const navigateToAddDevice = () => navigation.navigate('Add New Device');
 
   return (
     <View style={styles.container}>
@@ -33,7 +32,9 @@ function DevicesScreen({ navigation }) {
             onSettingsIconPress={navigateToSettings}
           />
         )}
-        ListFooterComponent={AddNewDeviceBtn}
+        ListFooterComponent={() => (
+          <AddNewDeviceBtn onPress={navigateToAddDevice} />
+        )}
         showsVerticalScrollIndicator={false}
       />
     </View>
