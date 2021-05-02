@@ -46,8 +46,6 @@ const Step5 = ({ navigation }) => {
     getNetworks();
   }, [getNetworks]);
 
-  console.log(networks);
-
   return (
     <KeyboardDismissArea>
       <View style={styles.container}>
