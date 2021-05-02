@@ -16,10 +16,9 @@ const Step1 = ({ navigation }) => {
   const dispatch = useDispatch();
   const closeTimezonesModal = () => setIsTimezoneModalVisible(false);
   const createDeviceAndNavigateToStep2 = () =>
-    navigation.navigate('Add New Device - Step 2');
-  // dispatch(addDeviceAsync(form.name, form.timezone)).then(() =>
-  //   navigation.navigate('Add New Device - Step 2')
-  // );
+    dispatch(addDeviceAsync(form.name, form.timezone)).then(() =>
+      navigation.navigate('Add New Device - Step 2')
+    );
 
   return (
     <KeyboardDismissArea>
