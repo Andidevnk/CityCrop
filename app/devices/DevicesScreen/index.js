@@ -16,7 +16,7 @@ function DevicesScreen({ navigation }) {
   const navigateToEmptyTank = (device) =>
     navigation.navigate('Water Wizard', { deviceId: device.id });
   const navigateToSettings = (device) =>
-    navigation.navigate('Device Settings', { deviceId: device.id });
+    navigation.navigate('Device Settings', { device });
   const navigateToAddDevice = () => navigation.navigate('Add New Device');
 
   return (
