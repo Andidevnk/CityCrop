@@ -17,7 +17,7 @@ import AddDeviceStep2Screen from './devices/AddDeviceScreens/Step2';
 import AddDeviceStep3Screen from './devices/AddDeviceScreens/Step3';
 import AddDeviceStep4Screen from './devices/AddDeviceScreens/Step4';
 import AddDeviceStep5Screen from './devices/AddDeviceScreens/Step5';
-import WiFiSettingsScreen from './drawer/WiFiSettingsScreen';
+import WiFiSettingsScreen from './devices/WiFiSettingsScreen';
 import WaterWizardStep1Screen from './devices/WaterWizardScreen/WaterWizardStep1Screen';
 import WaterWizardStep2Screen from './devices/WaterWizardScreen/WaterWizardStep2Screen';
 import WaterWizardStep3Screen from './devices/WaterWizardScreen/WaterWizardStep3Screen';
