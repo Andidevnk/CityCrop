@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, Pressable } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import useFormState from 'shared/hooks/useFormState';
-import { selectModule } from 'shared/store/modules/selectors';
 import {
   deleteModuleAsync,
   updateModuleAsync,
@@ -23,8 +22,8 @@ const ModuleSettingsScreen = ({
     type: module.tray,
   });
   const [isUpdateLoading, setIsUpdateLoading] = useState(false);
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   const updateModule = () => {
     const { name, type } = formState;
     setIsUpdateLoading(true);
@@ -32,10 +31,8 @@ const ModuleSettingsScreen = ({
       .then(() => navigation.goBack())
       .finally(() => setIsUpdateLoading(false));
   };
-
-  const deleteModule = () => {
+  const deleteModule = () =>
     dispatch(deleteModuleAsync(module.id)).then(() => navigation.goBack());
-  };
 
   return (
     <View style={styles.container}>
