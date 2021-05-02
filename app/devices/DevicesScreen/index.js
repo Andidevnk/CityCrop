@@ -30,7 +30,6 @@ function DevicesScreen({ navigation }) {
             device={item}
             onCardPress={navigateToModules}
             onEmptyTankPress={navigateToEmptyTank}
-            onReplaceNutrientPress={navigateToReplaceNutrients}
             onSettingsIconPress={navigateToSettings}
           />
         )}
