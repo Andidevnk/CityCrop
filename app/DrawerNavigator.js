@@ -32,7 +32,6 @@ const DrawerNavigator = () => {
       const expoPushToken = await registerForPushNotificationsAsync();
       const storedExpoPushToken = await AsyncStorage.getItem('expoPushToken');
       // If token not stored or changed
-      console.log(expoPushToken, storedExpoPushToken);
       if (
         (!storedExpoPushToken || storedExpoPushToken !== expoPushToken) &&
         expoPushToken
