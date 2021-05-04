@@ -2,7 +2,7 @@ import axios from 'axios';
 import { AsyncStorage } from 'react-native';
 
 import store from 'shared/store';
-import { logoutUser } from 'shared/store/auth/actions';
+import { logout } from 'shared/store/auth/actions';
 
 const AuthAxios = axios.create();
 
@@ -22,7 +22,7 @@ AuthAxios.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response.status === UNAUTHORIZED_STATUS_CODE) {
-      store.dispatch(logoutUser());
+      store.dispatch(logout());
     }
     return Promise.reject(error);
   }

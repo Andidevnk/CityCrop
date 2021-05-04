@@ -3,11 +3,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const SET_USER_TOKEN = 'SET_USER_TOKEN';
 
-export const tryGetStoredUserToken = () => (dispatch) => {
-  return AsyncStorage.getItem('token').then((userToken) =>
+export const tryGetStoredUserToken = () => (dispatch) =>
+  AsyncStorage.getItem('token').then((userToken) =>
     dispatch(setUserToken(userToken))
   );
-};
 
 export const login = (email, password) => (dispatch) => {
   const data = { email, password };
@@ -33,11 +32,8 @@ export const register = (name, surname, email, password) => (dispatch) => {
     );
 };
 
-export const logout = () => (dispatch) => {
-  return AsyncStorage.removeItem('token').then(() =>
-    dispatch(setUserToken(null))
-  );
-};
+export const logout = () => (dispatch) =>
+  AsyncStorage.removeItem('token').then(() => dispatch(setUserToken(null)));
 
 export const setUserToken = (userToken) => ({
   type: SET_USER_TOKEN,
