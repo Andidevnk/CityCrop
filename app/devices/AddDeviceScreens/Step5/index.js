@@ -18,6 +18,7 @@ import LightGreenBtn from 'shared/components/LightGreenBtn';
 import ListModal from 'shared/components/ListModal';
 import KeyboardDismissArea from 'shared/components/KeyboardDismissArea';
 import ScalableImage from 'shared/components/ScalableImage';
+import ErrorModal from './ErrorModal';
 
 const Step5 = ({ navigation }) => {
   const [form, setForm] = useFormState({
@@ -27,8 +28,10 @@ const Step5 = ({ navigation }) => {
   const [isNetworksModalVisible, setIsNetworksModalVisible] = useState(false);
   const [networks, setNetworks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
 
   const dispatch = useDispatch();
+  const closeErrorModal = () => setIsErrorModalVisible(false);
   const getNetworks = useCallback(
     () => dispatch(listNetworksAsync()).then(({ data }) => setNetworks(data)),
     [dispatch]
@@ -36,10 +39,10 @@ const Step5 = ({ navigation }) => {
   const closeNetworksModal = () => setIsNetworksModalVisible(false);
   const connectToNetwork = () => {
     setIsLoading(true);
-    dispatch(connectToNetworkAsync(form.network, form.password)).then(() => {
-      setIsLoading(false);
-      navigation.navigate('Devices');
-    });
+    dispatch(connectToNetworkAsync(form.network, form.password))
+      .then(() => navigation.navigate('Devices'))
+      .catch(() => setIsErrorModalVisible(true))
+      .finally(() => setIsLoading(false));
   };
 
   useEffect(() => {
@@ -49,6 +52,8 @@ const Step5 = ({ navigation }) => {
   return (
     <KeyboardDismissArea>
       <View style={styles.container}>
+        <ErrorModal visible={isErrorModalVisible} onClose={closeErrorModal} />
+
         <View>
           <Text style={styles.title}>Step 5</Text>
           <Text style={styles.subtitle}>Connect your device to WiFi</Text>
