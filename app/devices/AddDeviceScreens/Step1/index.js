@@ -10,7 +10,10 @@ import ListModal from 'shared/components/ListModal';
 import KeyboardDismissArea from 'shared/components/KeyboardDismissArea';
 
 const Step1 = ({ navigation }) => {
-  const [form, setForm] = useFormState({ name: '', timezone: '' });
+  const [form, setForm] = useFormState({
+    name: '',
+    timezone: moment.tz.guess(),
+  });
   const [isTimezoneModalVisible, setIsTimezoneModalVisible] = useState(false);
 
   const dispatch = useDispatch();
