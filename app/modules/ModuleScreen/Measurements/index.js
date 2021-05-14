@@ -17,7 +17,7 @@ const Measurements = ({ style, measurements }) => {
           name="TEMPERATURE"
           formattedValue={formatIfEmpty(
             temperature,
-            `${Math.floor(temperature)}°C`
+            `${temperature.toFixed(1)}°C`
           )}
         />
         <Measurement
