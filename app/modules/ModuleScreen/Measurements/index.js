@@ -52,7 +52,7 @@ const Measurements = ({ style, measurements }) => {
           style={styles.measurement}
           icon={require('assets/icons/ec.png')}
           name="EC"
-          formattedValue="Coming Soon"
+          formattedValue="--"
           future
         />
       </View>
