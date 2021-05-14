@@ -22,6 +22,9 @@ const ModuleSettingsScreen = ({
     type: module.tray,
   });
   const [isUpdateLoading, setIsUpdateLoading] = useState(false);
+  const [showChangeTypeErrorText, setShowChangeTypeErrorText] = useState(false);
+
+  const moduleHasPlants = module.plants.length > 0;
 
   const dispatch = useDispatch();
   const updateModule = () => {
@@ -52,8 +55,19 @@ const ModuleSettingsScreen = ({
       <ModuleTypeToggler
         style={{ marginTop: 50 }}
         value={formState.type}
-        onOptionPress={(type) => setFormState({ type })}
+        onOptionPress={(type) => {
+          if (moduleHasPlants) {
+            setShowChangeTypeErrorText(true);
+            return;
+          }
+          setFormState({ type });
+        }}
       />
+      {showChangeTypeErrorText && (
+        <Text style={{ marginTop: 5, textAlign: 'center', color: 'red' }}>
+          Can't change type, module contains plants.
+        </Text>
+      )}
       <LightGreenBtn
         style={{ marginTop: 'auto' }}
         title="Save"
