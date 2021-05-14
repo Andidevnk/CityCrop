@@ -18,6 +18,7 @@ import ListModal from 'shared/components/ListModal';
 import ScalableImage from 'shared/components/ScalableImage';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import KeyboardDismissArea from 'shared/components/KeyboardDismissArea';
+import PressableTextInput from 'shared/components/PressableTextInput';
 
 const WiFiSettingsScreen = ({ navigation }) => {
   const [form, setForm] = useFormState({
@@ -31,10 +32,11 @@ const WiFiSettingsScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const closeNetworksModal = () => setIsNetworksModalVisible(false);
   const getNetworks = useCallback(
-    () => dispatch(listNetworksAsync()).then(({ data: networks }) => {
-      if (networks.length > 0) setForm({ network: networks[0].ssid }); // Autocomplete input with first network
-      setNetworks(networks);
-    }),
+    () =>
+      dispatch(listNetworksAsync()).then(({ data: networks }) => {
+        if (networks.length > 0) setForm({ network: networks[0].ssid }); // Autocomplete input with first network
+        setNetworks(networks);
+      }),
     [dispatch, setForm]
   );
   const connectToNetwork = () => {
@@ -58,18 +60,13 @@ const WiFiSettingsScreen = ({ navigation }) => {
           </Text>
 
           <View style={{ marginVertical: 40 }}>
-            <Pressable
-              style={{ marginBottom: 20 }}
+            <PressableTextInput
+              containerStyle={{ marginBottom: 20 }}
+              style={styles.input}
+              placeholder="WiFi Network"
+              value={form.network}
               onPress={() => setIsNetworksModalVisible(true)}
-            >
-              <TextInput
-                style={styles.input}
-                placeholder="WiFi Network"
-                value={form.network}
-                pointerEvents="none"
-                editable={false}
-              />
-            </Pressable>
+            />
             <ListModal
               visible={isNetworksModalVisible}
               data={networks}

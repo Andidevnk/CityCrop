@@ -10,6 +10,7 @@ import {
 } from 'shared/store/devices/actions';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import ListModal from 'shared/components/ListModal';
+import PressableTextInput from 'shared/components/PressableTextInput';
 import SectionBtn from './SectionBtn';
 
 const DeviceSettingsScreen = ({
@@ -53,15 +54,12 @@ const DeviceSettingsScreen = ({
           value={formState.name}
           onChangeText={(text) => setFormState({ name: text })}
         />
-        <Pressable onPress={() => setIsTimezonesModalVisible(true)}>
-          <TextInput
-            style={styles.input}
-            placeholder="Timezone"
-            value={formState.timezone}
-            pointerEvents="none"
-            editable={false}
-          />
-        </Pressable>
+        <PressableTextInput
+          style={styles.input}
+          placeholder="Timezone"
+          value={formState.timezone}
+          onPress={() => setIsTimezonesModalVisible(true)}
+        />
         <ListModal
           visible={isTimezonesModalVisible}
           data={moment.tz.names()}

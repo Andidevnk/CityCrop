@@ -9,6 +9,7 @@ import { addDeviceAsync } from 'shared/store/devices/actions';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import ListModal from 'shared/components/ListModal';
 import KeyboardDismissArea from 'shared/components/KeyboardDismissArea';
+import PressableTextInput from 'shared/components/PressableTextInput';
 
 const Step1 = ({ navigation }) => {
   const [form, setForm] = useFormState({
@@ -39,15 +40,12 @@ const Step1 = ({ navigation }) => {
             value={form.name}
             onChangeText={(text) => setForm({ name: text })}
           />
-          <Pressable onPress={() => setIsTimezoneModalVisible(true)}>
-            <TextInput
-              style={styles.input}
-              placeholder="Timezone"
-              value={form.timezone}
-              pointerEvents="none"
-              editable={false}
-            />
-          </Pressable>
+          <PressableTextInput
+            style={styles.input}
+            placeholder="Timezone"
+            value={form.timezone}
+            onPress={() => setIsTimezoneModalVisible(true)}
+          />
           <ListModal
             visible={isTimezoneModalVisible}
             data={MINIMAL_TIMEZONES}
