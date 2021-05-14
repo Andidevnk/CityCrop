@@ -4,46 +4,42 @@ import { Ionicons } from '@expo/vector-icons';
 
 import ScalableImage from 'shared/components/ScalableImage';
 
-const WifiSettingsBtn = ({ style, ...restProps }) => (
-  <TouchableOpacity style={[styles.wifiSettingsBtn, style]} {...restProps}>
-    <ScalableImage
-      style={styles.wifiSettingsBtnLeftIcon}
-      source={require('assets/icons/wifi.png')}
-    />
-    <Text style={styles.wifiSettingsBtnText}>WiFi Setting</Text>
+const SectionBtn = ({ style, icon, title, ...rest }) => (
+  <TouchableOpacity style={[styles.container, style]} {...rest}>
+    <ScalableImage style={styles.icon} source={icon} />
+    <Text style={styles.title}>{title}</Text>
     <Ionicons
-      style={styles.wifiSettingsBtnArrowIcon}
+      style={styles.arrowIcon}
       name="chevron-forward"
-      size={24}
+      size={26}
       color="#59C901"
     />
   </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
-  wifiSettingsBtn: {
+  container: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 20,
+    paddingVertical: 16,
     paddingHorizontal: 25,
     backgroundColor: '#FFFFFF',
     borderRadius: 15,
     borderWidth: 1.5,
     borderColor: '#0B7B03',
-    marginTop: 60,
   },
-  wifiSettingsBtnLeftIcon: {
-    height: 18,
+  icon: {
+    height: 20,
     marginRight: 20,
   },
-  wifiSettingsBtnText: {
+  title: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#18191F',
   },
-  wifiSettingsBtnArrowIcon: {
+  arrowIcon: {
     marginLeft: 'auto',
   },
 });
 
-export default WifiSettingsBtn;
+export default SectionBtn;

@@ -10,7 +10,7 @@ import {
 } from 'shared/store/devices/actions';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import ListModal from 'shared/components/ListModal';
-import WifiSettingsBtn from './WifiSettingsBtn';
+import SectionBtn from './SectionBtn';
 
 const DeviceSettingsScreen = ({
   navigation,
@@ -30,6 +30,8 @@ const DeviceSettingsScreen = ({
   const navigateToWiFiSettings = () => {
     navigation.navigate('WiFi Settings');
   };
+  const navigateToWaterWizard = (device) =>
+    navigation.navigate('Water Wizard', { deviceId: device.id });
   const updateDevice = () => {
     const { name, timezone } = formState;
     setIsLoading(true);
@@ -72,7 +74,19 @@ const DeviceSettingsScreen = ({
         />
       </View>
 
-      <WifiSettingsBtn onPress={navigateToWiFiSettings} />
+      <View style={{ marginTop: 40 }}>
+        <SectionBtn
+          style={{ marginBottom: 15 }}
+          icon={require('assets/icons/wifi.png')}
+          title="WiFi Settings"
+          onPress={navigateToWiFiSettings}
+        />
+        <SectionBtn
+          icon={require('assets/icons/watering-can.png')}
+          title="Empty Tank"
+          onPress={navigateToWaterWizard}
+        />
+      </View>
 
       <LightGreenBtn
         style={{ marginTop: 'auto' }}

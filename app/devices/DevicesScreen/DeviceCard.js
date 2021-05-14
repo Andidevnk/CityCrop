@@ -10,7 +10,6 @@ import {
 
 import { CardStyles } from 'shared/styles';
 import ScalableImage from 'shared/components/ScalableImage';
-import ActionButton from './ActionButton';
 
 const getDeviceImageStyle = (modulesCount) => [
   styles.deviceImage,
@@ -21,12 +20,7 @@ const getDeviceImageSource = (modulesCount) =>
     ? require('assets/imgs/devices/1-module-device-front.png')
     : require('assets/imgs/devices/2-module-device-front.png');
 
-const DeviceCard = ({
-  device,
-  onCardPress,
-  onEmptyTankPress,
-  onSettingsIconPress,
-}) => {
+const DeviceCard = ({ device, onCardPress, onSettingsIconPress }) => {
   const { name, modulesCount, plantsCount } = device;
   return (
     <Pressable
@@ -64,12 +58,6 @@ const DeviceCard = ({
         />
         <Text style={styles.plantsText}>{plantsCount} plants</Text>
       </View>
-      <ActionButton
-        style={{ width: '50%', alignSelf: 'flex-start' }}
-        iconSource={require('assets/icons/watering-can.png')}
-        title="Empty tank"
-        onPress={() => onEmptyTankPress(device)}
-      />
     </Pressable>
   );
 };
@@ -117,7 +105,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'flex-start',
     alignItems: 'center',
-    marginBottom: 15,
   },
   plantImage: {
     width: 29,
