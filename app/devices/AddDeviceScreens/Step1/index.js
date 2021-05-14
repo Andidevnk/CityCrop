@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, Pressable } from 'react-native';
 import { useDispatch } from 'react-redux';
 import moment from 'moment-timezone';
 
+import { MINIMAL_TIMEZONES } from 'shared/constants';
 import useFormState from 'shared/hooks/useFormState';
 import { addDeviceAsync } from 'shared/store/devices/actions';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
@@ -49,7 +50,7 @@ const Step1 = ({ navigation }) => {
           </Pressable>
           <ListModal
             visible={isTimezoneModalVisible}
-            data={moment.tz.names()}
+            data={MINIMAL_TIMEZONES}
             onItemPress={(timezone) => {
               setForm({ timezone });
               closeTimezonesModal();
