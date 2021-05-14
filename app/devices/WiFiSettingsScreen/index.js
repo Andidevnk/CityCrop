@@ -29,11 +29,14 @@ const WiFiSettingsScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
-  const getNetworks = useCallback(
-    () => dispatch(listNetworksAsync()).then(({ data }) => setNetworks(data)),
-    [dispatch]
-  );
   const closeNetworksModal = () => setIsNetworksModalVisible(false);
+  const getNetworks = useCallback(
+    () => dispatch(listNetworksAsync()).then(({ data: networks }) => {
+      if (networks.length > 0) setForm({ network: networks[0].ssid }); // Autocomplete input with first network
+      setNetworks(networks);
+    }),
+    [dispatch, setForm]
+  );
   const connectToNetwork = () => {
     setIsLoading(true);
     dispatch(connectToNetworkAsync(form.network, form.password)).then(() => {
