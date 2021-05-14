@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Modal, Pressable } from 'react-native';
+import { StyleSheet, Text, Modal, Pressable } from 'react-native';
 
 import IconButton from 'shared/components/IconButton';
 
@@ -19,7 +19,8 @@ const SimpleModal = ({
     {...props}
   >
     <Pressable style={styles.modalContainer} onPress={onOutsidePress}>
-      <View style={[styles.modalContent, contentStyle]}>
+      {/* We use Pressable here to capture click and not propagate to parent's onPress */}
+      <Pressable style={[styles.modalContent, contentStyle]}>
         {showCloseButton && (
           <IconButton
             style={styles.closeIcon}
@@ -34,7 +35,7 @@ const SimpleModal = ({
         ) : (
           children
         )}
-      </View>
+      </Pressable>
     </Pressable>
   </Modal>
 );
