@@ -7,7 +7,7 @@ const Step2 = ({ navigation }) => (
   <View style={styles.container}>
     <Text style={styles.title}>Step 2</Text>
     <Text style={styles.subtitle}>
-      When you plug your CityCrop device, the light will start blinking white
+      When you plug your CityCrop device, the light will start blinking white. Wait until the light stops blinking and press <Text style={{ fontWeight: 'bold' }}>Next</Text>.
     </Text>
     <Image
       style={{ flex: 1, alignSelf: 'center', marginVertical: 50 }}
@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 18,
-    fontWeight: 'bold',
     color: '#18191F',
   },
 });
