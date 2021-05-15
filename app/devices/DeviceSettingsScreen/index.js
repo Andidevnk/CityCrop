@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import moment from 'moment-timezone';
 
 import useFormState from 'shared/hooks/useFormState';
+import useBooleanState from 'shared/hooks/useBooleanState';
 import {
   deleteDeviceAsync,
   updateDeviceAsync,
@@ -11,6 +12,7 @@ import {
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import ListModal from 'shared/components/ListModal';
 import PressableTextInput from 'shared/components/PressableTextInput';
+import ConfirmationModal from 'shared/components/ConfirmationModal';
 import SectionBtn from './SectionBtn';
 
 const DeviceSettingsScreen = ({
@@ -24,10 +26,15 @@ const DeviceSettingsScreen = ({
     timezone: device.timezone,
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [isTimezonesModalVisible, setIsTimezonesModalVisible] = useState(false);
+  const [isTimezonesModalVisible, openTimezonesModal, closeTimezonesModal] =
+    useBooleanState(false);
+  const [
+    isConfirmationModalVisible,
+    openConfirmationModal,
+    closeConfirmationModal,
+  ] = useBooleanState(false);
 
   const dispatch = useDispatch();
-  const closeTimezonesModal = () => setIsTimezonesModalVisible(false);
   const navigateToWiFiSettings = () => {
     navigation.navigate('WiFi Settings');
   };
@@ -46,6 +53,11 @@ const DeviceSettingsScreen = ({
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Edit your device settings</Text>
+      <ConfirmationModal
+        visible={isConfirmationModalVisible}
+        onAcceptPress={deleteDevice}
+        onRequestClose={closeConfirmationModal}
+      />
 
       <View>
         <TextInput
@@ -58,7 +70,7 @@ const DeviceSettingsScreen = ({
           style={styles.input}
           placeholder="Timezone"
           value={formState.timezone}
-          onPress={() => setIsTimezonesModalVisible(true)}
+          onPress={openTimezonesModal}
         />
         <ListModal
           visible={isTimezonesModalVisible}
@@ -68,7 +80,7 @@ const DeviceSettingsScreen = ({
             closeTimezonesModal();
           }}
           onOutsidePress={closeTimezonesModal}
-          onRequestClose={closeTimezonesModal} // Back button press
+          onRequestClose={closeTimezonesModal}
         />
       </View>
 
@@ -94,7 +106,7 @@ const DeviceSettingsScreen = ({
       />
       <Pressable
         style={{ marginTop: 20, alignItems: 'center' }}
-        onPress={deleteDevice}
+        onPress={openConfirmationModal}
       >
         <Text style={{ fontSize: 16, color: 'red' }}>Delete</Text>
       </Pressable>

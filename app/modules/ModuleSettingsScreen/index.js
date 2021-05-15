@@ -3,11 +3,13 @@ import { StyleSheet, View, Text, TextInput, Pressable } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import useFormState from 'shared/hooks/useFormState';
+import useBooleanState from 'shared/hooks/useBooleanState';
 import {
   deleteModuleAsync,
   updateModuleAsync,
 } from 'shared/store/modules/actions';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
+import ConfirmationModal from 'shared/components/ConfirmationModal';
 import ModuleTypeToggler from './ModuleTypeToggler';
 
 const ModuleSettingsScreen = ({
@@ -23,6 +25,11 @@ const ModuleSettingsScreen = ({
   });
   const [isUpdateLoading, setIsUpdateLoading] = useState(false);
   const [showChangeTypeErrorText, setShowChangeTypeErrorText] = useState(false);
+  const [
+    isConfirmationModalVisible,
+    openConfirmationModal,
+    closeConfirmationModal,
+  ] = useBooleanState(false);
 
   const moduleHasPlants = module.plants.length > 0;
 
@@ -39,6 +46,12 @@ const ModuleSettingsScreen = ({
 
   return (
     <View style={styles.container}>
+      <ConfirmationModal
+        visible={isConfirmationModalVisible}
+        onAcceptPress={deleteModule}
+        onRequestClose={closeConfirmationModal}
+      />
+
       <Text style={styles.title}>Edit your module settings</Text>
       <TextInput
         style={[styles.input, { marginBottom: 15 }]}
@@ -76,7 +89,7 @@ const ModuleSettingsScreen = ({
       />
       <Pressable
         style={{ marginTop: 20, alignItems: 'center' }}
-        onPress={deleteModule}
+        onPress={openConfirmationModal}
       >
         <Text style={{ fontSize: 16, color: 'red' }}>Delete</Text>
       </Pressable>

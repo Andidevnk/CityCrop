@@ -10,8 +10,10 @@ import { useDispatch } from 'react-redux';
 
 import { ShadowStyles } from 'shared/styles';
 import { getPlant, getPlantImage } from 'shared/utilities';
+import useBooleanState from 'shared/hooks/useBooleanState';
 import { deletePlantAsync } from 'shared/store/plants/actions';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
+import ConfirmationModal from 'shared/components/ConfirmationModal';
 import ProgressRing from './ProgressRing';
 import DeletePlantBtnIcon from './DeletePlantBtnIcon';
 
@@ -32,15 +34,19 @@ const PlantScreen = ({
   const windowHeight = useWindowDimensions().height;
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
   const [isHarvestLoading, setIsHarvestLoading] = useState(false);
-  const dispatch = useDispatch();
+  const [
+    isConfirmationModalVisible,
+    openConfirmationModal,
+    closeConfirmationModal,
+  ] = useBooleanState(false);
 
+  const dispatch = useDispatch();
   const deletePlant = useCallback(() => {
     setIsDeleteLoading(true);
     dispatch(deletePlantAsync(deviceId, moduleId, position))
       .then(() => navigation.goBack())
       .finally(() => setIsDeleteLoading(false));
   }, [deviceId, dispatch, moduleId, navigation, position]);
-
   const harvestPlant = () => {
     setIsHarvestLoading(true);
     dispatch(deletePlantAsync(deviceId, moduleId, position))
@@ -53,10 +59,13 @@ const PlantScreen = ({
     navigation.setOptions({
       // eslint-disable-next-line react/display-name
       headerRight: () => (
-        <DeletePlantBtnIcon loading={isDeleteLoading} onPress={deletePlant} />
+        <DeletePlantBtnIcon
+          loading={isDeleteLoading}
+          onPress={openConfirmationModal}
+        />
       ),
     });
-  }, [navigation, deletePlant, isDeleteLoading]);
+  }, [navigation, isDeleteLoading, openConfirmationModal]);
 
   const daysSincePlanted = dateDiffInDays(
     new Date(),
@@ -71,6 +80,12 @@ const PlantScreen = ({
 
   return (
     <View style={styles.container}>
+      <ConfirmationModal
+        visible={isConfirmationModalVisible}
+        onAcceptPress={deletePlant}
+        onRequestClose={closeConfirmationModal}
+      />
+
       <View style={[styles.imageContainer, ShadowStyles.shadow2]}>
         <Image
           style={{ width: '100%', height: '100%' }}
