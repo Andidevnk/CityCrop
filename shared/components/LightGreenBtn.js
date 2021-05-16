@@ -14,15 +14,22 @@ function LightGreenBtn({
   icon,
   outlined = false,
   loading = false,
+  disabled = false,
   ...restProps
 }) {
   if (loading)
     return <ActivityIndicator style={style} size="large" color="green" />;
   return (
     <TouchableHighlight
-      style={[styles.button, outlined && styles.buttonOutlined, style]}
-      activeOpacity={0.9}
+      style={[
+        styles.button,
+        ...(outlined ? [styles.buttonOutlined] : []),
+        ...(disabled ? [styles.buttonDisabled] : []),
+        style,
+      ]}
       underlayColor={outlined ? '#DDDDDD' : '#4bad01'}
+      activeOpacity={0.9}
+      disabled={disabled}
       {...restProps}
     >
       <>
@@ -33,7 +40,7 @@ function LightGreenBtn({
             resizeMode="contain"
           />
         )}
-        <Text style={[styles.text, outlined && styles.textOutlined]}>
+        <Text style={[styles.text, ...(outlined ? [styles.textOutlined] : [])]}>
           {title}
         </Text>
       </>
@@ -57,6 +64,9 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: '#59C901',
     backgroundColor: 'transparent',
+  },
+  buttonDisabled: {
+    backgroundColor: 'rgba(0, 0, 0, 0.12)',
   },
   text: {
     textAlign: 'center',
