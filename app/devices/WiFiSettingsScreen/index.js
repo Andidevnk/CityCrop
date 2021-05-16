@@ -1,36 +1,32 @@
 import React, { useCallback, useState } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  Pressable,
-  TouchableHighlight,
-} from 'react-native';
+import { StyleSheet, View, Text, TextInput } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import useFormState from 'shared/hooks/useFormState';
+import useBooleanState from 'shared/hooks/useBooleanState';
 import {
   connectToNetworkAsync,
   listNetworksAsync,
 } from 'shared/store/networks/actions';
 import ListModal from 'shared/components/ListModal';
-import ScalableImage from 'shared/components/ScalableImage';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import KeyboardDismissArea from 'shared/components/KeyboardDismissArea';
 import PressableTextInput from 'shared/components/PressableTextInput';
+import OutlinedGreenBtn from 'shared/components/OutlinedGreenBtn';
 
 const WiFiSettingsScreen = ({ navigation }) => {
   const [form, setForm] = useFormState({
     network: '',
     password: '',
   });
-  const [isNetworksModalVisible, setIsNetworksModalVisible] = useState(false);
   const [networks, setNetworks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isNetworksModalVisible, openNetworksModal, closeNetworksModal] =
+    useBooleanState(false);
+  const [hasTriedToConnect, setHasTriedToConnect] = useState(false);
 
   const dispatch = useDispatch();
-  const closeNetworksModal = () => setIsNetworksModalVisible(false);
+  const navigateToDevices = () => navigation.navigate('Devices');
   const getNetworks = useCallback(
     () =>
       dispatch(listNetworksAsync()).then(({ data: networks }) => {
@@ -41,9 +37,9 @@ const WiFiSettingsScreen = ({ navigation }) => {
   );
   const connectToNetwork = () => {
     setIsLoading(true);
-    dispatch(connectToNetworkAsync(form.network, form.password)).then(() => {
+    dispatch(connectToNetworkAsync(form.network, form.password)).finally(() => {
       setIsLoading(false);
-      navigation.navigate('Devices');
+      setHasTriedToConnect(true);
     });
   };
 
@@ -65,7 +61,7 @@ const WiFiSettingsScreen = ({ navigation }) => {
               style={styles.input}
               placeholder="WiFi Network"
               value={form.network}
-              onPress={() => setIsNetworksModalVisible(true)}
+              onPress={openNetworksModal}
             />
             <ListModal
               visible={isNetworksModalVisible}
@@ -89,34 +85,31 @@ const WiFiSettingsScreen = ({ navigation }) => {
             />
           </View>
 
-          <TouchableHighlight
-            style={{
-              flexDirection: 'row',
-              alignSelf: 'center',
-              alignItems: 'center',
-              padding: 20,
-              borderWidth: 1.5,
-              borderRadius: 15,
-              borderColor: '#0B7B03',
-            }}
-            underlayColor="#EEEEEE"
-            onPress={getNetworks}
-          >
-            <>
-              <ScalableImage
-                style={{ height: 20, marginRight: 10 }}
-                source={require('assets/icons/refresh.png')}
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ flex: 1, marginRight: 15 }}>
+              <OutlinedGreenBtn
+                icon={require('assets/icons/refresh.png')}
+                title="Refresh"
+                onPress={getNetworks}
               />
-              <Text style={{ fontSize: 16, color: '#0B7B03' }}>Refresh</Text>
-            </>
-          </TouchableHighlight>
+            </View>
+            <View style={{ flex: 1 }}>
+              <LightGreenBtn
+                style={{ width: '100%' }}
+                title="Connect"
+                loading={isLoading}
+                disabled={!form.network || !form.password}
+                onPress={connectToNetwork}
+              />
+            </View>
+          </View>
         </View>
 
         <LightGreenBtn
           style={{ marginTop: 30 }}
-          title="Connect"
-          loading={isLoading}
-          onPress={connectToNetwork}
+          title="Complete"
+          disabled={!hasTriedToConnect}
+          onPress={navigateToDevices}
         />
       </View>
     </KeyboardDismissArea>

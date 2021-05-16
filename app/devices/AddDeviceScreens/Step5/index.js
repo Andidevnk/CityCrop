@@ -1,15 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Pressable,
-  TouchableHighlight,
-} from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import useFormState from 'shared/hooks/useFormState';
+import useBooleanState from 'shared/hooks/useBooleanState';
 import {
   connectToNetworkAsync,
   listNetworksAsync,
@@ -17,23 +11,22 @@ import {
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import ListModal from 'shared/components/ListModal';
 import KeyboardDismissArea from 'shared/components/KeyboardDismissArea';
-import ScalableImage from 'shared/components/ScalableImage';
 import PressableTextInput from 'shared/components/PressableTextInput';
-import ErrorModal from './ErrorModal';
+import OutlinedGreenBtn from 'shared/components/OutlinedGreenBtn';
 
 const Step5 = ({ navigation }) => {
   const [form, setForm] = useFormState({
     network: '',
     password: '',
   });
-  const [isNetworksModalVisible, setIsNetworksModalVisible] = useState(false);
   const [networks, setNetworks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
+  const [isNetworksModalVisible, openNetworksModal, closeNetworksModal] =
+    useBooleanState(false);
+  const [hasTriedToConnect, setHasTriedToConnect] = useState(false);
 
   const dispatch = useDispatch();
-  const closeErrorModal = () => setIsErrorModalVisible(false);
-  const closeNetworksModal = () => setIsNetworksModalVisible(false);
+  const navigateToDevices = () => navigation.navigate('Devices');
   const getNetworks = useCallback(
     () =>
       dispatch(listNetworksAsync()).then(({ data: networks }) => {
@@ -44,10 +37,10 @@ const Step5 = ({ navigation }) => {
   );
   const connectToNetwork = () => {
     setIsLoading(true);
-    dispatch(connectToNetworkAsync(form.network, form.password))
-      .then(() => navigation.navigate('Devices'))
-      .catch(() => setIsErrorModalVisible(true))
-      .finally(() => setIsLoading(false));
+    dispatch(connectToNetworkAsync(form.network, form.password)).finally(() => {
+      setIsLoading(false);
+      setHasTriedToConnect(true);
+    });
   };
 
   useEffect(() => {
@@ -57,17 +50,18 @@ const Step5 = ({ navigation }) => {
   return (
     <KeyboardDismissArea>
       <View style={styles.container}>
-        <ErrorModal visible={isErrorModalVisible} onClose={closeErrorModal} />
-
         <View>
           <Text style={styles.title}>Step 5</Text>
           <Text style={styles.subtitle}>Connect your device to WiFi</Text>
 
           <Text>
-            Select the WiFi network your device will connect to below and
-            provide its password. You can scan for networks again by pressing{' '}
-            <Text style={{ fontWeight: 'bold' }}>Refresh</Text>. When you are
-            done, press <Text style={{ fontWeight: 'bold' }}>Connect</Text>.
+            Select a WiFi network, provide its password and press{' '}
+            <Text style={{ fontWeight: 'bold' }}>Connect</Text> to connect your
+            device to WiFi. You can scan for networks again by pressing{' '}
+            <Text style={{ fontWeight: 'bold' }}>Refresh</Text>. When the light
+            on your device stops blinking, you can press{' '}
+            <Text style={{ fontWeight: 'bold' }}>Complete</Text> to complete
+            this setup.
           </Text>
 
           <View style={{ marginVertical: 40 }}>
@@ -76,7 +70,7 @@ const Step5 = ({ navigation }) => {
               style={styles.input}
               placeholder="WiFi Network"
               value={form.network}
-              onPress={() => setIsNetworksModalVisible(true)}
+              onPress={openNetworksModal}
             />
             <ListModal
               visible={isNetworksModalVisible}
@@ -100,34 +94,31 @@ const Step5 = ({ navigation }) => {
             />
           </View>
 
-          <TouchableHighlight
-            style={{
-              flexDirection: 'row',
-              alignSelf: 'center',
-              alignItems: 'center',
-              padding: 20,
-              borderWidth: 1.5,
-              borderRadius: 15,
-              borderColor: '#0B7B03',
-            }}
-            underlayColor="#EEEEEE"
-            onPress={getNetworks}
-          >
-            <>
-              <ScalableImage
-                style={{ height: 20, marginRight: 10 }}
-                source={require('assets/icons/refresh.png')}
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ flex: 1, marginRight: 15 }}>
+              <OutlinedGreenBtn
+                icon={require('assets/icons/refresh.png')}
+                title="Refresh"
+                onPress={getNetworks}
               />
-              <Text style={{ fontSize: 16, color: '#0B7B03' }}>Refresh</Text>
-            </>
-          </TouchableHighlight>
+            </View>
+            <View style={{ flex: 1 }}>
+              <LightGreenBtn
+                style={{ width: '100%' }}
+                title="Connect"
+                loading={isLoading}
+                disabled={!form.network || !form.password}
+                onPress={connectToNetwork}
+              />
+            </View>
+          </View>
         </View>
 
         <LightGreenBtn
           style={{ marginTop: 30 }}
-          title="Connect"
-          loading={isLoading}
-          onPress={connectToNetwork}
+          title="Complete"
+          disabled={!hasTriedToConnect}
+          onPress={navigateToDevices}
         />
       </View>
     </KeyboardDismissArea>
