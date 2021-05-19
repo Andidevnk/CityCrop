@@ -38,7 +38,7 @@ const DeviceSettingsScreen = ({
   const navigateToWiFiSettings = () => {
     navigation.navigate('WiFi Settings');
   };
-  const navigateToWaterWizard = (device) =>
+  const navigateToWaterWizard = () =>
     navigation.navigate('Water Wizard', { deviceId: device.id });
   const updateDevice = () => {
     const { name, timezone } = formState;
