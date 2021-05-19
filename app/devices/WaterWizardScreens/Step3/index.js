@@ -6,20 +6,25 @@ import {
   View,
   useWindowDimensions,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
 
+import { addNutrientsAsync } from 'shared/store/water-tank/actions';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import ScalableImage from 'shared/components/ScalableImage';
 
-const WaterWizardStep2Screen = ({
+const Step3 = ({
   navigation,
   route: {
     params: { deviceId },
   },
 }) => {
   const windowHeight = useWindowDimensions().height;
+  const dispatch = useDispatch();
 
-  const navigateToWaterWizard3 = () =>
-    navigation.navigate('Water Wizard 3', { deviceId });
+  const addNutrients = () =>
+    dispatch(addNutrientsAsync(deviceId)).then(() =>
+      navigation.navigate('Devices')
+    );
 
   return (
     <ScrollView
@@ -27,32 +32,28 @@ const WaterWizardStep2Screen = ({
       style={styles.content}
       showsVerticalScrollIndicator={false}
     >
-      <Text style={styles.title}>Step 2</Text>
-      <Text style={styles.subtitle}>How to close the water valve</Text>
+      <Text style={styles.title}>Step 3</Text>
+      <Text style={styles.subtitle}>How to add new water</Text>
       <ScalableImage
         style={[styles.image, { height: windowHeight * 0.35 }]}
-        source={require('assets/imgs/water-tank/step-2.gif')}
+        source={require('assets/imgs/water-tank/step-3.gif')}
       />
       <View style={styles.listContainer}>
         <View style={styles.listItem}>
           <Text style={styles.listNumber}>1.</Text>
-          <Text style={styles.listItemText}>Close the water valve</Text>
+          <Text style={styles.listItemText}>Open the cap</Text>
         </View>
         <View style={styles.listItem}>
           <Text style={styles.listNumber}>2.</Text>
-          <Text style={styles.listItemText}>Put back the CC01 nutrient</Text>
-        </View>
-        <View style={[styles.listItem, { marginBottom: 0 }]}>
-          <Text style={styles.listNumber}>3.</Text>
           <Text style={styles.listItemText}>
-            Remove the blue hose and store it
+            Add 8lt of fresh water for your plants
           </Text>
         </View>
       </View>
       <LightGreenBtn
         style={{ marginTop: 'auto' }}
-        title="Next"
-        onPress={navigateToWaterWizard3}
+        title="Done!"
+        onPress={addNutrients}
       />
     </ScrollView>
   );
@@ -107,4 +108,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WaterWizardStep2Screen;
+export default Step3;

@@ -18,9 +18,9 @@ import AddDeviceStep3Screen from './devices/AddDeviceScreens/Step3';
 import AddDeviceStep4Screen from './devices/AddDeviceScreens/Step4';
 import AddDeviceStep5Screen from './devices/AddDeviceScreens/Step5';
 import WiFiSettingsScreen from './devices/WiFiSettingsScreen';
-import WaterWizardStep1Screen from './devices/WaterWizardScreen/WaterWizardStep1Screen';
-import WaterWizardStep2Screen from './devices/WaterWizardScreen/WaterWizardStep2Screen';
-import WaterWizardStep3Screen from './devices/WaterWizardScreen/WaterWizardStep3Screen';
+import WaterWizardStep1Screen from './devices/WaterWizardScreens/Step1';
+import WaterWizardStep2Screen from './devices/WaterWizardScreens/Step2';
+import WaterWizardStep3Screen from './devices/WaterWizardScreens/Step3';
 import ReplaceNutrientsScreen from './devices/ReplaceNutrientsScreen';
 import ModulesScreen from './modules/ModulesScreen';
 import ModuleScreen from './modules/ModuleScreen';
@@ -122,7 +122,7 @@ const HomeNavigator = ({ navigation }) => {
             options={ScreenOptions.greenHeader}
           />
           <Stack.Screen
-            name="Water Wizard 2"
+            name="Water Wizard - Step 2"
             component={WaterWizardStep2Screen}
             options={{
               ...ScreenOptions.greenHeader,
@@ -130,7 +130,7 @@ const HomeNavigator = ({ navigation }) => {
             }}
           />
           <Stack.Screen
-            name="Water Wizard 3"
+            name="Water Wizard - Step 3"
             component={WaterWizardStep3Screen}
             options={{
               ...ScreenOptions.greenHeader,
