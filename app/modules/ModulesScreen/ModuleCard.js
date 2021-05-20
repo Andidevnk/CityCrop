@@ -69,12 +69,13 @@ const ModuleCard = ({ module, onCardPress, onSettingsIconPress }) => {
 
 const styles = StyleSheet.create({
   cardPadding: {
-    paddingVertical: 20,
+    paddingTop: 30,
+    paddingBottom: 20,
     paddingHorizontal: 25,
   },
   moduleImage: {
     height: 140,
-    marginBottom: 40,
+    marginBottom: 20,
   },
   settingsIconContainer: {
     position: 'absolute',
