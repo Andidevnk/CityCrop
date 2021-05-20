@@ -8,20 +8,34 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import { DEVICE_MODULE_IMAGES } from 'shared/constants';
 import { CardStyles } from 'shared/styles';
 import ScalableImage from 'shared/components/ScalableImage';
 
-const getDeviceImageStyle = (modulesCount) => [
+const getDeviceImageModulesPart = (moduleTypes) =>
+  moduleTypes.length == 1 ? moduleTypes[0] : 'LU-UU';
+const getDeviceImageStyle = (moduleTypes) => [
   styles.deviceImage,
-  modulesCount === 1 ? styles.singleModuleImage : styles.dualModuleImage,
+  ...(moduleTypes.length === 0 ? [styles.singleModuleImage] : []),
+  ...(moduleTypes.length === 1 ? [styles.singleModuleImage] : []),
+  ...(moduleTypes.length === 2 ? [styles.dualModuleImage] : []),
 ];
-const getDeviceImageSource = (modulesCount) =>
-  modulesCount === 1
-    ? require('assets/imgs/devices/1-module-device-front.png')
-    : require('assets/imgs/devices/2-module-device-front.png');
+const getDeviceImageSource = (moduleTypes, hasPlants) => {
+  if (moduleTypes.length === 0) return DEVICE_MODULE_IMAGES['LU-add-module'];
+
+  const modulesPart = getDeviceImageModulesPart(moduleTypes);
+  const plantsPart = hasPlants ? 'with-plants' : 'no-plants';
+  return DEVICE_MODULE_IMAGES[`${modulesPart}-online-${plantsPart}`];
+};
 
 const DeviceCard = ({ device, onCardPress, onSettingsIconPress }) => {
-  const { name, modulesCount, plantsCount } = device;
+  const { name, modules, plantsCount } = device;
+
+  const moduleTypes = modules.map((module) =>
+    module.type === 'main' ? 'LU' : 'UU'
+  );
+  const hasPlants = plantsCount > 0;
+
   return (
     <Pressable
       style={[CardStyles.card, styles.cardPadding]}
@@ -38,8 +52,8 @@ const DeviceCard = ({ device, onCardPress, onSettingsIconPress }) => {
         />
       </TouchableOpacity>
       <ScalableImage
-        style={getDeviceImageStyle(modulesCount)}
-        source={getDeviceImageSource(modulesCount)}
+        style={getDeviceImageStyle(moduleTypes)}
+        source={getDeviceImageSource(moduleTypes, hasPlants)}
         resizeMode="contain"
       />
       <View style={styles.nameContainer}>

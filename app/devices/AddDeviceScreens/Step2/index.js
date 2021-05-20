@@ -7,11 +7,13 @@ const Step2 = ({ navigation }) => (
   <View style={styles.container}>
     <Text style={styles.title}>Step 2</Text>
     <Text style={styles.subtitle}>
-      When you plug your CityCrop device, the light will start blinking white. Wait until the light stops blinking and press <Text style={{ fontWeight: 'bold' }}>Next</Text>.
+      When you plug your CityCrop device, the light will start blinking white.
+      Wait until the light stops blinking and press{' '}
+      <Text style={{ fontWeight: 'bold' }}>Next</Text>.
     </Text>
     <Image
       style={{ flex: 1, alignSelf: 'center', marginVertical: 50 }}
-      source={require('assets/imgs/devices/blinking-white.gif')}
+      source={require('assets/imgs/devices-modules/blinking-white.gif')}
       resizeMode="contain"
     />
     <LightGreenBtn

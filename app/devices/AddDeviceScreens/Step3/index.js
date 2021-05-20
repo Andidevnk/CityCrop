@@ -16,7 +16,7 @@ const Step3 = ({ navigation }) => (
     </Text>
     <Image
       style={{ flex: 1, alignSelf: 'center', marginVertical: 50 }}
-      source={require('assets/imgs/devices/blinking-blue.gif')}
+      source={require('assets/imgs/devices-modules/blinking-blue.gif')}
       resizeMode="contain"
     />
     <LightGreenBtn

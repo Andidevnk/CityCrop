@@ -8,20 +8,25 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import { DEVICE_MODULE_IMAGES } from 'shared/constants';
 import { CardStyles } from 'shared/styles';
 import ScalableImage from 'shared/components/ScalableImage';
 
-const STATUS_TO_IMAGE = {
-  on: require('assets/imgs/modules/module-on.png'),
-  off: require('assets/imgs/modules/module-off.png'),
-};
 const STATUS_TO_ICON = {
   on: require('assets/icons/on.png'),
   off: require('assets/icons/off.png'),
 };
 
+const getModuleImageSource = (moduleType, hasPlants) => {
+  const modulePart = moduleType === 'main' ? 'LU' : 'UU';
+  const plantsPart = hasPlants ? 'with-plants' : 'no-plants';
+  return DEVICE_MODULE_IMAGES[`${modulePart}-online-${plantsPart}`];
+};
+
 const ModuleCard = ({ module, onCardPress, onSettingsIconPress }) => {
-  const { name, plants, status } = module;
+  const { name, plants, type, status } = module;
+  const hasPlants = plants.length > 0;
+
   return (
     <Pressable
       style={[CardStyles.card, styles.cardPadding]}
@@ -39,7 +44,7 @@ const ModuleCard = ({ module, onCardPress, onSettingsIconPress }) => {
       </TouchableOpacity>
       <ScalableImage
         style={styles.moduleImage}
-        source={STATUS_TO_IMAGE[status]}
+        source={getModuleImageSource(type, hasPlants)}
         resizeMode="contain"
       />
       <View style={styles.nameContainer}>

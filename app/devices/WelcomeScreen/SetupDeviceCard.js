@@ -7,7 +7,7 @@ const SetupDeviceCard = () => (
   <View style={[CardStyles.card, { marginBottom: 0 }]}>
     <Image
       style={styles.image}
-      source={require('assets/imgs/devices/2-module-device-side.png')}
+      source={require('assets/imgs/devices-modules/2-module-device-side.png')}
       fadeDuration={0}
       resizeMode="contain"
     />
