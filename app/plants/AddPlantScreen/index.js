@@ -6,7 +6,7 @@ import { addPlantAsync } from 'shared/store/plants/actions';
 import { PLANTS } from 'shared/constants';
 import { ShadowStyles } from 'shared/styles';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
-import HarvestInfo from './HarvestInfo';
+import DurationInfo from './DurationInfo';
 
 const AddPlantScreen = ({
   navigation,
@@ -15,7 +15,8 @@ const AddPlantScreen = ({
   },
 }) => {
   const plant = PLANTS.find((plant) => plant.id === plantId);
-  const { name, image, characteristics, commonUse, duration } = plant;
+  const { name, image, characteristics, commonUse, germinationDays, duration } =
+    plant;
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -40,10 +41,18 @@ const AddPlantScreen = ({
           <Text style={styles.description}>{commonUse}</Text>
         </ScrollView>
       </View>
-      <HarvestInfo
-        style={{ height: '24%', marginVertical: 30 }}
-        days={duration}
-      />
+      <View style={styles.durationInfoContainer}>
+        <DurationInfo
+          source={require('assets/icons/seeds.png')}
+          name="Germination"
+          duration={germinationDays}
+        />
+        <DurationInfo
+          source={require('assets/icons/tall-plant-pot.png')}
+          name="Harvest"
+          duration={duration}
+        />
+      </View>
       <LightGreenBtn
         style={{ marginTop: 'auto' }}
         title="Add"
@@ -62,6 +71,7 @@ const styles = StyleSheet.create({
     paddingVertical: 40,
     paddingHorizontal: 30,
     backgroundColor: '#F5F8F5',
+    justifyContent: 'space-between',
   },
   imageContainer: {
     width: '100%',
@@ -84,5 +94,10 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
     color: '#18191F',
+  },
+  durationInfoContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    marginVertical: 30,
   },
 });
