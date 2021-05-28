@@ -5,17 +5,21 @@ import SubTitles from './SubTitles';
 import LearnMoreCard from './LearnMoreCard';
 import SetupDeviceCard from './SetupDeviceCard';
 
-const WelcomeScreen = () => (
-  <ScrollView
-    contentContainerStyle={styles.container}
-    style={styles.scrollView}
-    showsVerticalScrollIndicator={false}
-  >
-    <SubTitles />
-    <LearnMoreCard />
-    <SetupDeviceCard />
-  </ScrollView>
-);
+const WelcomeScreen = ({ navigation }) => {
+  const navigateToAddDevice = () => navigation.navigate('Add New Device');
+
+  return (
+    <ScrollView
+      contentContainerStyle={styles.container}
+      style={styles.scrollView}
+      showsVerticalScrollIndicator={false}
+    >
+      <SubTitles />
+      <LearnMoreCard />
+      <SetupDeviceCard onPress={navigateToAddDevice} />
+    </ScrollView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

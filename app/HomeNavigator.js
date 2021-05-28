@@ -43,7 +43,7 @@ const HomeNavigator = ({ navigation }) => {
         ...TransitionPresets.SlideFromRightIOS,
       }}
     >
-      {devicesCount === 0 ? (
+      {devicesCount <= 0 ? (
         <Stack.Screen
           name="Welcome"
           component={WelcomeScreen}
@@ -85,31 +85,6 @@ const HomeNavigator = ({ navigation }) => {
             name="Device Settings"
             component={DeviceSettingsScreen}
             options={ScreenOptions.greenHeader}
-          />
-          <Stack.Screen
-            name="Add New Device"
-            component={AddDeviceStep1Screen}
-            options={ScreenOptions.greenHeader}
-          />
-          <Stack.Screen
-            name="Add New Device - Step 2"
-            component={AddDeviceStep2Screen}
-            options={{ ...ScreenOptions.greenHeader, title: 'Add New Device' }}
-          />
-          <Stack.Screen
-            name="Add New Device - Step 3"
-            component={AddDeviceStep3Screen}
-            options={{ ...ScreenOptions.greenHeader, title: 'Add New Device' }}
-          />
-          <Stack.Screen
-            name="Add New Device - Step 4"
-            component={AddDeviceStep4Screen}
-            options={{ ...ScreenOptions.greenHeader, title: 'Add New Device' }}
-          />
-          <Stack.Screen
-            name="Add New Device - Step 5"
-            component={AddDeviceStep5Screen}
-            options={{ ...ScreenOptions.greenHeader, title: 'Add New Device' }}
           />
           <Stack.Screen
             name="WiFi Settings"
@@ -199,6 +174,31 @@ const HomeNavigator = ({ navigation }) => {
           />
         </>
       )}
+      <Stack.Screen
+        name="Add New Device"
+        component={AddDeviceStep1Screen}
+        options={ScreenOptions.greenHeader}
+      />
+      <Stack.Screen
+        name="Add New Device - Step 2"
+        component={AddDeviceStep2Screen}
+        options={{ ...ScreenOptions.greenHeader, title: 'Add New Device' }}
+      />
+      <Stack.Screen
+        name="Add New Device - Step 3"
+        component={AddDeviceStep3Screen}
+        options={{ ...ScreenOptions.greenHeader, title: 'Add New Device' }}
+      />
+      <Stack.Screen
+        name="Add New Device - Step 4"
+        component={AddDeviceStep4Screen}
+        options={{ ...ScreenOptions.greenHeader, title: 'Add New Device' }}
+      />
+      <Stack.Screen
+        name="Add New Device - Step 5"
+        component={AddDeviceStep5Screen}
+        options={{ ...ScreenOptions.greenHeader, title: 'Add New Device' }}
+      />
     </Stack.Navigator>
   );
 };

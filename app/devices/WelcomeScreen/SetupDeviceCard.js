@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, Text, Image, Pressable } from 'react-native';
 
 import { CardStyles } from 'shared/styles';
 
-const SetupDeviceCard = () => (
-  <View style={[CardStyles.card, { marginBottom: 0 }]}>
+const SetupDeviceCard = ({ onPress }) => (
+  <Pressable style={[CardStyles.card, { marginBottom: 0 }]} onPress={onPress}>
     <Image
       style={styles.image}
       source={require('assets/imgs/devices-modules/2-module-device-side.png')}
@@ -13,7 +13,7 @@ const SetupDeviceCard = () => (
     />
     <Text style={styles.topText}>Just Received You CityCrop?</Text>
     <Text>Setup your CityCrop and start growing.</Text>
-  </View>
+  </Pressable>
 );
 
 const styles = StyleSheet.create({
