@@ -39,6 +39,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/leafy-greens/swiss_chard.png'),
     binomialName: 'Beta vulgaris',
     duration: 28,
+    germinationDays: 3,
     characteristics:
       'Vibrant, lush, and colorful, Swiss chard is Related to beet and beet greens. Leaves are large and deep green while stalks can be red, orange, yellow, pink, or white.',
     commonUse:
@@ -51,6 +52,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/leafy-greens/upland_cress.png'),
     binomialName: 'Barbarea verna',
     duration: 28,
+    germinationDays: 4,
     characteristics:
       'Upland cress is considered a less potent substitute for watercress. Often referred to as the “baby” cress.',
     commonUse:
@@ -63,6 +65,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/leafy-greens/arugula.png'),
     binomialName: 'Eruca sativa',
     duration: 28,
+    germinationDays: 2,
     characteristics:
       'Nutty, bitter green available in several varieties like Astro, Wasabi and Surrey. Great as garnish or as a base to a dish.',
     commonUse:
@@ -75,6 +78,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/leafy-greens/frisee.png'),
     binomialName: 'Cichorium endivia var crisum',
     duration: 28,
+    germinationDays: 3,
     characteristics:
       'Frisée, a member of the chicory family, has a frizzy texture, as well as a deliciously bitter edge. Look for fresh-looking leaves that go from greenish yellow to white.',
     commonUse:
@@ -87,6 +91,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/leafy-greens/pak_choi_karaoke.png'),
     binomialName: 'Brassica Rapa',
     duration: 28,
+    germinationDays: 4,
     characteristics:
       'Similar to bok choi or chinese white cabbage, with darker leaves, and whiter, wider stems.',
     commonUse:
@@ -99,6 +104,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/leafy-greens/mizuna.png'),
     binomialName: 'Brassica Rapa',
     duration: 28,
+    germinationDays: 4,
     characteristics:
       'Mizuna which means “water greens” in Japanese, is a mild, mustardy green with curled fringed leaves that have apiquant, mild peppery flavor; slightly spicy, but less so than arugula',
     commonUse:
@@ -111,6 +117,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/leafy-greens/mustard_green_fire.png'),
     binomialName: 'Brassica juncea',
     duration: 28,
+    germinationDays: 4,
     characteristics:
       'Spicy, dense leaves. Related to kale, cabbage, and collard greens, mustard has large deep green leaves that curl slightly. It resembles a headless cabbage.',
     commonUse:
@@ -123,6 +130,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/leafy-greens/mustard_red_lion.png'),
     binomialName: 'Brassica juncea',
     duration: 28,
+    germinationDays: 4,
     characteristics:
       'The red counterpart to green mustard. Sharp, garlicky flavor. Broad wrinkled leaves with a violet purple overlay on green. Leaves are succulent and tender.',
     commonUse:
@@ -135,6 +143,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/leafy-greens/kale_scarlet.png'),
     binomialName: 'Brassica oleracea',
     duration: 28,
+    germinationDays: 4,
     characteristics:
       'Small-leafed with smooth deep green leaves and stark white veins. Less tough than typical kale and light in flavor.',
     commonUse:
@@ -147,6 +156,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/leafy-greens/komatsuna_comred.png'),
     binomialName: 'Brassica rapa perviridis',
     duration: 28,
+    germinationDays: 4,
     characteristics:
       'A hybrid of spinach and mustard with deep red and purple leaves, best for baby greens. The leaves are round, flat and purple on top with green undersides and green stems.',
     commonUse:
@@ -159,6 +169,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/leafy-greens/green_sorrel.png'),
     binomialName: 'Rumex acetosa',
     duration: 28,
+    germinationDays: 4,
     characteristics:
       'Small, edible green plant from the Polygonaceae family, same as buckwheat and rhubarb. Translating to “sour” in french, Sorrel has an intense lemony tang.',
     commonUse:
@@ -171,6 +182,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/leafy-greens/red_sorrel.png'),
     binomialName: 'Rumex sanguineus var',
     duration: 28,
+    germinationDays: 4,
     characteristics:
       'Red sorrel is a leafy herb that grows low to the ground with slender stems. It has bright lime-green leaves with dark maroon stems and veins that run the entirety of the leaf. Red sorrel leaves are shaped like an arrow with slightly curled edges.',
     commonUse:
@@ -183,6 +195,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/herbs/basil_red_shiraz.png'),
     binomialName: 'Ocimum basilicum',
     duration: 28,
+    germinationDays: 3,
     characteristics:
       'Amethyst Basil is a Genovese basil that has thick, turned down leaves that are deep purple in color.',
     commonUse:
@@ -195,6 +208,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/herbs/genovese_basil.png'),
     binomialName: 'Ocimum basilicum',
     duration: 28,
+    germinationDays: 3,
     characteristics:
       'Large-leafed green common basil with thick foliage and a sweet and pungent flavor. Best used raw.',
     commonUse:
@@ -207,6 +221,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/herbs/holy_basil.png'),
     binomialName: 'Ocimum sanctum',
     duration: 28,
+    germinationDays: 3,
     characteristics:
       'When freshly picked, the aromatic leaves hold a spicy, peppery bite and a delicious combination of basil and mint flavors.',
     commonUse:
@@ -219,6 +234,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/herbs/lemon_basil.png'),
     binomialName: 'Ocimum basilicum',
     duration: 28,
+    germinationDays: 3,
     characteristics:
       'A small and tender-leafed basil with a pronounced lemony taste; similar to lemon verbena.',
     commonUse:
@@ -231,6 +247,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/herbs/thai_basil.png'),
     binomialName: 'Ocimum basilicum',
     duration: 28,
+    germinationDays: 3,
     characteristics:
       'This tropical variety of sweet basil provides the unusual basil flavor present in many Thai dishes that it has come to be identified as “Thai basil,” even though the Vietnamese and Laotians also use lots of it in their cuisine',
     commonUse:
@@ -243,6 +260,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/herbs/cilantro.png'),
     binomialName: 'Coriandrum sativum',
     duration: 28,
+    germinationDays: 4,
     characteristics:
       'An herb with wide delicate lacy green leaves and a pungent flavor that is widely used in dishes throughout the Caribbean, Latin America, and the Far East.',
     commonUse:
@@ -255,6 +273,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/herbs/common_mint.png'),
     binomialName: 'Mentha viridis',
     duration: 21,
+    germinationDays: 5,
     characteristics:
       'There are many varieties of mint, but common mint, or peppermint, is most well known. It is a hearty herb with textured, teardrop shaped leaves.',
     commonUse:
@@ -267,6 +286,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/herbs/dill.png'),
     binomialName: 'Anethum graveolens',
     duration: 28,
+    germinationDays: 10,
     characteristics:
       'Native to Southwest Asia and India, dill is a popular culinary herb used in the kitchen along with chives or parsley.',
     commonUse:
@@ -279,6 +299,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/herbs/bronze_fennel.png'),
     binomialName: 'Foeniculum vulgare',
     duration: 28,
+    germinationDays: 4,
     characteristics:
       'Bronze Fennel can be used in place of Green Fennel in any recipe, and the wispy leaves with their unique bronze color add a lot of visual interest',
     commonUse:
@@ -291,6 +312,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/herbs/green_fennel.png'),
     binomialName: 'Foeniculum vulgare',
     duration: 28,
+    germinationDays: 4,
     characteristics:
       'Classic fennel. With a sweet licorice flavor, green fennel has soft wispy leaves with a blue-green color. Similar in look to dill, but wth a pungent anise scent and flavor.',
     commonUse:
@@ -303,6 +325,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/herbs/parsley.png'),
     binomialName: 'Petroselinum crispum',
     duration: 28,
+    germinationDays: 3,
     characteristics:
       'Native to the Mediterranean, parlsey is one of the most commonly used herbs in the world. Bright green with three pronged leaves, there is a flat and curly variety.',
     commonUse:
@@ -315,6 +338,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/herbs/sage.png'),
     binomialName: 'Salvia officinalis',
     duration: 28,
+    germinationDays: 3,
     characteristics:
       'Sage is an aromatic herb with an earthy warm flavor and soft downy blue-green leaves that are light in tone.',
     commonUse:
@@ -327,6 +351,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/herbs/savory.png'),
     binomialName: 'Satureja hortensis',
     duration: 28,
+    germinationDays: 4,
     characteristics:
       'Commonly used in “herbes de provence”, savory has slender, bronze-green leaves and is most commonly used in its dried form.',
     commonUse:
@@ -339,6 +364,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/herbs/thyme.png'),
     binomialName: 'Thymus serpyllum',
     duration: 28,
+    germinationDays: 4,
     characteristics:
       'Thyme is a member of the mint family, and also a relative to oregano. This flowering herb grows in spindly, low lying bunches and can be eaten fresh or dried.',
     commonUse:
@@ -351,6 +377,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/herbs/marjoram.png'),
     binomialName: 'Origanum vulgare',
     duration: 28,
+    germinationDays: 4,
     characteristics:
       'Marjoram looks very similar to oregano. It grows like a small shrub and the leaves are more elliptical than those of oregano, with the same fuzzy texture.',
     commonUse:
@@ -363,6 +390,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/herbs/chives_garlic.png'),
     binomialName: 'Allium tuberosum',
     duration: 35,
+    germinationDays: 4,
     characteristics:
       'Chives grow in clusters, their blade-like leaves growing straight upward. The green leaves are hollow, and come to a point.',
     commonUse:
@@ -375,6 +403,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/lettuces/red_oak_lettuce.png'),
     binomialName: 'Lactuca sativa',
     duration: 28,
+    germinationDays: 3,
     characteristics:
       'Delicious lettuce with stunning burgundy tipped leaves, named after the shape of their leaves that are similar to oak.',
     commonUse:
@@ -387,6 +416,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/lettuces/lettuce_lobjoits_green_cos.png'),
     binomialName: 'Lectuca sativa var longifolia',
     duration: 28,
+    germinationDays: 3,
     characteristics:
       'Romaine is a variety of lettuce that grows in a tall head of sturdy dark green leaves with firm ribs down their centers. Unlike most lettuces, it is tolerant of heat.',
     commonUse:
@@ -399,6 +429,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/lettuces/babyleaf_lettuce.png'),
     binomialName: 'Lactuca sativa',
     duration: 21,
+    germinationDays: 3,
     characteristics:
       'Actually multiple varieties of lettuce, babyleaf is lettuce selected to be grown as a “mini” green.',
     commonUse:
@@ -411,6 +442,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/lettuces/butter_lettuce.png'),
     binomialName: 'Lactuca sativa var crispa',
     duration: 28,
+    germinationDays: 3,
     characteristics:
       'Cabbage-like lettuce with tender, smooth, loosely coiled leaves.',
     commonUse:
@@ -423,164 +455,11 @@ export const PLANTS = [
     image: require('assets/imgs/plants/lettuces/lettuce_green_oak_leaf.png'),
     binomialName: 'Lactuca sativa var salanova',
     duration: 28,
+    germinationDays: 3,
     characteristics:
       'Salanova lettuce have round bases with three times the amount of leaves than the standard head of lettuce, all growing in a rosette pattern.',
     commonUse:
       'Salanova lettuce is best used for salads, but can also be used on sandwiches, in pastas or as a bed for proteins.',
-  },
-  {
-    id: '1050',
-    categoryId: '105',
-    name: 'Amaranth Passion',
-    image: require('assets/imgs/plants/exotic/amaranth_passion.png'),
-    binomialName: 'Amaranthus tricolor',
-    duration: 28,
-    characteristics:
-      'The species of amaranth is cultivated by many Asian cultures as a leaf vegetable. Across Malaysia, Indonesia, Vietnam, India, and China, cumin, chile peppers, onions, and garlic are common pairings for amaranth.',
-    commonUse:
-      'Amaranth greens may be eaten raw or cooked. The younger leaves are mild and tender while the more mature plants are slightly fibrous and bitter. Mature leaves are best for stewing or braising, similarly to a chard or beet green.',
-  },
-  {
-    id: '1051',
-    categoryId: '105',
-    name: 'Chamomile Wild',
-    image: require('assets/imgs/plants/exotic/chamomile_wild.png'),
-    binomialName: 'Matricaria recutita',
-    duration: 35,
-    characteristics:
-      'Chamomile plants are made up of thin feathery branched leaves and erect fuzzy green stems that produce numerous flowering heads.',
-    commonUse:
-      'Chamomile yields a large concentration of volatile essential oils that are extracted to flavor ice creams, confectionery, alcoholic and non-alcoholic beverages. The most common application is tea.',
-  },
-  {
-    id: '1052',
-    categoryId: '105',
-    name: 'Feverfew',
-    image: require('assets/imgs/plants/exotic/feverfew.png'),
-    binomialName: 'Tanacetum parhenium',
-    duration: 28,
-    characteristics:
-      'Feverfew is bright-green, has pungently aromatic leaves and a mass of white daisy-like flowers with yellow centers.',
-    commonUse:
-      'All parts of the leaves or flowering tops can be used both fresh and dried. Best used in small quantities; often times it is paired with honey to mask the bitterness.',
-  },
-  {
-    id: '1053',
-    categoryId: '105',
-    name: 'Mexican Marigold',
-    image: require('assets/imgs/plants/exotic/mexican_marigold.png'),
-    binomialName: 'Tagetes minuta',
-    duration: 28,
-    characteristics:
-      'Mexican marigold is similar in flavor and scent to huacatay, a peruvian herb. Its taste and odor is a mix of basil, tarragon, mint and lime.',
-    commonUse:
-      'Used most commonly in peruvian and latin american dishes, mexican marigold is a fresh and sweet addition to any dessert, cocktail, or spicy dish.',
-  },
-  {
-    id: '1054',
-    categoryId: '105',
-    name: 'Nasturtium',
-    image: require('assets/imgs/plants/exotic/nasturtium.png'),
-    binomialName: 'Tropaeolum majus',
-    duration: 21,
-    characteristics:
-      'Related to watercress, this flowering plant has spicy round leaves (and flowers), often used as a garnish.',
-    commonUse:
-      'Best if used sparingly as a garnish, or in salads. Doesn’t do well cooked. Often seen on summer salads, desserts, and cocktails.',
-  },
-  {
-    id: '1055',
-    categoryId: '105',
-    name: 'Britton Shiso',
-    image: require('assets/imgs/plants/exotic/britton_shiso.png'),
-    binomialName: 'Perilla frutescens var crispa',
-    duration: 28,
-    characteristics:
-      'Variety of shiso with red undersides to leaves. Slightly larger leaves than red and green shisos.',
-    commonUse:
-      'Best used raw, and can be harvested at any stage Shiso leaves are found in Japanese, Korean, and Southeast Asian cuisines, and is mostly used as a wrapping or in soups and with rice.',
-  },
-  {
-    id: '1056',
-    categoryId: '105',
-    name: 'Green Shiso',
-    image: require('assets/imgs/plants/exotic/green_shiso.png'),
-    binomialName: 'Perilla frutescens var crispa',
-    duration: 28,
-    characteristics:
-      'Green shiso has large thin teardrop shaped leaves with serrated edges with ridges and fine hairs on the underside. A member of the mint family.',
-    commonUse:
-      'Best used raw, and can be harvested at any stage Shiso leaves are found in Japanese, Korean, and Southeast Asian cuisines, and is mostly used as a wrapping or in soups and with rice.',
-  },
-  {
-    id: '1057',
-    categoryId: '105',
-    name: 'Red Shiso',
-    image: require('assets/imgs/plants/exotic/red_shiso.png'),
-    binomialName: 'Perilla frutescens var crispa',
-    duration: 28,
-    characteristics:
-      'Vibrant flavorful shiso with a faint anise flavor. Belonging to the mint family, the plant has red-ish purple leaves.',
-    commonUse:
-      'The mature red leaves make undesirable raw salad leaves, but germinated sprouts, or me-jiso, have been long used as garnish to accent a Japanese dish, such as a plate of sashimi.',
-  },
-  {
-    id: '1058',
-    categoryId: '105',
-    name: 'Papalo',
-    image: require('assets/imgs/plants/exotic/papalo.png'),
-    binomialName: 'Porophyllum ruderale',
-    duration: 35,
-    characteristics:
-      'Papalo is a green leafy plant with tall, thin, branched stalks. Its leaves are a light green color and are eggshaped with scalloped edges.',
-    commonUse:
-      'In Central America, the spicy green along with peppers is an essential ingredient in traditional Aztec dishes. It has a stronger flavor than cilantro.',
-  },
-  {
-    id: '1059',
-    categoryId: '105',
-    name: "Za'atar'",
-    image: require('assets/imgs/plants/exotic/za_atar.png'),
-    binomialName: 'Thymbra spicata',
-    duration: 35,
-    characteristics:
-      'Za’atar is a leafy green herb that looks very much like oregano when the plant first begins to grow; its fuzzy, light blue-green spear-shaped leaves growing in clustered pairs along woody stems.',
-    commonUse:
-      'Za’atar is most often dried and combined with sumac, sesame seeds and salt to make the spice blend known as “za’atar.” Za’atar can be used as a substitute for thyme or oregano.',
-  },
-  {
-    id: '1060',
-    categoryId: '105',
-    name: 'Viola',
-    image: require('assets/imgs/plants/exotic/viola.png'),
-    binomialName: 'Viola cornuta',
-    duration: 28,
-    characteristics:
-      'Small, tri-colored edible flowers. Similar to pansies but smaller in scale.',
-    commonUse:
-      'Violas can be used to flavor vinegar, oils, beverages, butter and tea. Most commonly they are used for ornamental purposes and can be used candied or fresh atop ice cream, crème brule, tarts, cakes and other delicate pastries.',
-  },
-  {
-    id: '1061',
-    categoryId: '105',
-    name: 'Anise Hyssop',
-    image: require('assets/imgs/plants/exotic/anise_hyssop.png'),
-    binomialName: 'Agastache foeniculum',
-    duration: 28,
-    characteristics:
-      'Anise hyssop is a stiff, upright, leafy herb that has a somewhat bushy appearance. Blooms small, violet and indigo flowers.',
-    commonUse:
-      'Both the leaves and the flowers of Anise hyssop can be used fresh or dried. The natural sweetness lends well to desserts, without the need for much additional sugar or sweetner.',
-  },
-  {
-    id: '1063',
-    categoryId: '105',
-    name: 'Nicotiana Benthamiana',
-    image: require('assets/imgs/plants/exotic/nicotiana_benthamiana.png'),
-    binomialName: '', // TODO: Add content
-    duration: 28,
-    characteristics: '', // TODO: Add content
-    commonUse: '', // TODO: Add content
   },
   {
     id: '1034',
@@ -589,6 +468,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/microgreens/coriander.png'),
     binomialName: 'Coriandrum sativum',
     duration: 14,
+    germinationDays: 3,
     characteristics:
       "Coriander is one of the world's most commonly used herbs - in spite of the fact that the name comes from the Greek, koris, meaning bed bug!",
     commonUse:
@@ -601,6 +481,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/microgreens/lemon_balm.png'),
     binomialName: 'Melissa officinalis',
     duration: 14,
+    germinationDays: 4,
     characteristics:
       'As its name suggests, this leafy, green herb has a lemony flavour and fragrance. It works well with fish, poultry and vegetables as well as in salads, stuffing’s and drinks.',
     commonUse:
@@ -613,6 +494,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/microgreens/pink_stem_radish.png'),
     binomialName: 'Raphanus sativus',
     duration: 14,
+    germinationDays: 2,
     characteristics:
       'Pink Stem Radish maintain many of the same flavour characteristics found in full-grown radishes. Sometimes described as hot or spicy, these micro’s pack plenty of flavour, and are sure to add a gourmet touch to a wide range of dishes.',
     commonUse:
@@ -625,6 +507,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/microgreens/rocket.png'),
     binomialName: 'Eruca sativa',
     duration: 14,
+    germinationDays: 2,
     characteristics:
       'Every 100 grams of raw Micro Rocket leaves contain important macronutrients such as carbohydrates, fibre, and proteins; essential micronutrients such as vitamins A, C, K, B2, and folate; and minerals like phosphorus, magnesium, and especially high amounts of potassium and calcium.',
     commonUse:
@@ -637,6 +520,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/microgreens/red_amaranth.png'),
     binomialName: 'Amaranthus tricolor',
     duration: 14,
+    germinationDays: 2,
     characteristics:
       'They have a mild earthy flavour that is reminiscent of a beet with a delicate sweet grassy finish. Micro Red Amaranth is rich in vitamin C, carotenoids, vitamin K, and vitamin E.',
     commonUse:
@@ -649,6 +533,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/microgreens/red_cabbage.png'),
     binomialName: 'Brassica oleracea var. capitata',
     duration: 14,
+    germinationDays: 2,
     characteristics:
       'Compared to the adult red cabbage the microgreen has 6 times more vitamin C, 40 times more vitamin E and 69 times more vitamin K.',
     commonUse:
@@ -661,6 +546,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/microgreens/red_mustard.png'),
     binomialName: 'Brassica juncea',
     duration: 14,
+    germinationDays: 2,
     characteristics:
       'Red mustard contains two important compounds, sinigrin and gluconasturtiian, which have cancer preventing benefits, including antioxidants, anti-inflammatory and natural detoxifying properties.',
     commonUse:
@@ -673,6 +559,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/microgreens/sweet_basil.png'),
     binomialName: 'Ocimum basilicum',
     duration: 14,
+    germinationDays: 3,
     characteristics:
       'Basil is virtually calorie-free and, in addition to antioxidant vitamins and phenolics, is a rich source of vitamin K, zinc, calcium, magnesium, potassium and dietary fibre.',
     commonUse:
@@ -685,6 +572,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/microgreens/thai_basil.png'),
     binomialName: 'Ocimum basilicum',
     duration: 14,
+    germinationDays: 3,
     characteristics:
       'Thai basil is a popular cooking herb, especially in Southeast Asian cuisines.',
     commonUse:
@@ -697,6 +585,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/microgreens/pea_style.png'),
     binomialName: 'Pisum sativum',
     duration: 14,
+    germinationDays: 3,
     characteristics: 'Tastes like sweet pea with a crunchy and fresh flavour.',
     commonUse:
       'An excellent garnish or ingredient for most soups, meat or salad dishes, stir fry and smoothies to name a few.',
@@ -708,6 +597,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/microgreens/micro_broccoli.png'),
     binomialName: 'Brassica oleracea',
     duration: 14,
+    germinationDays: 1,
     characteristics:
       'Excellent source of Vitamin A, C, B-3, B-5, B-6, also minerals like calcium, manganese, iron, magnesium, selenium, zinc, and phosphorus.',
     commonUse:
@@ -720,6 +610,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/microgreens/garlic_chive.png'),
     binomialName: 'Allium tuberosum',
     duration: 14,
+    germinationDays: 3,
     characteristics:
       'High in Vitamins A, B, C and E, F, has a lot of anti-inflammatory properties, calcium, magnesium, iron, zinc, potassium, many monosaccharides phytoncides, allicin.',
     commonUse:
@@ -732,6 +623,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/microgreens/nasturtium_blue_pepe.png'),
     binomialName: 'Tropaeolum majus',
     duration: 21,
+    germinationDays: 3,
     characteristics:
       'Nasturtium leaves look like small lily pads: bright green, round, with a central stem. Nasturtium has long been used throughout the Andes as an herbal expectorant for chest congestion, a remedy for wounds, and as a peppery pest repellent.',
     commonUse:
@@ -744,6 +636,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/microgreens/swiss_chard_rainbow.png'),
     binomialName: 'Beta vulgaris',
     duration: 14,
+    germinationDays: 3,
     characteristics:
       'A rainbow of bright pastel colours on the stems. Rich in Vitamin A, C and K, also full of protein, dietary fibre and antioxidants.',
     commonUse:
@@ -756,6 +649,7 @@ export const PLANTS = [
     image: require('assets/imgs/plants/microgreens/red_pac_choi.png'),
     binomialName: 'Brassica rapa var. chinensis',
     duration: 14,
+    germinationDays: 3,
     characteristics:
       'Packed with Vitamins A, K and C. Helps destroy free radicals and protects cells from inflammation, also contains anti-oxidants which improve skin tone and aging.',
     commonUse:
@@ -768,10 +662,167 @@ export const PLANTS = [
     image: require('assets/imgs/plants/microgreens/red_rioja_radish.png'),
     binomialName: 'Raphanus sativus',
     duration: 14,
+    germinationDays: 2,
     characteristics:
       'A sharp, colourful, and great tasting microgreen. These are high in vitamins B, C and D, calcium, potassium, sodium, magnesium. Rich in antioxidants and low in calories.',
     commonUse:
       'Flavour accents seafood and meat entrees. Use with meat, fish, eggs and cheese dishes, also excellent colour and flavour to salads and sandwiches.',
+  },
+  {
+    id: '1050',
+    categoryId: '105',
+    name: 'Amaranth Passion',
+    image: require('assets/imgs/plants/exotic/amaranth_passion.png'),
+    binomialName: 'Amaranthus tricolor',
+    duration: 28,
+    germinationDays: 4,
+    characteristics:
+      'The species of amaranth is cultivated by many Asian cultures as a leaf vegetable. Across Malaysia, Indonesia, Vietnam, India, and China, cumin, chile peppers, onions, and garlic are common pairings for amaranth.',
+    commonUse:
+      'Amaranth greens may be eaten raw or cooked. The younger leaves are mild and tender while the more mature plants are slightly fibrous and bitter. Mature leaves are best for stewing or braising, similarly to a chard or beet green.',
+  },
+  {
+    id: '1051',
+    categoryId: '105',
+    name: 'Chamomile Wild',
+    image: require('assets/imgs/plants/exotic/chamomile_wild.png'),
+    binomialName: 'Matricaria recutita',
+    duration: 35,
+    germinationDays: 3,
+    characteristics:
+      'Chamomile plants are made up of thin feathery branched leaves and erect fuzzy green stems that produce numerous flowering heads.',
+    commonUse:
+      'Chamomile yields a large concentration of volatile essential oils that are extracted to flavor ice creams, confectionery, alcoholic and non-alcoholic beverages. The most common application is tea.',
+  },
+  {
+    id: '1052',
+    categoryId: '105',
+    name: 'Feverfew',
+    image: require('assets/imgs/plants/exotic/feverfew.png'),
+    binomialName: 'Tanacetum parhenium',
+    duration: 28,
+    germinationDays: 5,
+    characteristics:
+      'Feverfew is bright-green, has pungently aromatic leaves and a mass of white daisy-like flowers with yellow centers.',
+    commonUse:
+      'All parts of the leaves or flowering tops can be used both fresh and dried. Best used in small quantities; often times it is paired with honey to mask the bitterness.',
+  },
+  {
+    id: '1053',
+    categoryId: '105',
+    name: 'Mexican Marigold',
+    image: require('assets/imgs/plants/exotic/mexican_marigold.png'),
+    binomialName: 'Tagetes minuta',
+    duration: 28,
+    germinationDays: 4,
+    characteristics:
+      'Mexican marigold is similar in flavor and scent to huacatay, a peruvian herb. Its taste and odor is a mix of basil, tarragon, mint and lime.',
+    commonUse:
+      'Used most commonly in peruvian and latin american dishes, mexican marigold is a fresh and sweet addition to any dessert, cocktail, or spicy dish.',
+  },
+  {
+    id: '1054',
+    categoryId: '105',
+    name: 'Nasturtium',
+    image: require('assets/imgs/plants/exotic/nasturtium.png'),
+    binomialName: 'Tropaeolum majus',
+    duration: 21,
+    germinationDays: 5,
+    characteristics:
+      'Related to watercress, this flowering plant has spicy round leaves (and flowers), often used as a garnish.',
+    commonUse:
+      'Best if used sparingly as a garnish, or in salads. Doesn’t do well cooked. Often seen on summer salads, desserts, and cocktails.',
+  },
+  {
+    id: '1055',
+    categoryId: '105',
+    name: 'Britton Shiso',
+    image: require('assets/imgs/plants/exotic/britton_shiso.png'),
+    binomialName: 'Perilla frutescens var crispa',
+    duration: 28,
+    germinationDays: 3,
+    characteristics:
+      'Variety of shiso with red undersides to leaves. Slightly larger leaves than red and green shisos.',
+    commonUse:
+      'Best used raw, and can be harvested at any stage Shiso leaves are found in Japanese, Korean, and Southeast Asian cuisines, and is mostly used as a wrapping or in soups and with rice.',
+  },
+  {
+    id: '1056',
+    categoryId: '105',
+    name: 'Green Shiso',
+    image: require('assets/imgs/plants/exotic/green_shiso.png'),
+    binomialName: 'Perilla frutescens var crispa',
+    duration: 28,
+    germinationDays: 3,
+    characteristics:
+      'Green shiso has large thin teardrop shaped leaves with serrated edges with ridges and fine hairs on the underside. A member of the mint family.',
+    commonUse:
+      'Best used raw, and can be harvested at any stage Shiso leaves are found in Japanese, Korean, and Southeast Asian cuisines, and is mostly used as a wrapping or in soups and with rice.',
+  },
+  {
+    id: '1057',
+    categoryId: '105',
+    name: 'Red Shiso',
+    image: require('assets/imgs/plants/exotic/red_shiso.png'),
+    binomialName: 'Perilla frutescens var crispa',
+    duration: 28,
+    germinationDays: 3,
+    characteristics:
+      'Vibrant flavorful shiso with a faint anise flavor. Belonging to the mint family, the plant has red-ish purple leaves.',
+    commonUse:
+      'The mature red leaves make undesirable raw salad leaves, but germinated sprouts, or me-jiso, have been long used as garnish to accent a Japanese dish, such as a plate of sashimi.',
+  },
+  {
+    id: '1058',
+    categoryId: '105',
+    name: 'Papalo',
+    image: require('assets/imgs/plants/exotic/papalo.png'),
+    binomialName: 'Porophyllum ruderale',
+    duration: 35,
+    germinationDays: 4,
+    characteristics:
+      'Papalo is a green leafy plant with tall, thin, branched stalks. Its leaves are a light green color and are eggshaped with scalloped edges.',
+    commonUse:
+      'In Central America, the spicy green along with peppers is an essential ingredient in traditional Aztec dishes. It has a stronger flavor than cilantro.',
+  },
+  {
+    id: '1059',
+    categoryId: '105',
+    name: "Za'atar'",
+    image: require('assets/imgs/plants/exotic/za_atar.png'),
+    binomialName: 'Thymbra spicata',
+    duration: 35,
+    germinationDays: 4,
+    characteristics:
+      'Za’atar is a leafy green herb that looks very much like oregano when the plant first begins to grow; its fuzzy, light blue-green spear-shaped leaves growing in clustered pairs along woody stems.',
+    commonUse:
+      'Za’atar is most often dried and combined with sumac, sesame seeds and salt to make the spice blend known as “za’atar.” Za’atar can be used as a substitute for thyme or oregano.',
+  },
+  {
+    id: '1060',
+    categoryId: '105',
+    name: 'Viola',
+    image: require('assets/imgs/plants/exotic/viola.png'),
+    binomialName: 'Viola cornuta',
+    duration: 28,
+    germinationDays: 2,
+    characteristics:
+      'Small, tri-colored edible flowers. Similar to pansies but smaller in scale.',
+    commonUse:
+      'Violas can be used to flavor vinegar, oils, beverages, butter and tea. Most commonly they are used for ornamental purposes and can be used candied or fresh atop ice cream, crème brule, tarts, cakes and other delicate pastries.',
+  },
+  {
+    id: '1061',
+    categoryId: '105',
+    name: 'Anise Hyssop',
+    image: require('assets/imgs/plants/exotic/anise_hyssop.png'),
+    binomialName: 'Agastache foeniculum',
+    duration: 28,
+    germinationDays: 4,
+    characteristics:
+      'Anise hyssop is a stiff, upright, leafy herb that has a somewhat bushy appearance. Blooms small, violet and indigo flowers.',
+    commonUse:
+      'Both the leaves and the flowers of Anise hyssop can be used fresh or dried. The natural sweetness lends well to desserts, without the need for much additional sugar or sweetner.',
   },
   {
     id: '1062',
@@ -780,9 +831,21 @@ export const PLANTS = [
     image: require('assets/imgs/plants/microgreens/cardamom.png'),
     binomialName: 'Elettaria cardamomum',
     duration: 14,
+    germinationDays: 3,
     characteristics:
       'The pleasant aroma and the characteristic warm, slightly pungent taste are due to numerous essential oil components present in the seeds. Cardamom is a perennial bushy herb.',
     commonUse:
       'Green cardamom is also used to flavor coffee and teas, most notably Masala chai.',
+  },
+  {
+    id: '1063',
+    categoryId: '105',
+    name: 'Nicotiana Benthamiana',
+    image: require('assets/imgs/plants/exotic/nicotiana_benthamiana.png'),
+    binomialName: '', // TODO: Add content
+    duration: 28,
+    germinationDays: 4,
+    characteristics: '', // TODO: Add content
+    commonUse: '', // TODO: Add content
   },
 ];
