@@ -23,13 +23,13 @@ const getModuleImageSource = (moduleType, hasPlants) => {
   return DEVICE_MODULE_IMAGES[`${modulePart}-online-${plantsPart}`];
 };
 
-const ModuleCard = ({ module, onCardPress, onSettingsIconPress }) => {
+const ModuleCard = ({ style, module, onCardPress, onSettingsIconPress }) => {
   const { name, plants, type, status } = module;
   const hasPlants = plants.length > 0;
 
   return (
     <Pressable
-      style={[CardStyles.card, styles.cardPadding]}
+      style={[CardStyles.card, styles.cardPadding, style]}
       onPress={() => onCardPress(module)}
     >
       <TouchableOpacity
