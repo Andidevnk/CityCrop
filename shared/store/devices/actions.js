@@ -15,7 +15,10 @@ export const addDeviceAsync = (name, timezone) => (dispatch) => {
     timezone: timezone,
   };
   return AuthAxios.post('https://api.citycrop.io/v1/devices/add', data).then(
-    () => dispatch(loadDevicesAsync())
+    () => {
+      setNewDevice({}); // Resets newDevice object
+      return dispatch(loadDevicesAsync());
+    }
   );
 };
 

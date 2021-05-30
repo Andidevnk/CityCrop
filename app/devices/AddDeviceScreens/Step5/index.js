@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import useFormState from 'shared/hooks/useFormState';
 import useBooleanState from 'shared/hooks/useBooleanState';
+import { addDeviceAsync } from 'shared/store/devices/actions';
 import {
   connectToNetworkAsync,
   listNetworksAsync,
@@ -15,6 +16,7 @@ import PressableTextInput from 'shared/components/PressableTextInput';
 import OutlinedGreenBtn from 'shared/components/OutlinedGreenBtn';
 
 const Step5 = ({ navigation }) => {
+  const newDevice = useSelector((state) => state.devices.newDevice);
   const [form, setForm] = useFormState({
     network: '',
     password: '',
@@ -26,7 +28,6 @@ const Step5 = ({ navigation }) => {
   const [hasTriedToConnect, setHasTriedToConnect] = useState(false);
 
   const dispatch = useDispatch();
-  const navigateToDevices = () => navigation.navigate('Devices');
   const getNetworks = useCallback(
     () =>
       dispatch(listNetworksAsync()).then(({ data: networks }) => {
@@ -42,6 +43,10 @@ const Step5 = ({ navigation }) => {
       setHasTriedToConnect(true);
     });
   };
+  const createDeviceAndNavigateToDevices = () =>
+    dispatch(addDeviceAsync(newDevice.name, newDevice.timezone)).then(() =>
+      navigation.navigate('Devices')
+    );
 
   useEffect(() => {
     getNetworks();
@@ -118,7 +123,7 @@ const Step5 = ({ navigation }) => {
           style={{ marginTop: 30 }}
           title="Complete"
           disabled={!hasTriedToConnect}
-          onPress={navigateToDevices}
+          onPress={createDeviceAndNavigateToDevices}
         />
       </View>
     </KeyboardDismissArea>

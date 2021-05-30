@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Pressable } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { useDispatch } from 'react-redux';
 import moment from 'moment-timezone';
 
 import { MINIMAL_TIMEZONES } from 'shared/constants';
 import useFormState from 'shared/hooks/useFormState';
-import { addDeviceAsync } from 'shared/store/devices/actions';
+import { setNewDevice } from 'shared/store/devices/actions';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import ListModal from 'shared/components/ListModal';
 import KeyboardDismissArea from 'shared/components/KeyboardDismissArea';
@@ -20,10 +20,10 @@ const Step1 = ({ navigation }) => {
 
   const dispatch = useDispatch();
   const closeTimezonesModal = () => setIsTimezoneModalVisible(false);
-  const createDeviceAndNavigateToStep2 = () =>
-    dispatch(addDeviceAsync(form.name, form.timezone)).then(() =>
-      navigation.navigate('Add New Device - Step 2')
-    );
+  const storeDeviceInfoAndNavigateToStep2 = () => {
+    dispatch(setNewDevice({ name: form.name, timezone: form.timezone }));
+    navigation.navigate('Add New Device - Step 2');
+  };
 
   return (
     <KeyboardDismissArea>
@@ -61,7 +61,7 @@ const Step1 = ({ navigation }) => {
         <LightGreenBtn
           style={{ marginTop: 'auto' }}
           title="Next"
-          onPress={createDeviceAndNavigateToStep2}
+          onPress={storeDeviceInfoAndNavigateToStep2}
         />
       </View>
     </KeyboardDismissArea>
