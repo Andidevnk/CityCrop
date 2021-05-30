@@ -1,8 +1,13 @@
-import { SET_DEVICES, UPDATE_DEVICE_MEASUREMENTS } from './actions';
+import {
+  SET_DEVICES,
+  SET_NEW_DEVICE,
+  UPDATE_DEVICE_MEASUREMENTS,
+} from './actions';
 import { UPDATE_MODULE_MEASUREMENTS } from '../modules/actions';
 
 const initialState = {
   devices: [],
+  newDevice: {},
 };
 
 // TODO: Send this from backend
@@ -102,6 +107,12 @@ const devicesReducer = (state = initialState, action) => {
       return {
         ...state,
         devices: updatedDevices,
+      };
+    }
+    case SET_NEW_DEVICE: {
+      return {
+        ...state,
+        newDevice: action.payload.newDevice,
       };
     }
     default:

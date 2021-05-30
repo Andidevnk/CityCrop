@@ -56,3 +56,8 @@ export const updateDeviceMeasurements = (deviceId, newMeasurements) => ({
     newMeasurements,
   },
 });
+
+export const setNewDevice = (newDevice) => ({
+  type: SET_NEW_DEVICE,
+  payload: { newDevice },
+});
