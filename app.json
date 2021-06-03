@@ -37,6 +37,19 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "citycrop",
+            "project": "citycrop",
+            "authToken": "f1a2bcc041fe480192ce20aee561e5f4452424d5dcac4780b5e2a5a92d236108",
+            "setCommits": true
+          }
+        }
+      ]
     }
   }
 }
