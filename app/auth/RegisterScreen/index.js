@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { register } from 'shared/store/auth/actions';
@@ -17,10 +17,16 @@ const RegisterScreen = ({ navigation }) => {
     password: '',
     confirmPassword: '',
   });
+  const [showPasswordMatchErrorText, setShowPasswordMatchError] =
+    useState(false);
 
   const dispatch = useDispatch();
-
   const registerUser = () => {
+    if (formState.password !== formState.confirmPassword) {
+      setShowPasswordMatchError(true);
+      return;
+    }
+
     const [firstName, lastname] = formState.name.split(' ');
     dispatch(
       register(firstName, lastname, formState.email, formState.password)
@@ -68,6 +74,11 @@ const RegisterScreen = ({ navigation }) => {
           secureTextEntry={true}
           onChangeText={(text) => setFormState({ confirmPassword: text })}
         />
+        {showPasswordMatchErrorText && (
+          <Text style={{ marginTop: 5, marginLeft: 10, color: 'red' }}>
+            Passwords should match
+          </Text>
+        )}
 
         <View style={styles.bottomSection}>
           <GreenBtn title="Signup" onPress={registerUser} />
