@@ -30,6 +30,11 @@ export const register = (name, surname, email, password) => (dispatch) => {
     );
 };
 
+export const resetPassword = (email) => () => {
+  const data = { email };
+  return axios.post('https://api.citycrop.io/v1/users/reset-password', data);
+};
+
 export const logout = () => (dispatch) =>
   AsyncStorage.removeItem('token').then(() => dispatch(setUserToken(null)));
 
