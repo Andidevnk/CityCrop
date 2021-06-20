@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectMe } from 'shared/store/users/selectors';
@@ -13,20 +13,35 @@ const AccountSettingsScreen = () => {
   const me = useSelector(selectMe());
   const [formState, setFormState] = useFormState({
     name: me.fullName,
+    newPassword: '',
+    confirmNewPassword: '',
     // TODO: Uncomment when endpoint 'users/me/password' is ready
     // oldPassword: '',
     // newPassword: '',
     // newPasswordConfirm: '',
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [showPasswordsErrorText, setShowPasswordsErrorText] = useState(false);
+
   const dispatch = useDispatch();
 
   const updateMe = () => {
+    // Passwords should match
+    if (formState.newPassword !== formState.confirmNewPassword) {
+      setShowPasswordsErrorText(true);
+      return;
+    }
+
+    setShowPasswordsErrorText(false);
     setIsLoading(true);
     dispatch(
       updateMeAsync({
         name: formState.name.split(' ')[0],
         surname: formState.name.split(' ')[1] || '',
+        // If password is non-empty, update it
+        ...(formState.newPassword.length > 0 && {
+          password: formState.newPassword,
+        }),
       })
     ).finally(() => setIsLoading(false));
   };
@@ -59,12 +74,31 @@ const AccountSettingsScreen = () => {
           onChangeText={(text) => setFormState({ name: text })}
         />
         <IconTextInput
-          style={[styles.input, { marginBottom: 0 }]}
+          style={styles.input}
           placeholder="Email"
           iconImage={require('assets/icons/mail.png')}
           editable={false}
           value={me.email}
         />
+        <IconTextInput
+          style={styles.input}
+          placeholder="New password"
+          secureTextEntry={true}
+          value={formState.newPassword}
+          onChangeText={(text) => setFormState({ newPassword: text })}
+        />
+        <IconTextInput
+          style={[styles.input, { marginBottom: 0 }]}
+          placeholder="Confirm new password"
+          secureTextEntry={true}
+          value={formState.confirmNewPassword}
+          onChangeText={(text) => setFormState({ confirmNewPassword: text })}
+        />
+        {showPasswordsErrorText && (
+          <Text style={{ marginTop: 5, marginLeft: 10, color: 'red' }}>
+            Passwords should match
+          </Text>
+        )}
         {/* TODO: Uncomment when endpoint 'users/me/password' is ready */}
         {/* <View
           style={{
