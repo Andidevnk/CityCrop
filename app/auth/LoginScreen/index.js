@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { useDispatch } from 'react-redux';
 
+import useIsMounted from 'shared/hooks/useIsMounted';
 import { login } from 'shared/store/auth/actions';
 import useFormState from 'shared/hooks/useFormState';
 import KeyboardDismissArea from 'shared/components/KeyboardDismissArea';
@@ -16,6 +17,7 @@ function LoginScreen({ navigation }) {
     email: '',
     password: '',
   });
+  const isMounted = useIsMounted();
 
   const dispatch = useDispatch();
 
@@ -28,24 +30,28 @@ function LoginScreen({ navigation }) {
       <View style={styles.container}>
         <CityCropBanner />
 
-        <IconTextInput
-          style={styles.input}
-          iconImage={require('assets/icons/mail.png')}
-          placeholder="Email"
-          value={formState.email}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          autoCompleteType="email"
-          onChangeText={(text) => setFormState({ email: text })}
-        />
-        <IconTextInput
-          iconImage={require('assets/icons/key.png')}
-          placeholder="Password"
-          value={formState.password}
-          autoCompleteType="password"
-          secureTextEntry={true}
-          onChangeText={(text) => setFormState({ password: text })}
-        />
+        {isMounted && ( // Solves the autofill bug
+          <>
+            <IconTextInput
+              style={styles.input}
+              iconImage={require('assets/icons/mail.png')}
+              placeholder="Email"
+              value={formState.email}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              autoCompleteType="email"
+              onChangeText={(text) => setFormState({ email: text })}
+            />
+            <IconTextInput
+              iconImage={require('assets/icons/key.png')}
+              placeholder="Password"
+              value={formState.password}
+              autoCompleteType="password"
+              secureTextEntry={true}
+              onChangeText={(text) => setFormState({ password: text })}
+            />
+          </>
+        )}
 
         <View style={styles.loginButtonContainer}>
           <GreenBtn title="Login" onPress={loginUser} />
