@@ -47,8 +47,6 @@ const RegisterScreen = ({ navigation }) => {
           iconImage={require('assets/icons/user.png')}
           placeholder="Name"
           value={formState.name}
-          autoCompleteType="name"
-          keyboardType="visible-password"
           onChangeText={(text) => setFormState({ name: text })}
         />
         <IconTextInput
@@ -58,7 +56,6 @@ const RegisterScreen = ({ navigation }) => {
           value={formState.email}
           keyboardType="email-address"
           autoCapitalize="none"
-          autoCompleteType="email"
           onChangeText={(text) => setFormState({ email: text })}
         />
         <IconTextInput
@@ -66,7 +63,6 @@ const RegisterScreen = ({ navigation }) => {
           iconImage={require('assets/icons/key.png')}
           placeholder="Password"
           value={formState.password}
-          autoCompleteType="off"
           secureTextEntry={true}
           onChangeText={(text) => setFormState({ password: text })}
         />
@@ -74,7 +70,6 @@ const RegisterScreen = ({ navigation }) => {
           iconImage={require('assets/icons/key.png')}
           placeholder="Confirm password"
           value={formState.confirmPassword}
-          autoCompleteType="off"
           secureTextEntry={true}
           onChangeText={(text) => setFormState({ confirmPassword: text })}
         />
