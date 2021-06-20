@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Modal } from 'react-native';
+import { useDispatch } from 'react-redux';
 
+import { resetPassword } from 'shared/store/auth/actions';
 import KeyboardDismissArea from 'shared/components/KeyboardDismissArea';
 import IconTextInput from 'shared/components/IconTextInput';
 import IconButton from 'shared/components/IconButton';
@@ -8,11 +10,16 @@ import GreenBtn from 'shared/components/GreenBtn';
 
 const ForgotPasswordScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
+  const dispatch = useDispatch();
+
   const sendResetPasswordEmail = () => {
-    console.log('Send');
-    setModalVisible(true);
+    setLoading(true);
+    dispatch(resetPassword(email))
+      .then(() => setModalVisible(true))
+      .finally(() => setLoading(false));
   };
 
   const closeModalAndNavigateToLogin = () => {
@@ -26,7 +33,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Forgot password</Text>
           <Text style={styles.subtitle}>
-            Insert email to send verification code.
+            Fill in your email below and press 'Send'.
           </Text>
         </View>
 
@@ -41,7 +48,11 @@ const ForgotPasswordScreen = ({ navigation }) => {
         />
 
         <View style={styles.bottomSection}>
-          <GreenBtn title="Send" onPress={sendResetPasswordEmail} />
+          <GreenBtn
+            title="Send"
+            loading={loading}
+            onPress={sendResetPasswordEmail}
+          />
         </View>
 
         <Modal
@@ -60,10 +71,17 @@ const ForgotPasswordScreen = ({ navigation }) => {
                 color="#0B7B03"
                 onPress={() => setModalVisible(false)}
               />
-              <Text style={styles.modalText}>
-                We have sent you an email. Please check your inbox.
-              </Text>
+              <View style={{ marginTop: 30 }}>
+                <Text style={[styles.modalText, { fontWeight: '600' }]}>
+                  You are almost done!
+                </Text>
+                <Text style={[styles.modalText, { marginBottom: 0 }]}>
+                  Check your inbox and use the new password we sent you to
+                  login.
+                </Text>
+              </View>
               <GreenBtn
+                style={{ marginTop: 50 }}
                 title="Go back"
                 onPress={closeModalAndNavigateToLogin}
               />
@@ -126,9 +144,7 @@ const styles = StyleSheet.create({
     right: 20,
   },
   modalText: {
-    marginTop: 40,
-    marginBottom: 60,
-    textAlign: 'center',
+    marginBottom: 10,
     fontSize: 18,
     color: '#18191F',
   },
