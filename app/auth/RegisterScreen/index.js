@@ -17,17 +17,16 @@ const RegisterScreen = ({ navigation }) => {
     password: '',
     confirmPassword: '',
   });
-  const [showPasswordMatchErrorText, setShowPasswordMatchError] =
-    useState(false);
+  const [showPasswordErrorText, setShowPasswordErrorText] = useState(false);
 
   const dispatch = useDispatch();
   const registerUser = () => {
     // Password should be non-empty and match with confirm password
     if (
-      formState.password.length > 0 &&
+      formState.password.length <= 0 ||
       formState.password !== formState.confirmPassword
     ) {
-      setShowPasswordMatchError(true);
+      setShowPasswordErrorText(true);
       return;
     }
 
@@ -73,9 +72,9 @@ const RegisterScreen = ({ navigation }) => {
           secureTextEntry={true}
           onChangeText={(text) => setFormState({ confirmPassword: text })}
         />
-        {showPasswordMatchErrorText && (
+        {showPasswordErrorText && (
           <Text style={{ marginTop: 5, marginLeft: 10, color: 'red' }}>
-            Passwords should match
+            Passwords should match and not be empty
           </Text>
         )}
 
