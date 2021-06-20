@@ -22,7 +22,11 @@ const RegisterScreen = ({ navigation }) => {
 
   const dispatch = useDispatch();
   const registerUser = () => {
-    if (formState.password !== formState.confirmPassword) {
+    // Password should be non-empty and match with confirm password
+    if (
+      formState.password.length > 0 &&
+      formState.password !== formState.confirmPassword
+    ) {
       setShowPasswordMatchError(true);
       return;
     }
