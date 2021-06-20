@@ -10,7 +10,6 @@ export const tryGetStoredUserToken = () => (dispatch) =>
 
 export const login = (email, password) => (dispatch) => {
   const data = { email, password };
-
   return axios
     .post('https://api.citycrop.io/v1/auth/login', data)
     .then((response) =>
@@ -22,7 +21,6 @@ export const login = (email, password) => (dispatch) => {
 
 export const register = (name, surname, email, password) => (dispatch) => {
   const data = { name, surname, email, password };
-
   return axios
     .post('https://api.citycrop.io/v1/auth/signup', data)
     .then((response) =>
