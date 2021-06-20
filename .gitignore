@@ -17,4 +17,4 @@ web-build/
 jsconfig.json
 
 # Sentry
-.tmp/sentry/
+.tmp/
