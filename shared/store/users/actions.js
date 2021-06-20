@@ -5,9 +5,9 @@ export const SET_USER_ME = 'SET_USER_ME';
 export const UPDATE_USER_ME = 'UPDATE_USER_ME';
 
 export const getMeAsync = () => (dispatch) => {
-  return AuthAxios.get(
-    'https://api.citycrop.io/v1/users/get'
-  ).then((response) => dispatch(setUserMe(response.data)));
+  return AuthAxios.get('https://api.citycrop.io/v1/users/get').then(
+    (response) => dispatch(setUserMe(response.data))
+  );
 };
 
 export const updateMeAsync = (newUser) => (dispatch) => {
