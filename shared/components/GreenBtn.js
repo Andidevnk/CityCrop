@@ -1,7 +1,20 @@
 import React from 'react';
-import { StyleSheet, TouchableHighlight, Text } from 'react-native';
+import {
+  StyleSheet,
+  TouchableHighlight,
+  Text,
+  ActivityIndicator,
+} from 'react-native';
 
-function GreenBtn({ style, title, outlined = false, ...restProps }) {
+const GreenBtn = ({
+  style,
+  title,
+  loading,
+  outlined = false,
+  ...restProps
+}) => {
+  if (loading)
+    return <ActivityIndicator style={style} size="large" color="green" />;
   return (
     <TouchableHighlight
       style={[styles.button, outlined && styles.buttonOutlined, style]}
@@ -14,7 +27,7 @@ function GreenBtn({ style, title, outlined = false, ...restProps }) {
       </Text>
     </TouchableHighlight>
   );
-}
+};
 
 const styles = StyleSheet.create({
   button: {
