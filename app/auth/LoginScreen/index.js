@@ -3,8 +3,8 @@ import { StyleSheet, View, Text } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import useIsMounted from 'shared/hooks/useIsMounted';
-import { login } from 'shared/store/auth/actions';
 import useFormState from 'shared/hooks/useFormState';
+import { login } from 'shared/store/auth/actions';
 import KeyboardDismissArea from 'shared/components/KeyboardDismissArea';
 import IconTextInput from 'shared/components/IconTextInput';
 import GreenBtn from 'shared/components/GreenBtn';
