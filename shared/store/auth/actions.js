@@ -1,5 +1,6 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { showAlert } from 'shared/store/alert/actions';
 
 export const SET_USER_TOKEN = 'SET_USER_TOKEN';
 
@@ -16,7 +17,8 @@ export const login = (email, password) => (dispatch) => {
       AsyncStorage.setItem('token', response.data.token).then(() =>
         dispatch(setUserToken(response.data.token))
       )
-    );
+    )
+    .catch(() => dispatch(showAlert('Your email or password is wrong.')));
 };
 
 export const register = (name, surname, email, password) => (dispatch) => {

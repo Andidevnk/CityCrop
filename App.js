@@ -4,7 +4,8 @@ import * as Notifications from 'expo-notifications';
 import { Provider } from 'react-redux';
 import * as Sentry from 'sentry-expo';
 
-import store from './shared/store';
+import store from 'shared/store';
+import AlertSnackBar from 'shared/components/AlertSnackBar';
 import AuthNavigator from './app/AuthNavigator';
 
 // Initialize Sentry
@@ -27,6 +28,7 @@ export default function App() {
     <Provider store={store}>
       <StatusBar style="auto" />
       <AuthNavigator />
+      <AlertSnackBar />
     </Provider>
   );
 }
