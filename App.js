@@ -10,7 +10,6 @@ import AuthNavigator from './app/AuthNavigator';
 // Initialize Sentry
 Sentry.init({
   dsn: 'https://70bb7c356f5e45a6bfd6a03fe76d5ecc@o786187.ingest.sentry.io/5799477',
-  enableInExpoDevelopment: true,
   debug: false,
 });
 
