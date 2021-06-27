@@ -1,22 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
 
 import ScalableImage from 'shared/components/ScalableImage';
 
-function IconTextInput({ style, iconImage, ...restProps }) {
-  return (
-    <View style={[styles.container, style]}>
-      {iconImage && (
-        <ScalableImage
-          style={styles.iconImage}
-          source={iconImage}
-          resizeMode="contain"
-          fadeDuration={0}
-        />
-      )}
-      <TextInput style={styles.input} {...restProps} />
-    </View>
-  );
+// Class component necessary for createAnimatedComponent()
+class IconTextInput extends Component {
+  render() {
+    const { style, iconImage, invalid = false, ...restProps } = this.props;
+    return (
+      <View
+        style={[
+          styles.container,
+          ...(invalid ? [styles.invalidContainer] : []),
+          style,
+        ]}
+      >
+        {iconImage && (
+          <ScalableImage
+            style={styles.iconImage}
+            source={iconImage}
+            resizeMode="contain"
+            fadeDuration={0}
+          />
+        )}
+        <TextInput style={styles.input} {...restProps} />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -27,6 +37,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 28,
     borderRadius: 15,
     backgroundColor: '#FFFFFF',
+  },
+  invalidContainer: {
+    borderColor: 'red',
+    borderWidth: 1,
   },
   iconImage: {
     width: 20,

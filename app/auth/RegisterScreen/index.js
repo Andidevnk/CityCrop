@@ -9,6 +9,16 @@ import IconTextInput from 'shared/components/IconTextInput';
 import GreenBtn from 'shared/components/GreenBtn';
 import TouchableText from 'shared/components/TouchableText';
 import CityCropBanner from 'shared/components/CityCropBanner';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withSequence,
+  withTiming,
+} from 'react-native-reanimated';
+
+const AnimatedIconTextInput = Animated.createAnimatedComponent(IconTextInput);
+const TIMING_ANIMATION_CONFIG = { duration: 60 };
 
 const RegisterScreen = ({ navigation }) => {
   const [formState, setFormState] = useFormState({
@@ -17,7 +27,25 @@ const RegisterScreen = ({ navigation }) => {
     password: '',
     confirmPassword: '',
   });
-  const [showPasswordErrorText, setShowPasswordErrorText] = useState(false);
+  const [arePasswordsInvalid, setArePasswordsInvalid] = useState(false);
+
+  // Shake animation
+  const translateX = useSharedValue(0);
+  const calcShakeAnimatedStyle = () => {
+    'worklet';
+    return {
+      transform: [{ translateX: translateX.value }],
+    };
+  };
+  const shakeAnimatedStyle = useAnimatedStyle(calcShakeAnimatedStyle);
+  const shakeAnimatedStyle2 = useAnimatedStyle(calcShakeAnimatedStyle);
+  const shakePasswordInputs = () => {
+    translateX.value = withSequence(
+      withTiming(-4, TIMING_ANIMATION_CONFIG),
+      withRepeat(withTiming(4, TIMING_ANIMATION_CONFIG), 8, true),
+      withTiming(0, TIMING_ANIMATION_CONFIG)
+    );
+  };
 
   const dispatch = useDispatch();
   const registerUser = () => {
@@ -26,7 +54,8 @@ const RegisterScreen = ({ navigation }) => {
       formState.password.length <= 0 ||
       formState.password !== formState.confirmPassword
     ) {
-      setShowPasswordErrorText(true);
+      setArePasswordsInvalid(true);
+      shakePasswordInputs();
       return;
     }
 
@@ -57,22 +86,25 @@ const RegisterScreen = ({ navigation }) => {
           autoCapitalize="none"
           onChangeText={(text) => setFormState({ email: text })}
         />
-        <IconTextInput
-          style={styles.input}
+        <AnimatedIconTextInput
+          style={[styles.input, shakeAnimatedStyle]}
           iconImage={require('assets/icons/key.png')}
           placeholder="Password"
           value={formState.password}
+          invalid={arePasswordsInvalid}
           secureTextEntry={true}
           onChangeText={(text) => setFormState({ password: text })}
         />
-        <IconTextInput
+        <AnimatedIconTextInput
+          style={shakeAnimatedStyle2}
           iconImage={require('assets/icons/key.png')}
           placeholder="Confirm password"
           value={formState.confirmPassword}
+          invalid={arePasswordsInvalid}
           secureTextEntry={true}
           onChangeText={(text) => setFormState({ confirmPassword: text })}
         />
-        {showPasswordErrorText && (
+        {arePasswordsInvalid && (
           <Text style={{ marginTop: 5, marginLeft: 10, color: 'red' }}>
             Passwords should match and not be empty
           </Text>
