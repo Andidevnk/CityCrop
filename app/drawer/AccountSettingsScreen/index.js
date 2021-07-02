@@ -15,10 +15,6 @@ const AccountSettingsScreen = () => {
     name: me.fullName,
     newPassword: '',
     confirmNewPassword: '',
-    // TODO: Uncomment when endpoint 'users/me/password' is ready
-    // oldPassword: '',
-    // newPassword: '',
-    // newPasswordConfirm: '',
   });
   const [isLoading, setIsLoading] = useState(false);
   const [showPasswordsErrorText, setShowPasswordsErrorText] = useState(false);
@@ -99,45 +95,6 @@ const AccountSettingsScreen = () => {
             Passwords should match
           </Text>
         )}
-        {/* TODO: Uncomment when endpoint 'users/me/password' is ready */}
-        {/* <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginTop: 60,
-            marginLeft: 26,
-            marginBottom: 30,
-          }}
-        >
-          <ScalableImage
-            style={{
-              width: 20,
-              marginRight: 20,
-            }}
-            source={require('assets/icons/key.png')}
-          />
-          <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#0B7B03' }}>
-            Change password
-          </Text>
-        </View>
-        <IconTextInput
-          style={[styles.input]}
-          placeholder="Old password"
-          value={formState.oldPassword}
-          onChangeText={(text) => setFormState({ oldPassword: text })}
-        />
-        <IconTextInput
-          style={[styles.input]}
-          placeholder="New password"
-          value={formState.newPassword}
-          onChangeText={(text) => setFormState({ newPassword: text })}
-        />
-        <IconTextInput
-          style={[styles.input, { marginBottom: 0 }]}
-          placeholder="Confirm password"
-          value={formState.newPasswordConfirm}
-          onChangeText={(text) => setFormState({ newPasswordConfirm: text })}
-        /> */}
       </ScrollView>
       <LightGreenBtn title="Save" loading={isLoading} onPress={updateMe} />
     </View>
