@@ -21,7 +21,7 @@ const AnimatedIconTextInput = Animated.createAnimatedComponent(IconTextInput);
 const TIMING_ANIMATION_CONFIG = { duration: 60 };
 
 const RegisterScreen = ({ navigation }) => {
-  const [formState, setFormState] = useFormState({
+  const [form, setForm] = useFormState({
     firstName: '',
     lastName: '',
     email: '',
@@ -51,22 +51,14 @@ const RegisterScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const registerUser = () => {
     // Password should be non-empty and match with confirm password
-    if (
-      formState.password.length <= 0 ||
-      formState.password !== formState.confirmPassword
-    ) {
+    if (form.password.length <= 0 || form.password !== form.confirmPassword) {
       setArePasswordsInvalid(true);
       shakePasswordInputs();
       return;
     }
 
     dispatch(
-      register(
-        formState.firstName,
-        formState.lastName,
-        formState.email,
-        formState.password
-      )
+      register(form.firstName, form.lastName, form.email, form.password)
     );
   };
 
@@ -81,41 +73,41 @@ const RegisterScreen = ({ navigation }) => {
             placeholder="First name"
             autoCompleteType="name"
             textContentType="givenName"
-            value={formState.firstName}
-            onChangeText={(text) => setFormState({ firstName: text })}
+            value={form.firstName}
+            onChangeText={(text) => setForm({ firstName: text })}
           />
           <IconTextInput
             style={[styles.input, { flex: 1 }]}
             placeholder="Last name"
             autoCompleteType="name"
             textContentType="familyName"
-            value={formState.lastName}
-            onChangeText={(text) => setFormState({ lastName: text })}
+            value={form.lastName}
+            onChangeText={(text) => setForm({ lastName: text })}
           />
         </View>
         <IconTextInput
           style={styles.input}
           placeholder="Email"
-          value={formState.email}
+          value={form.email}
           keyboardType="email-address"
           autoCapitalize="none"
-          onChangeText={(text) => setFormState({ email: text })}
+          onChangeText={(text) => setForm({ email: text })}
         />
         <AnimatedIconTextInput
           style={[styles.input, shakeAnimatedStyle]}
           placeholder="Password"
-          value={formState.password}
+          value={form.password}
           invalid={arePasswordsInvalid}
           secureTextEntry={true}
-          onChangeText={(text) => setFormState({ password: text })}
+          onChangeText={(text) => setForm({ password: text })}
         />
         <AnimatedIconTextInput
           style={shakeAnimatedStyle2}
           placeholder="Confirm password"
-          value={formState.confirmPassword}
+          value={form.confirmPassword}
           invalid={arePasswordsInvalid}
           secureTextEntry={true}
-          onChangeText={(text) => setFormState({ confirmPassword: text })}
+          onChangeText={(text) => setForm({ confirmPassword: text })}
         />
         {arePasswordsInvalid && (
           <Text style={{ marginTop: 5, marginLeft: 10, color: 'red' }}>
