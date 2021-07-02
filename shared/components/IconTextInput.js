@@ -6,7 +6,21 @@ import ScalableImage from 'shared/components/ScalableImage';
 // Class component necessary for createAnimatedComponent()
 class IconTextInput extends Component {
   render() {
-    const { style, iconImage, invalid = false, ...restProps } = this.props;
+    const {
+      style,
+      iconImage,
+      invalid = false,
+      disableAutofill = false,
+      ...restProps
+    } = this.props;
+
+    const disableAutofillProps = disableAutofill
+      ? {
+          autoCompleteType: 'off', // Android
+          textContentType: 'none', // iOS
+        }
+      : {};
+
     return (
       <View
         style={[
@@ -23,7 +37,11 @@ class IconTextInput extends Component {
             fadeDuration={0}
           />
         )}
-        <TextInput style={styles.input} {...restProps} />
+        <TextInput
+          style={styles.input}
+          {...disableAutofillProps}
+          {...restProps}
+        />
       </View>
     );
   }
