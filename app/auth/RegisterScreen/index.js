@@ -22,7 +22,8 @@ const TIMING_ANIMATION_CONFIG = { duration: 60 };
 
 const RegisterScreen = ({ navigation }) => {
   const [formState, setFormState] = useFormState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -59,9 +60,13 @@ const RegisterScreen = ({ navigation }) => {
       return;
     }
 
-    const [firstName, lastname] = formState.name.split(' ');
     dispatch(
-      register(firstName, lastname, formState.email, formState.password)
+      register(
+        formState.firstName,
+        formState.lastName,
+        formState.email,
+        formState.password
+      )
     );
   };
 
@@ -70,16 +75,26 @@ const RegisterScreen = ({ navigation }) => {
       <View style={styles.container}>
         <CityCropBanner style={styles.banner} />
 
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <IconTextInput
+            style={[styles.input, { flex: 1, marginRight: 10 }]}
+            placeholder="First name"
+            autoCompleteType="name"
+            textContentType="givenName"
+            value={formState.firstName}
+            onChangeText={(text) => setFormState({ firstName: text })}
+          />
+          <IconTextInput
+            style={[styles.input, { flex: 1 }]}
+            placeholder="Last name"
+            autoCompleteType="name"
+            textContentType="familyName"
+            value={formState.lastName}
+            onChangeText={(text) => setFormState({ lastName: text })}
+          />
+        </View>
         <IconTextInput
           style={styles.input}
-          iconImage={require('assets/icons/user.png')}
-          placeholder="Name"
-          value={formState.name}
-          onChangeText={(text) => setFormState({ name: text })}
-        />
-        <IconTextInput
-          style={styles.input}
-          iconImage={require('assets/icons/mail.png')}
           placeholder="Email"
           value={formState.email}
           keyboardType="email-address"
@@ -88,7 +103,6 @@ const RegisterScreen = ({ navigation }) => {
         />
         <AnimatedIconTextInput
           style={[styles.input, shakeAnimatedStyle]}
-          iconImage={require('assets/icons/key.png')}
           placeholder="Password"
           value={formState.password}
           invalid={arePasswordsInvalid}
@@ -97,7 +111,6 @@ const RegisterScreen = ({ navigation }) => {
         />
         <AnimatedIconTextInput
           style={shakeAnimatedStyle2}
-          iconImage={require('assets/icons/key.png')}
           placeholder="Confirm password"
           value={formState.confirmPassword}
           invalid={arePasswordsInvalid}
