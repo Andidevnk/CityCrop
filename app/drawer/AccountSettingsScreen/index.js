@@ -11,7 +11,7 @@ import UserProfileImagePicker from './UserProfileImagePicker';
 
 const AccountSettingsScreen = () => {
   const me = useSelector(selectMe());
-  const [formState, setFormState] = useFormState({
+  const [form, setForm] = useFormState({
     name: me.fullName,
     newPassword: '',
     confirmNewPassword: '',
@@ -23,7 +23,7 @@ const AccountSettingsScreen = () => {
 
   const updateMe = () => {
     // Passwords should match
-    if (formState.newPassword !== formState.confirmNewPassword) {
+    if (form.newPassword !== form.confirmNewPassword) {
       setShowPasswordsErrorText(true);
       return;
     }
@@ -32,11 +32,11 @@ const AccountSettingsScreen = () => {
     setIsLoading(true);
     dispatch(
       updateMeAsync({
-        name: formState.name.split(' ')[0],
-        surname: formState.name.split(' ')[1] || '',
+        name: form.name.split(' ')[0],
+        surname: form.name.split(' ')[1] || '',
         // If password is non-empty, update it
-        ...(formState.newPassword.length > 0 && {
-          password: formState.newPassword,
+        ...(form.newPassword.length > 0 && {
+          password: form.newPassword,
         }),
       })
     ).finally(() => setIsLoading(false));
@@ -66,8 +66,8 @@ const AccountSettingsScreen = () => {
           style={styles.input}
           placeholder="Name"
           iconImage={require('assets/icons/user.png')}
-          value={formState.name}
-          onChangeText={(text) => setFormState({ name: text })}
+          value={form.name}
+          onChangeText={(text) => setForm({ name: text })}
         />
         <IconTextInput
           style={styles.input}
@@ -80,15 +80,15 @@ const AccountSettingsScreen = () => {
           style={styles.input}
           placeholder="New password"
           secureTextEntry={true}
-          value={formState.newPassword}
-          onChangeText={(text) => setFormState({ newPassword: text })}
+          value={form.newPassword}
+          onChangeText={(text) => setForm({ newPassword: text })}
         />
         <IconTextInput
           style={[styles.input, { marginBottom: 0 }]}
           placeholder="Confirm new password"
           secureTextEntry={true}
-          value={formState.confirmNewPassword}
-          onChangeText={(text) => setFormState({ confirmNewPassword: text })}
+          value={form.confirmNewPassword}
+          onChangeText={(text) => setForm({ confirmNewPassword: text })}
         />
         {showPasswordsErrorText && (
           <Text style={{ marginTop: 5, marginLeft: 10, color: 'red' }}>
