@@ -12,7 +12,8 @@ import UserProfileImagePicker from './UserProfileImagePicker';
 const AccountSettingsScreen = () => {
   const me = useSelector(selectMe());
   const [form, setForm] = useFormState({
-    name: me.fullName,
+    firstName: me.name,
+    lastName: me.surname,
     newPassword: '',
     confirmNewPassword: '',
   });
@@ -32,8 +33,8 @@ const AccountSettingsScreen = () => {
     setIsLoading(true);
     dispatch(
       updateMeAsync({
-        name: form.name.split(' ')[0],
-        surname: form.name.split(' ')[1] || '',
+        name: form.firstName,
+        surname: form.lastName,
         // If password is non-empty, update it
         ...(form.newPassword.length > 0 && {
           password: form.newPassword,
@@ -62,22 +63,34 @@ const AccountSettingsScreen = () => {
           style={{ alignSelf: 'center', marginBottom: 30 }}
           onPickImagePress={() => console.log('pick image')}
         />
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <IconTextInput
+            style={[styles.input, { flex: 1, marginRight: 10 }]}
+            placeholder="First name"
+            autoCompleteType="name"
+            textContentType="givenName"
+            value={form.firstName}
+            onChangeText={(text) => setForm({ firstName: text })}
+          />
+          <IconTextInput
+            style={[styles.input, { flex: 1 }]}
+            placeholder="Last name"
+            autoCompleteType="name"
+            textContentType="familyName"
+            value={form.lastName}
+            onChangeText={(text) => setForm({ lastName: text })}
+          />
+        </View>
         <IconTextInput
           style={styles.input}
-          placeholder="Name"
-          iconImage={require('assets/icons/user.png')}
-          value={form.name}
-          onChangeText={(text) => setForm({ name: text })}
-        />
-        <IconTextInput
-          style={styles.input}
-          placeholder="Email"
           iconImage={require('assets/icons/mail.png')}
+          placeholder="Email"
           editable={false}
           value={me.email}
         />
         <IconTextInput
           style={styles.input}
+          iconImage={require('assets/icons/key.png')}
           placeholder="New password"
           secureTextEntry={true}
           value={form.newPassword}
@@ -85,6 +98,7 @@ const AccountSettingsScreen = () => {
         />
         <IconTextInput
           style={[styles.input, { marginBottom: 0 }]}
+          iconImage={require('assets/icons/key.png')}
           placeholder="Confirm new password"
           secureTextEntry={true}
           value={form.confirmNewPassword}
