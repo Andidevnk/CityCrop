@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { register } from 'shared/store/auth/actions';
 import useFormState from 'shared/hooks/useFormState';
+import useIsMounted from 'shared/hooks/useIsMounted';
 import KeyboardDismissArea from 'shared/components/KeyboardDismissArea';
 import IconTextInput from 'shared/components/IconTextInput';
 import GreenBtn from 'shared/components/GreenBtn';
@@ -29,6 +30,7 @@ const RegisterScreen = ({ navigation }) => {
     confirmPassword: '',
   });
   const [arePasswordsInvalid, setArePasswordsInvalid] = useState(false);
+  const isMounted = useIsMounted();
 
   // Shake animation
   const translateX = useSharedValue(0);
@@ -67,52 +69,59 @@ const RegisterScreen = ({ navigation }) => {
       <View style={styles.container}>
         <CityCropBanner style={styles.banner} />
 
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <IconTextInput
-            style={[styles.input, { flex: 1, marginRight: 10 }]}
-            placeholder="First name"
-            autoCompleteType="name"
-            textContentType="givenName"
-            value={form.firstName}
-            onChangeText={(text) => setForm({ firstName: text })}
-          />
-          <IconTextInput
-            style={[styles.input, { flex: 1 }]}
-            placeholder="Last name"
-            autoCompleteType="name"
-            textContentType="familyName"
-            value={form.lastName}
-            onChangeText={(text) => setForm({ lastName: text })}
-          />
-        </View>
-        <IconTextInput
-          style={styles.input}
-          placeholder="Email"
-          value={form.email}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          onChangeText={(text) => setForm({ email: text })}
-        />
-        <AnimatedIconTextInput
-          style={[styles.input, shakeAnimatedStyle]}
-          placeholder="Password"
-          value={form.password}
-          invalid={arePasswordsInvalid}
-          secureTextEntry={true}
-          onChangeText={(text) => setForm({ password: text })}
-        />
-        <AnimatedIconTextInput
-          style={shakeAnimatedStyle2}
-          placeholder="Confirm password"
-          value={form.confirmPassword}
-          invalid={arePasswordsInvalid}
-          secureTextEntry={true}
-          onChangeText={(text) => setForm({ confirmPassword: text })}
-        />
-        {arePasswordsInvalid && (
-          <Text style={{ marginTop: 5, marginLeft: 10, color: 'red' }}>
-            Passwords should match and not be empty
-          </Text>
+        {isMounted && ( // Solves the autofill bug
+          <>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <IconTextInput
+                style={[styles.input, { flex: 1, marginRight: 10 }]}
+                placeholder="First name"
+                autoCompleteType="name"
+                textContentType="givenName"
+                value={form.firstName}
+                onChangeText={(text) => setForm({ firstName: text })}
+              />
+              <IconTextInput
+                style={[styles.input, { flex: 1 }]}
+                placeholder="Last name"
+                autoCompleteType="name"
+                textContentType="familyName"
+                value={form.lastName}
+                onChangeText={(text) => setForm({ lastName: text })}
+              />
+            </View>
+            <IconTextInput
+              style={styles.input}
+              placeholder="Email"
+              value={form.email}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              disableAutofill
+              onChangeText={(text) => setForm({ email: text })}
+            />
+            <AnimatedIconTextInput
+              style={[styles.input, shakeAnimatedStyle]}
+              placeholder="Password"
+              value={form.password}
+              invalid={arePasswordsInvalid}
+              secureTextEntry={true}
+              disableAutofill
+              onChangeText={(text) => setForm({ password: text })}
+            />
+            <AnimatedIconTextInput
+              style={shakeAnimatedStyle2}
+              placeholder="Confirm password"
+              value={form.confirmPassword}
+              invalid={arePasswordsInvalid}
+              secureTextEntry={true}
+              disableAutofill
+              onChangeText={(text) => setForm({ confirmPassword: text })}
+            />
+            {arePasswordsInvalid && (
+              <Text style={{ marginTop: 5, marginLeft: 10, color: 'red' }}>
+                Passwords should match and not be empty
+              </Text>
+            )}
+          </>
         )}
 
         <View style={styles.bottomSection}>
