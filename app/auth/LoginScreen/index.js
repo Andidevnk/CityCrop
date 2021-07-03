@@ -28,41 +28,43 @@ function LoginScreen({ navigation }) {
   return (
     <KeyboardDismissArea>
       <View style={styles.container}>
-        <CityCropBanner />
+        <View>
+          <CityCropBanner style={{ marginTop: 80, marginBottom: 65 }} />
 
-        {isMounted && ( // Solves the autofill bug
-          <>
-            <IconTextInput
-              style={styles.input}
-              iconImage={require('assets/icons/mail.png')}
-              placeholder="Email"
-              value={formState.email}
-              keyboardType="email-address"
-              autoCapitalize="none"
-              autoCompleteType="email"
-              onChangeText={(text) => setFormState({ email: text })}
-            />
-            <IconTextInput
-              iconImage={require('assets/icons/key.png')}
-              placeholder="Password"
-              value={formState.password}
-              autoCompleteType="password"
-              secureTextEntry={true}
-              onChangeText={(text) => setFormState({ password: text })}
-            />
-          </>
-        )}
+          {isMounted && ( // Solves the autofill bug
+            <>
+              <IconTextInput
+                style={styles.input}
+                iconImage={require('assets/icons/mail.png')}
+                placeholder="Email"
+                value={formState.email}
+                keyboardType="email-address"
+                autoCapitalize="none"
+                autoCompleteType="email"
+                onChangeText={(text) => setFormState({ email: text })}
+              />
+              <IconTextInput
+                iconImage={require('assets/icons/key.png')}
+                placeholder="Password"
+                value={formState.password}
+                autoCompleteType="password"
+                secureTextEntry={true}
+                onChangeText={(text) => setFormState({ password: text })}
+              />
+            </>
+          )}
 
-        <View style={styles.loginButtonContainer}>
-          <GreenBtn title="Login" onPress={loginUser} />
+          <View style={styles.loginButtonContainer}>
+            <GreenBtn title="Login" onPress={loginUser} />
+          </View>
+          <TouchableText
+            style={styles.forgotPasswordTextContainer}
+            textStyle={styles.forgotPasswordText}
+            onPress={() => navigation.navigate('Forgot Password')}
+          >
+            Forgot password?
+          </TouchableText>
         </View>
-        <TouchableText
-          style={styles.forgotPasswordTextContainer}
-          textStyle={styles.forgotPasswordText}
-          onPress={() => navigation.navigate('Forgot Password')}
-        >
-          Forgot password?
-        </TouchableText>
 
         <View style={styles.registerSectionContainer}>
           <Text style={styles.registerText}>Not a CityCropper yet?</Text>
@@ -85,6 +87,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#F5F8F5',
+    justifyContent: 'space-between',
   },
   input: {
     marginBottom: 10,
@@ -103,8 +106,8 @@ const styles = StyleSheet.create({
     color: '#18191F',
   },
   registerSectionContainer: {
-    marginTop: 'auto',
     alignItems: 'center',
+    marginTop: 30,
   },
   registerText: {
     fontSize: 16,
