@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Modal } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { resetPassword } from 'shared/store/auth/actions';
+import useIsMounted from 'shared/hooks/useIsMounted';
 import KeyboardDismissArea from 'shared/components/KeyboardDismissArea';
 import IconTextInput from 'shared/components/IconTextInput';
 import IconButton from 'shared/components/IconButton';
@@ -12,6 +13,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const isMounted = useIsMounted();
 
   const dispatch = useDispatch();
 
@@ -37,15 +39,18 @@ const ForgotPasswordScreen = ({ navigation }) => {
           </Text>
         </View>
 
-        <IconTextInput
-          iconImage={require('assets/icons/mail.png')}
-          placeholder="Email"
-          value={email}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          autoCompleteType="email"
-          onChangeText={(text) => setEmail(text)}
-        />
+        {isMounted && ( // Solves the autofill bug
+          <IconTextInput
+            iconImage={require('assets/icons/mail.png')}
+            placeholder="Email"
+            value={email}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCompleteType="email"
+            textContentType="emailAddress"
+            onChangeText={(text) => setEmail(text)}
+          />
+        )}
 
         <View style={styles.bottomSection}>
           <GreenBtn
