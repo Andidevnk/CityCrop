@@ -41,14 +41,16 @@ const AddModuleScreen = ({
       </View>
       <Text style={styles.inputLabel}>Module Name</Text>
       <IconTextInput
-        style={styles.input}
+        style={{ marginBottom: 25 }}
+        inputContainerStyle={styles.input}
         placeholder="Name"
         value={formState.name}
         onChangeText={(text) => setFormState({ name: text })}
       />
       <Text style={styles.inputLabel}>Serial Number</Text>
       <IconTextInput
-        style={styles.input}
+        style={{ marginBottom: 25 }}
+        inputContainerStyle={styles.input}
         placeholder="Serial Number"
         value={formState.serialNumber}
         onChangeText={(text) => setFormState({ serialNumber: text })}
@@ -95,7 +97,6 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     paddingVertical: 20,
     paddingHorizontal: 25,
-    marginBottom: 25,
     backgroundColor: '#FFFFFF',
     fontSize: 16,
   },

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
+import { isEmailValid, arePasswordsValid } from 'shared/utilities';
 import { register } from 'shared/store/auth/actions';
 import useFormState from 'shared/hooks/useFormState';
 import useIsMounted from 'shared/hooks/useIsMounted';
@@ -10,16 +11,14 @@ import IconTextInput from 'shared/components/IconTextInput';
 import GreenBtn from 'shared/components/GreenBtn';
 import TouchableText from 'shared/components/TouchableText';
 import CityCropBanner from 'shared/components/CityCropBanner';
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withRepeat,
-  withSequence,
-  withTiming,
-} from 'react-native-reanimated';
+import useShakeAnimation from './useShakeAnimation';
 
-const AnimatedIconTextInput = Animated.createAnimatedComponent(IconTextInput);
-const TIMING_ANIMATION_CONFIG = { duration: 60 };
+const getInvalidFormInputs = (form) => [
+  ...(!isEmailValid(form.email) ? ['email'] : []),
+  ...(!arePasswordsValid(form.password, form.confirmPassword)
+    ? ['password', 'confirmPassword']
+    : []),
+];
 
 const RegisterScreen = ({ navigation }) => {
   const [form, setForm] = useFormState({
@@ -29,33 +28,29 @@ const RegisterScreen = ({ navigation }) => {
     password: '',
     confirmPassword: '',
   });
-  const [arePasswordsInvalid, setArePasswordsInvalid] = useState(false);
+  const [invalidInputs, setInvalidInputs] = useState([]);
   const isMounted = useIsMounted();
 
-  // Shake animation
-  const translateX = useSharedValue(0);
-  const calcShakeAnimatedStyle = () => {
-    'worklet';
-    return {
-      transform: [{ translateX: translateX.value }],
-    };
-  };
-  const shakeAnimatedStyle = useAnimatedStyle(calcShakeAnimatedStyle);
-  const shakeAnimatedStyle2 = useAnimatedStyle(calcShakeAnimatedStyle);
-  const shakePasswordInputs = () => {
-    translateX.value = withSequence(
-      withTiming(-4, TIMING_ANIMATION_CONFIG),
-      withRepeat(withTiming(4, TIMING_ANIMATION_CONFIG), 8, true),
-      withTiming(0, TIMING_ANIMATION_CONFIG)
-    );
-  };
+  const [shakeEmailInput, shakeEmailAnimatedStyle] = useShakeAnimation();
+  const [shakePasswordInput, shakePasswordAnimatedStyle] = useShakeAnimation();
+  const [shakeConfirmPasswordInput, shakeConfirmPasswordAnimatedStyle] =
+    useShakeAnimation();
 
   const dispatch = useDispatch();
+  const shakeInvalidInputs = (invalidInputIds) => {
+    if (invalidInputIds.includes('email')) shakeEmailInput();
+    if (invalidInputIds.includes('password')) shakePasswordInput();
+    if (invalidInputIds.includes('confirmPassword'))
+      shakeConfirmPasswordInput();
+  };
   const registerUser = () => {
-    // Password should be non-empty and match with confirm password
-    if (form.password.length <= 0 || form.password !== form.confirmPassword) {
-      setArePasswordsInvalid(true);
-      shakePasswordInputs();
+    const invalidInputIds = getInvalidFormInputs(form);
+
+    setInvalidInputs(invalidInputIds);
+
+    // Form is invalid, shake inputs and return
+    if (invalidInputIds.length > 0) {
+      shakeInvalidInputs(invalidInputIds);
       return;
     }
 
@@ -89,38 +84,40 @@ const RegisterScreen = ({ navigation }) => {
                 onChangeText={(text) => setForm({ lastName: text })}
               />
             </View>
+
             <IconTextInput
               style={styles.input}
+              inputContainerStyle={shakeEmailAnimatedStyle}
               placeholder="Email"
               value={form.email}
               keyboardType="email-address"
               autoCapitalize="none"
               disableAutofill
+              invalid={invalidInputs.includes('email')}
+              errorText="Email is not valid"
               onChangeText={(text) => setForm({ email: text })}
             />
-            <AnimatedIconTextInput
-              style={[styles.input, shakeAnimatedStyle]}
+
+            <IconTextInput
+              style={styles.input}
+              inputContainerStyle={shakePasswordAnimatedStyle}
               placeholder="Password"
               value={form.password}
-              invalid={arePasswordsInvalid}
               secureTextEntry={true}
               disableAutofill
+              invalid={invalidInputs.includes('password')}
               onChangeText={(text) => setForm({ password: text })}
             />
-            <AnimatedIconTextInput
-              style={shakeAnimatedStyle2}
+            <IconTextInput
+              inputContainerStyle={shakeConfirmPasswordAnimatedStyle}
               placeholder="Confirm password"
               value={form.confirmPassword}
-              invalid={arePasswordsInvalid}
               secureTextEntry={true}
               disableAutofill
+              invalid={invalidInputs.includes('confirmPassword')}
+              errorText="Passwords don't match or empty"
               onChangeText={(text) => setForm({ confirmPassword: text })}
             />
-            {arePasswordsInvalid && (
-              <Text style={{ marginTop: 5, marginLeft: 10, color: 'red' }}>
-                Passwords should match and not be empty
-              </Text>
-            )}
           </>
         )}
 

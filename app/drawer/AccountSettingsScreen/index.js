@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, ScrollView, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { arePasswordsValid } from 'shared/utilities';
 import { selectMe } from 'shared/store/users/selectors';
 import { updateMeAsync } from 'shared/store/users/actions';
 import useFormState from 'shared/hooks/useFormState';
@@ -24,7 +25,11 @@ const AccountSettingsScreen = () => {
 
   const updateMe = () => {
     // Passwords should match
-    if (form.newPassword !== form.confirmNewPassword) {
+    if (
+      !arePasswordsValid(form.newPassword, form.confirmNewPassword, {
+        allowEmpty: true,
+      })
+    ) {
       setShowPasswordsErrorText(true);
       return;
     }
@@ -65,7 +70,8 @@ const AccountSettingsScreen = () => {
         />
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <IconTextInput
-            style={[styles.input, { flex: 1, marginRight: 10 }]}
+            style={{ flex: 1, marginRight: 10 }}
+            inputContainerStyle={styles.input}
             placeholder="First name"
             autoCompleteType="name"
             textContentType="givenName"
@@ -73,7 +79,8 @@ const AccountSettingsScreen = () => {
             onChangeText={(text) => setForm({ firstName: text })}
           />
           <IconTextInput
-            style={[styles.input, { flex: 1 }]}
+            style={{ flex: 1 }}
+            inputContainerStyle={styles.input}
             placeholder="Last name"
             autoCompleteType="name"
             textContentType="familyName"
@@ -82,14 +89,14 @@ const AccountSettingsScreen = () => {
           />
         </View>
         <IconTextInput
-          style={styles.input}
+          inputContainerStyle={styles.input}
           iconImage={require('assets/icons/mail.png')}
           placeholder="Email"
           editable={false}
           value={me.email}
         />
         <IconTextInput
-          style={styles.input}
+          inputContainerStyle={styles.input}
           iconImage={require('assets/icons/key.png')}
           placeholder="New password"
           secureTextEntry={true}
@@ -97,7 +104,7 @@ const AccountSettingsScreen = () => {
           onChangeText={(text) => setForm({ newPassword: text })}
         />
         <IconTextInput
-          style={[styles.input, { marginBottom: 0 }]}
+          inputContainerStyle={[styles.input, { marginBottom: 0 }]}
           iconImage={require('assets/icons/key.png')}
           placeholder="Confirm new password"
           secureTextEntry={true}
