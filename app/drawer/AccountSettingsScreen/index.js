@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, ScrollView, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { arePasswordsValid } from 'shared/utilities';
 import { selectMe } from 'shared/store/users/selectors';
 import { updateMeAsync } from 'shared/store/users/actions';
 import useFormState from 'shared/hooks/useFormState';
+import useIsMounted from 'shared/hooks/useIsMounted';
+import KeyboardAvoidingScrollView from 'shared/components/KeyboardAvoidingScrollView';
 import IconTextInput from 'shared/components/IconTextInput';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import UserProfileImagePicker from './UserProfileImagePicker';
@@ -19,10 +21,10 @@ const AccountSettingsScreen = () => {
     confirmNewPassword: '',
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [showPasswordsErrorText, setShowPasswordsErrorText] = useState(false);
+  const [arePasswordsInvalid, setArePasswordsInvalid] = useState(false);
+  const isMounted = useIsMounted();
 
   const dispatch = useDispatch();
-
   const updateMe = () => {
     // Passwords should match
     if (
@@ -30,11 +32,11 @@ const AccountSettingsScreen = () => {
         allowEmpty: true,
       })
     ) {
-      setShowPasswordsErrorText(true);
+      setArePasswordsInvalid(true);
       return;
     }
 
-    setShowPasswordsErrorText(false);
+    setArePasswordsInvalid(false);
     setIsLoading(true);
     dispatch(
       updateMeAsync({
@@ -49,88 +51,111 @@ const AccountSettingsScreen = () => {
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: '#FFFFFF',
-        paddingBottom: 40,
-      }}
+    <KeyboardAvoidingScrollView
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}
     >
-      <ScrollView
-        contentContainerStyle={{
-          paddingTop: 35,
-          paddingBottom: 150,
-          paddingHorizontal: 20,
-        }}
-        showsVerticalScrollIndicator={false}
-      >
+      <View>
         <UserProfileImagePicker
-          style={{ alignSelf: 'center', marginBottom: 30 }}
+          style={styles.userProfileImagePicker}
           onPickImagePress={() => console.log('pick image')}
         />
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <IconTextInput
-            style={{ flex: 1, marginRight: 10 }}
-            inputContainerStyle={styles.input}
-            placeholder="First name"
-            autoCompleteType="name"
-            textContentType="givenName"
-            value={form.firstName}
-            onChangeText={(text) => setForm({ firstName: text })}
-          />
-          <IconTextInput
-            style={{ flex: 1 }}
-            inputContainerStyle={styles.input}
-            placeholder="Last name"
-            autoCompleteType="name"
-            textContentType="familyName"
-            value={form.lastName}
-            onChangeText={(text) => setForm({ lastName: text })}
-          />
-        </View>
-        <IconTextInput
-          inputContainerStyle={styles.input}
-          iconImage={require('assets/icons/mail.png')}
-          placeholder="Email"
-          editable={false}
-          value={me.email}
-        />
-        <IconTextInput
-          inputContainerStyle={styles.input}
-          iconImage={require('assets/icons/key.png')}
-          placeholder="New password"
-          secureTextEntry={true}
-          value={form.newPassword}
-          onChangeText={(text) => setForm({ newPassword: text })}
-        />
-        <IconTextInput
-          inputContainerStyle={[styles.input, { marginBottom: 0 }]}
-          iconImage={require('assets/icons/key.png')}
-          placeholder="Confirm new password"
-          secureTextEntry={true}
-          value={form.confirmNewPassword}
-          onChangeText={(text) => setForm({ confirmNewPassword: text })}
-        />
-        {showPasswordsErrorText && (
-          <Text style={{ marginTop: 5, marginLeft: 10, color: 'red' }}>
-            Passwords should match
-          </Text>
+
+        {isMounted && ( // Solves the autofill bug
+          <>
+            <View style={[styles.row, styles.input]}>
+              <IconTextInput
+                style={styles.column}
+                inputContainerStyle={styles.inputContainer}
+                placeholder="First name"
+                autoCompleteType="name"
+                textContentType="givenName"
+                value={form.firstName}
+                onChangeText={(text) => setForm({ firstName: text })}
+              />
+              <IconTextInput
+                style={[styles.column, { marginRight: 0 }]}
+                inputContainerStyle={styles.inputContainer}
+                placeholder="Last name"
+                autoCompleteType="name"
+                textContentType="familyName"
+                value={form.lastName}
+                onChangeText={(text) => setForm({ lastName: text })}
+              />
+            </View>
+            <IconTextInput
+              style={styles.input}
+              inputContainerStyle={styles.inputContainer}
+              iconImage={require('assets/icons/mail.png')}
+              placeholder="Email"
+              editable={false}
+              value={me.email}
+            />
+            <IconTextInput
+              style={styles.input}
+              inputContainerStyle={styles.inputContainer}
+              iconImage={require('assets/icons/key.png')}
+              placeholder="New password"
+              value={form.newPassword}
+              secureTextEntry={true}
+              disableAutofill
+              invalid={arePasswordsInvalid}
+              onChangeText={(text) => setForm({ newPassword: text })}
+            />
+            <IconTextInput
+              inputContainerStyle={styles.inputContainer}
+              iconImage={require('assets/icons/key.png')}
+              placeholder="Confirm new password"
+              value={form.confirmNewPassword}
+              secureTextEntry={true}
+              disableAutofill
+              invalid={arePasswordsInvalid}
+              errorText="Passwords don't match"
+              onChangeText={(text) => setForm({ confirmNewPassword: text })}
+            />
+          </>
         )}
-      </ScrollView>
-      <LightGreenBtn title="Save" loading={isLoading} onPress={updateMe} />
-    </View>
+      </View>
+      <LightGreenBtn
+        style={{ marginTop: 30 }}
+        title="Save"
+        loading={isLoading}
+        onPress={updateMe}
+      />
+    </KeyboardAvoidingScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#FFFFFF',
+  },
+  contentContainer: {
+    padding: 20,
+    justifyContent: 'space-between',
+  },
+  userProfileImagePicker: {
+    alignSelf: 'center',
+    marginBottom: 30,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  column: {
+    flex: 1,
+    marginRight: 10,
+  },
   input: {
+    marginBottom: 10,
+  },
+  inputContainer: {
     elevation: 2,
     shadowColor: '#000000',
     shadowOffset: {
       height: 2,
     },
     shadowOpacity: 0.1,
-    marginBottom: 20,
   },
 });
 

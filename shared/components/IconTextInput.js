@@ -42,7 +42,7 @@ class IconTextInput extends Component {
             />
           )}
           <TextInput
-            style={styles.input}
+            style={[styles.input, ...(iconImage ? [styles.inputWithIcon] : [])]}
             {...disableAutofillProps}
             {...restProps}
           />
@@ -57,10 +57,7 @@ class IconTextInput extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 20,
-    paddingHorizontal: 28,
+    justifyContent: 'center',
     borderRadius: 15,
     backgroundColor: '#FFFFFF',
   },
@@ -71,11 +68,16 @@ const styles = StyleSheet.create({
   iconImage: {
     width: 20,
     height: 20,
-    marginRight: 20,
+    position: 'absolute',
+    left: 28,
   },
   input: {
-    flex: 1,
+    paddingVertical: 20,
+    paddingHorizontal: 28,
     fontSize: 16,
+  },
+  inputWithIcon: {
+    paddingLeft: 68,
   },
   errorText: {
     marginTop: 5,
