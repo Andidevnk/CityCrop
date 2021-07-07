@@ -7,7 +7,7 @@ import { addModuleAsync } from 'shared/store/modules/actions';
 import useFormState from 'shared/hooks/useFormState';
 import IconTextInput from 'shared/components/IconTextInput';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
-import TraySelector from './TraySelector';
+import TraySelector from 'shared/components/TraySelector';
 
 const AddModuleScreen = ({
   navigation,
