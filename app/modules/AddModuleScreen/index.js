@@ -7,7 +7,7 @@ import { addModuleAsync } from 'shared/store/modules/actions';
 import useFormState from 'shared/hooks/useFormState';
 import IconTextInput from 'shared/components/IconTextInput';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
-import ModuleTypeToggler from '../ModuleSettingsScreen/ModuleTypeToggler';
+import TraySelector from './TraySelector';
 
 const AddModuleScreen = ({
   navigation,
@@ -55,7 +55,7 @@ const AddModuleScreen = ({
         value={formState.serialNumber}
         onChangeText={(text) => setFormState({ serialNumber: text })}
       />
-      <ModuleTypeToggler
+      <TraySelector
         value={formState.type}
         onOptionPress={(type) => setFormState({ type })}
       />
