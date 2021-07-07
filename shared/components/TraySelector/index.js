@@ -3,8 +3,8 @@ import { StyleSheet, View } from 'react-native';
 
 import TrayOption from './TrayOption';
 
-const TraySelector = ({ value, onOptionPress }) => (
-  <View style={styles.row}>
+const TraySelector = ({ style, value, onOptionPress }) => (
+  <View style={[styles.row, style]}>
     <View style={styles.column}>
       <TrayOption
         title="Greens"
