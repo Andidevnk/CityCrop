@@ -10,7 +10,7 @@ import {
 } from 'shared/store/modules/actions';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import ConfirmationModal from 'shared/components/ConfirmationModal';
-import ModuleTypeToggler from './ModuleTypeToggler';
+import TraySelector from 'shared/components/TraySelector';
 
 const ModuleSettingsScreen = ({
   navigation,
@@ -65,7 +65,7 @@ const ModuleSettingsScreen = ({
         value={formState.serialNumber}
         editable={false}
       />
-      <ModuleTypeToggler
+      <TraySelector
         style={{ marginTop: 50 }}
         value={formState.type}
         onOptionPress={(type) => {
