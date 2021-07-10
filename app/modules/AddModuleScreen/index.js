@@ -8,6 +8,8 @@ import useFormState from 'shared/hooks/useFormState';
 import IconTextInput from 'shared/components/IconTextInput';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import TraySelector from 'shared/components/TraySelector';
+import KeyboardDismissArea from 'shared/components/KeyboardDismissArea';
+import KeyboardAvoidingScrollView from 'shared/components/KeyboardAvoidingScrollView';
 
 const AddModuleScreen = ({
   navigation,
@@ -34,46 +36,49 @@ const AddModuleScreen = ({
   };
 
   return (
-    <View style={styles.container}>
-      <View style={{ marginBottom: 40 }}>
-        <Text style={styles.description}>You’re adding a module to</Text>
-        <Text style={styles.deviceName}>{device.name}</Text>
+    <KeyboardAvoidingScrollView>
+      <View style={styles.container}>
+        <View style={{ marginBottom: 40 }}>
+          <Text style={styles.description}>You’re adding a module to</Text>
+          <Text style={styles.deviceName}>{device.name}</Text>
+        </View>
+        <Text style={styles.inputLabel}>Module Name</Text>
+        <IconTextInput
+          style={styles.input}
+          inputContainerStyle={styles.inputContainer}
+          placeholder="Name"
+          value={formState.name}
+          onChangeText={(text) => setFormState({ name: text })}
+        />
+        <Text style={styles.inputLabel}>Serial Number</Text>
+        <IconTextInput
+          style={styles.input}
+          inputContainerStyle={styles.inputContainer}
+          placeholder="Serial Number"
+          value={formState.serialNumber}
+          onChangeText={(text) => setFormState({ serialNumber: text })}
+        />
+        <Text style={styles.inputLabel}>Choose Your Tray</Text>
+        <TraySelector
+          style={{ marginBottom: 30 }}
+          value={formState.type}
+          onOptionPress={(type) => setFormState({ type })}
+        />
+        <LightGreenBtn
+          style={{ marginTop: 'auto' }}
+          title="Save"
+          loading={isLoading}
+          onPress={addModule}
+        />
       </View>
-      <Text style={styles.inputLabel}>Module Name</Text>
-      <IconTextInput
-        style={{ marginBottom: 25 }}
-        inputContainerStyle={styles.input}
-        placeholder="Name"
-        value={formState.name}
-        onChangeText={(text) => setFormState({ name: text })}
-      />
-      <Text style={styles.inputLabel}>Serial Number</Text>
-      <IconTextInput
-        style={{ marginBottom: 25 }}
-        inputContainerStyle={styles.input}
-        placeholder="Serial Number"
-        value={formState.serialNumber}
-        onChangeText={(text) => setFormState({ serialNumber: text })}
-      />
-      <TraySelector
-        value={formState.type}
-        onOptionPress={(type) => setFormState({ type })}
-      />
-      <LightGreenBtn
-        style={{ marginTop: 'auto' }}
-        title="Save"
-        loading={isLoading}
-        onPress={addModule}
-      />
-    </View>
+    </KeyboardAvoidingScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 40,
-    paddingHorizontal: 20,
+    padding: 20,
     backgroundColor: '#F5F8F5',
   },
   description: {
@@ -94,6 +99,9 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   input: {
+    marginBottom: 25,
+  },
+  inputContainer: {
     borderRadius: 15,
     backgroundColor: '#FFFFFF',
     fontSize: 16,

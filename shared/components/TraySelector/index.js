@@ -5,22 +5,20 @@ import TrayOption from './TrayOption';
 
 const TraySelector = ({ style, value, onOptionPress }) => (
   <View style={[styles.row, style]}>
-    <View style={styles.column}>
-      <TrayOption
-        title="Greens"
-        image={require('assets/imgs/tray/greens.png')}
-        selected={value === 'greens'}
-        onPress={() => onOptionPress('greens')}
-      />
-    </View>
-    <View style={styles.column}>
-      <TrayOption
-        title="Microgreens"
-        image={require('assets/imgs/tray/microgreens.png')}
-        selected={value === 'microgreens'}
-        onPress={() => onOptionPress('microgreens')}
-      />
-    </View>
+    <TrayOption
+      style={styles.column}
+      title="Greens"
+      image={require('assets/imgs/tray/greens.png')}
+      selected={value === 'greens'}
+      onPress={() => onOptionPress('greens')}
+    />
+    <TrayOption
+      style={styles.column}
+      title="Microgreens"
+      image={require('assets/imgs/tray/microgreens.png')}
+      selected={value === 'microgreens'}
+      onPress={() => onOptionPress('microgreens')}
+    />
   </View>
 );
 
