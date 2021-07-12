@@ -27,13 +27,14 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   trayOptionSelected: {
-    backgroundColor: '#0D9903',
+    backgroundColor: 'rgba(89, 201, 1, 0.6)',
   },
   title: {
     fontSize: 18,
     color: '#000000',
   },
   titleSelected: {
+    fontWeight: 'bold',
     color: '#FFFFFF',
   },
   image: {
