@@ -9,6 +9,7 @@ import {
   updateModuleAsync,
 } from 'shared/store/modules/actions';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
+import WarningModal from 'shared/components/WarningModal';
 import ConfirmationModal from 'shared/components/ConfirmationModal';
 import TraySelector from 'shared/components/TraySelector';
 
@@ -25,6 +26,8 @@ const ModuleSettingsScreen = ({
   });
   const [isUpdateLoading, setIsUpdateLoading] = useState(false);
   const [showChangeTypeErrorText, setShowChangeTypeErrorText] = useState(false);
+  const [isWarningModalVisible, openWarningModal, closeWarningModal] =
+    useBooleanState(false);
   const [
     isConfirmationModalVisible,
     openConfirmationModal,
@@ -46,6 +49,18 @@ const ModuleSettingsScreen = ({
 
   return (
     <View style={styles.container}>
+      <WarningModal
+        visible={isWarningModalVisible}
+        message="This module contains plants. If you delete it, you will NOT be able to access them."
+        onOKPress={() => {
+          closeWarningModal();
+          openConfirmationModal();
+        }}
+        onRequestClose={() => {
+          closeWarningModal();
+          openConfirmationModal();
+        }}
+      />
       <ConfirmationModal
         visible={isConfirmationModalVisible}
         onAcceptPress={deleteModule}
@@ -89,7 +104,10 @@ const ModuleSettingsScreen = ({
       />
       <Pressable
         style={{ marginTop: 20, alignItems: 'center' }}
-        onPress={openConfirmationModal}
+        onPress={() => {
+          if (module.plants.length > 0) openWarningModal();
+          else openConfirmationModal();
+        }}
       >
         <Text style={{ fontSize: 16, color: 'red' }}>Delete</Text>
       </Pressable>

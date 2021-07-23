@@ -12,6 +12,7 @@ import {
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import ListModal from 'shared/components/ListModal';
 import PressableTextInput from 'shared/components/PressableTextInput';
+import WarningModal from 'shared/components/WarningModal';
 import ConfirmationModal from 'shared/components/ConfirmationModal';
 import SectionBtn from './SectionBtn';
 
@@ -27,6 +28,8 @@ const DeviceSettingsScreen = ({
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isTimezonesModalVisible, openTimezonesModal, closeTimezonesModal] =
+    useBooleanState(false);
+  const [isWarningModalVisible, openWarningModal, closeWarningModal] =
     useBooleanState(false);
   const [
     isConfirmationModalVisible,
@@ -53,6 +56,18 @@ const DeviceSettingsScreen = ({
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Edit your device settings</Text>
+      <WarningModal
+        visible={isWarningModalVisible}
+        message="This device contains plants. If you delete it, you will NOT be able to access them."
+        onOKPress={() => {
+          closeWarningModal();
+          openConfirmationModal();
+        }}
+        onRequestClose={() => {
+          closeWarningModal();
+          openConfirmationModal();
+        }}
+      />
       <ConfirmationModal
         visible={isConfirmationModalVisible}
         onAcceptPress={deleteDevice}
@@ -106,7 +121,10 @@ const DeviceSettingsScreen = ({
       />
       <Pressable
         style={{ marginTop: 20, alignItems: 'center' }}
-        onPress={openConfirmationModal}
+        onPress={() => {
+          if (device.plantsCount > 0) openWarningModal();
+          else openConfirmationModal();
+        }}
       >
         <Text style={{ fontSize: 16, color: 'red' }}>Delete</Text>
       </Pressable>
