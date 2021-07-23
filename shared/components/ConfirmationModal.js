@@ -30,17 +30,6 @@ const ConfirmationModal = ({
           <TouchableHighlight
             style={[
               styles.button,
-              { marginRight: 20, backgroundColor: 'rgba(255, 0, 0, 0.8)' },
-            ]}
-            underlayColor="rgba(255, 0, 0, 1)"
-            activeOpacity={1}
-            onPress={onYesPress}
-          >
-            <Text style={styles.buttonText}>Yes</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={[
-              styles.button,
               { backgroundColor: 'rgba(204, 204, 204, 0.8)' },
             ]}
             underlayColor="rgba(204, 204, 204, 1)"
@@ -48,6 +37,17 @@ const ConfirmationModal = ({
             onPress={onNoPress}
           >
             <Text style={styles.buttonText}>No</Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={[
+              styles.button,
+              { marginLeft: 20, backgroundColor: 'rgba(255, 0, 0, 0.8)' },
+            ]}
+            underlayColor="rgba(255, 0, 0, 1)"
+            activeOpacity={1}
+            onPress={onYesPress}
+          >
+            <Text style={styles.buttonText}>Yes</Text>
           </TouchableHighlight>
         </View>
       </>
