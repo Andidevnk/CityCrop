@@ -6,7 +6,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "sv": "node ./scripts/setAppVersion.js"
+    "increment": "node ./scripts/incrementAppVersion.js"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "~1.15.0",
