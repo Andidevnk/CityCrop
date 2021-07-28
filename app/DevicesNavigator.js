@@ -27,7 +27,7 @@ import AddModuleScreen from './modules/AddModuleScreen';
 import PlantScreen from './plants/PlantScreen';
 import PlantCategoriesScreen from './plants/PlantCategoriesScreen';
 import CategoryPlantsScreen from './plants/CategoryPlantsScreen';
-import AddPlantScreen from './plants/AddPlantScreen';
+import PlantInfoScreen from './plants/PlantInfoScreen';
 import AddDomeScreen from './plants/AddDomeScreen';
 
 const Stack = createStackNavigator();
@@ -166,7 +166,7 @@ const DevicesNavigator = ({ navigation }) => {
       />
       <Stack.Screen
         name="Add Plant"
-        component={AddPlantScreen}
+        component={PlantInfoScreen}
         options={({ route }) => ({
           ...ScreenOptions.greenHeader,
           title: route.params.plantName,

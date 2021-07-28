@@ -6,7 +6,7 @@ import { ShadowStyles } from 'shared/styles';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import DurationInfo from './DurationInfo';
 
-const AddPlantScreen = ({
+const PlantInfoScreen = ({
   navigation,
   route: {
     params: { deviceId, moduleId, plantId, gridPosition },
@@ -60,7 +60,7 @@ const AddPlantScreen = ({
   );
 };
 
-export default AddPlantScreen;
+export default PlantInfoScreen;
 
 const styles = StyleSheet.create({
   container: {
