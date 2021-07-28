@@ -28,6 +28,7 @@ import PlantScreen from './plants/PlantScreen';
 import PlantCategoriesScreen from './plants/PlantCategoriesScreen';
 import CategoryPlantsScreen from './plants/CategoryPlantsScreen';
 import AddPlantScreen from './plants/AddPlantScreen';
+import AddDomeScreen from './plants/AddDomeScreen';
 
 const Stack = createStackNavigator();
 
@@ -166,6 +167,14 @@ const DevicesNavigator = ({ navigation }) => {
       <Stack.Screen
         name="Add Plant"
         component={AddPlantScreen}
+        options={({ route }) => ({
+          ...ScreenOptions.greenHeader,
+          title: route.params.plantName,
+        })}
+      />
+      <Stack.Screen
+        name="Add Dome"
+        component={AddDomeScreen}
         options={({ route }) => ({
           ...ScreenOptions.greenHeader,
           title: route.params.plantName,
