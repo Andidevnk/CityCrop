@@ -13,9 +13,10 @@ const AddDomeScreen = ({
     params: { deviceId, moduleId, plantId, gridPosition },
   },
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const { categoryId } = PLANTS.find((plant) => plant.id === plantId);
   const { type } = CATEGORIES.find((category) => category.id === categoryId);
-  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
   const addPlant = () => {
@@ -39,7 +40,7 @@ const AddDomeScreen = ({
         }
         resizeMode="contain"
       />
-      <Text style={styles.text}>You should add the dome!</Text>
+      <Text style={styles.text}>You should now add the dome!</Text>
       <LightGreenBtn
         style={{ marginTop: 'auto' }}
         title="Start growing"
@@ -53,7 +54,8 @@ const AddDomeScreen = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    paddingVertical: 40,
+    paddingHorizontal: 30,
     backgroundColor: '#F5F8F5',
     alignItems: 'center',
   },

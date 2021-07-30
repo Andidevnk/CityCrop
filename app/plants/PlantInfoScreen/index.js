@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 import { PLANTS } from 'shared/constants';
 import { ShadowStyles } from 'shared/styles';
+import { addPlantAsync } from 'shared/store/plants/actions';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import DurationInfo from './DurationInfo';
 
@@ -12,10 +14,19 @@ const PlantInfoScreen = ({
     params: { deviceId, moduleId, plantId, gridPosition },
   },
 }) => {
-  const plant = PLANTS.find((plant) => plant.id === plantId);
-  const { name, image, characteristics, commonUse, germinationDays, duration } =
-    plant;
+  const [isLoading, setIsLoading] = useState(false);
 
+  const {
+    name,
+    image,
+    characteristics,
+    commonUse,
+    germinationDays,
+    duration,
+    needsDome,
+  } = PLANTS.find((plant) => plant.id === plantId);
+
+  const dispatch = useDispatch();
   const navigateToAddDome = () =>
     navigation.navigate('Add Dome', {
       deviceId,
@@ -24,6 +35,12 @@ const PlantInfoScreen = ({
       plantId,
       plantName: name,
     });
+  const addPlant = () => {
+    setIsLoading(true);
+    dispatch(addPlantAsync(deviceId, moduleId, plantId, gridPosition))
+      .then(() => navigation.navigate('Module'))
+      .finally(() => setIsLoading(false));
+  };
 
   return (
     <View style={styles.container}>
@@ -53,8 +70,9 @@ const PlantInfoScreen = ({
       </View>
       <LightGreenBtn
         style={{ marginTop: 'auto' }}
-        title="Next"
-        onPress={navigateToAddDome}
+        title={needsDome ? 'Next' : 'Start growing'}
+        loading={isLoading}
+        onPress={needsDome ? navigateToAddDome : addPlant}
       />
     </View>
   );
