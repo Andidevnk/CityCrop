@@ -28,7 +28,7 @@ const HomeNavigator = () => {
         />
       ) : (
         <Stack.Screen
-          name="Devices"
+          name="Devices Home"
           component={DevicesNavigator}
           options={{ headerShown: false }}
         />

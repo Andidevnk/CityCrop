@@ -2,8 +2,8 @@ import React from 'react';
 import {
   createStackNavigator,
   TransitionPresets,
-  HeaderBackButton,
 } from '@react-navigation/stack';
+import { HeaderBackButton } from '@react-navigation/elements';
 
 import { ScreenOptions } from 'shared/constants';
 import AccountSettingsScreen from './drawer/AccountSettingsScreen';
@@ -25,9 +25,12 @@ const AccountSettingsNavigator = ({ navigation }) => {
       }}
     >
       <Stack.Screen
-        name="Account Settings"
+        name="Account Settings 1"
         component={AccountSettingsScreen}
-        options={ScreenOptions.greenHeader}
+        options={{
+          ...ScreenOptions.greenHeader,
+          headerTitle: 'Account Settings',
+        }}
       />
     </Stack.Navigator>
   );

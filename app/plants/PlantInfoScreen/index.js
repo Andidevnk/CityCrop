@@ -38,7 +38,7 @@ const PlantInfoScreen = ({
   const addPlant = () => {
     setIsLoading(true);
     dispatch(addPlantAsync(deviceId, moduleId, plantId, gridPosition))
-      .then(() => navigation.navigate('Module'))
+      .then(() => navigation.navigate({ name: 'Module', merge: true }))
       .finally(() => setIsLoading(false));
   };
 

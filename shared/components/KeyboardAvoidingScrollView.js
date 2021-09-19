@@ -6,7 +6,7 @@ import {
   Platform,
   StatusBar,
 } from 'react-native';
-import { useHeaderHeight } from '@react-navigation/stack';
+import { useHeaderHeight } from '@react-navigation/elements';
 
 const KeyboardAvoidingScrollView = ({
   contentContainerStyle,

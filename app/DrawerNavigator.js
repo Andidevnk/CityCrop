@@ -21,10 +21,9 @@ const DrawerNavigator = () => {
 
   // Fetch devices and user info before rendering screens
   useEffect(() => {
-    Promise.all([
-      dispatch(loadDevicesAsync()),
-      dispatch(getMeAsync()),
-    ]).then(() => setIsLoading(false));
+    Promise.all([dispatch(loadDevicesAsync()), dispatch(getMeAsync())]).then(
+      () => setIsLoading(false)
+    );
   }, [dispatch]);
 
   useEffect(() => {
@@ -45,7 +44,11 @@ const DrawerNavigator = () => {
   if (isLoading) return null;
 
   return (
-    <Drawer.Navigator initialRouteName="Home" drawerContent={DrawerContent}>
+    <Drawer.Navigator
+      initialRouteName="Home"
+      drawerContent={DrawerContent}
+      screenOptions={{ headerShown: false }}
+    >
       <Drawer.Screen name="Home" component={HomeNavigator} />
       <Drawer.Screen
         name="Account Settings"
