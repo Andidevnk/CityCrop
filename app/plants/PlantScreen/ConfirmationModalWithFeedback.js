@@ -39,7 +39,7 @@ const ConfirmationModalWithFeedback = ({
           Are you sure you want to remove the plant?
         </Text>
         <Text style={styles.subtext}>
-          Would you like to give us feeback on how it went?
+          Would you like to give us feedback on how it went?
         </Text>
         <TouchableOpacity
           style={{
@@ -102,14 +102,14 @@ const styles = StyleSheet.create({
     color: '#18191F',
     textAlign: 'center',
     marginBottom: 20,
-    paddingHorizontal: 40,
+    paddingHorizontal: 20,
   },
   subtext: {
     fontSize: 16,
     color: '#18191F',
     textAlign: 'center',
     marginBottom: 20,
-    paddingHorizontal: 40,
+    paddingHorizontal: 20,
   },
   buttonsContainer: {
     flexDirection: 'row',
