@@ -25,6 +25,7 @@ import ModuleScreen from './modules/ModuleScreen';
 import ModuleSettingsScreen from './modules/ModuleSettingsScreen';
 import AddModuleScreen from './modules/AddModuleScreen';
 import PlantScreen from './plants/PlantScreen';
+import GiveFeedbackScreen from './plants/GiveFeedbackScreen';
 import PlantCategoriesScreen from './plants/PlantCategoriesScreen';
 import CategoryPlantsScreen from './plants/CategoryPlantsScreen';
 import PlantInfoScreen from './plants/PlantInfoScreen';
@@ -149,6 +150,14 @@ const DevicesNavigator = ({ navigation }) => {
         options={({ route }) => ({
           ...ScreenOptions.transparentHeader,
           title: route.params.plant.name,
+        })}
+      />
+      <Stack.Screen
+        name="Give Feedback"
+        component={GiveFeedbackScreen}
+        options={({ route }) => ({
+          ...ScreenOptions.transparentHeader,
+          title: route.params.plantName,
         })}
       />
       <Stack.Screen
