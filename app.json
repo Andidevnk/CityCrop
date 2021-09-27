@@ -2,7 +2,7 @@
   "expo": {
     "name": "CityCrop",
     "slug": "citycrop",
-    "version": "3.0.14",
+    "version": "3.0.15",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -21,7 +21,7 @@
       "color": "#D4F8D4"
     },
     "ios": {
-      "buildNumber": "3.0.14",
+      "buildNumber": "3.0.15",
       "bundleIdentifier": "io.citycrop.app",
       "supportsTablet": true,
       "config": {
@@ -29,7 +29,7 @@
       }
     },
     "android": {
-      "versionCode": 30014,
+      "versionCode": 30015,
       "package": "io.citycrop.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
