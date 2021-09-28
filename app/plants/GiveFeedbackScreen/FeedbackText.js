@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   feedbackInput: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 20,
+    paddingHorizontal: 20,
     backgroundColor: '#FFFFFF',
     borderRadius: 15,
     elevation: 2,
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   input: {
+    paddingVertical: 20,
     marginLeft: 'auto',
   },
 });
