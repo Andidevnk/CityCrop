@@ -6,9 +6,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "increment": "node ./scripts/incrementAppVersion.js",
-    "slack-production": "node ./scripts/slackProduction.js",
-    "slack-staging": "node ./scripts/slackStaging.js"
+    "iav": "node ./scripts/incrementAppVersion.js",
+    "nr:production": "node ./scripts/notifyReleaseProduction.js",
+    "nr:staging": "node ./scripts/notifyReleaseStaging.js"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "~1.15.0",
