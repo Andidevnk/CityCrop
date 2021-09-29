@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
 import LightGreenBtn from 'shared/components/LightGreenBtn';
+import WarningBlock from './WarningBlock';
 
 const Step3 = ({ navigation }) => (
   <View style={styles.container}>
@@ -19,6 +20,7 @@ const Step3 = ({ navigation }) => (
       source={require('assets/imgs/devices-modules/blinking-blue.gif')}
       resizeMode="contain"
     />
+    <WarningBlock />
     <LightGreenBtn
       style={{ marginTop: 'auto' }}
       title="Next"
