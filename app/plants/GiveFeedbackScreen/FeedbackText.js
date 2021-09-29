@@ -8,7 +8,7 @@ const FeedbackText = ({ style, icon, text, ...props }) => (
   <View style={[styles.feedbackInput, style]}>
     <ScalableImage style={styles.icon} source={icon} resizeMode="contain" />
     <Text style={styles.text}>{text}</Text>
-    <TextInput style={styles.input} {...props} />
+    <TextInput style={styles.input} textAlign="right" {...props} />
   </View>
 );
 
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   feedbackInput: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 20,
+    paddingLeft: 20,
     backgroundColor: '#FFFFFF',
     borderRadius: 15,
     elevation: 2,
@@ -33,8 +33,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   input: {
+    flex: 1,
     paddingVertical: 20,
-    marginLeft: 'auto',
+    paddingHorizontal: 20,
   },
 });
 
