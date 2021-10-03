@@ -12,19 +12,21 @@ import { DEVICE_MODULE_IMAGES } from 'shared/constants';
 import { CardStyles } from 'shared/styles';
 import ScalableImage from 'shared/components/ScalableImage';
 
-const STATUS_TO_ICON = {
+const POWER_STATUS_TO_ICON = {
   on: require('assets/icons/on.png'),
   off: require('assets/icons/off.png'),
 };
 
-const getModuleImageSource = (moduleType, hasPlants) => {
+const getModuleImageSource = (moduleType, onlineStatus, hasPlants) => {
   const modulePart = moduleType === 'main' ? 'LU' : 'UU';
+  if (onlineStatus === 'offline')
+    return DEVICE_MODULE_IMAGES[`${modulePart}-offline`];
   const plantsPart = hasPlants ? 'with-plants' : 'no-plants';
   return DEVICE_MODULE_IMAGES[`${modulePart}-online-${plantsPart}`];
 };
 
 const ModuleCard = ({ style, module, onCardPress, onSettingsIconPress }) => {
-  const { name, plants, type, status } = module;
+  const { name, plants, type, powerStatus, onlineStatus } = module;
   const hasPlants = plants.length > 0;
 
   return (
@@ -44,14 +46,14 @@ const ModuleCard = ({ style, module, onCardPress, onSettingsIconPress }) => {
       </TouchableOpacity>
       <ScalableImage
         style={styles.moduleImage}
-        source={getModuleImageSource(type, hasPlants)}
+        source={getModuleImageSource(type, onlineStatus, hasPlants)}
         resizeMode="contain"
       />
       <View style={styles.nameContainer}>
         <Text style={styles.name}>{name}</Text>
         <ScalableImage
           style={styles.connectionStatusIcon}
-          source={STATUS_TO_ICON[status]}
+          source={POWER_STATUS_TO_ICON[powerStatus]}
           resizeMode="contain"
         />
       </View>

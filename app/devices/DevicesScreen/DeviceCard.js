@@ -12,6 +12,11 @@ import { DEVICE_MODULE_IMAGES } from 'shared/constants';
 import { CardStyles } from 'shared/styles';
 import ScalableImage from 'shared/components/ScalableImage';
 
+const ONLINE_STATUS_TO_ICON = {
+  online: require('assets/icons/online.png'),
+  offline: require('assets/icons/offline.png'),
+};
+
 const getDeviceImageModulesPart = (moduleTypes) =>
   moduleTypes.length == 1 ? moduleTypes[0] : 'LU-UU';
 const getDeviceImageStyle = (moduleTypes) => [
@@ -20,16 +25,18 @@ const getDeviceImageStyle = (moduleTypes) => [
   ...(moduleTypes.length === 1 ? [styles.singleModuleImage] : []),
   ...(moduleTypes.length === 2 ? [styles.dualModuleImage] : []),
 ];
-const getDeviceImageSource = (moduleTypes, hasPlants) => {
+const getDeviceImageSource = (moduleTypes, onlineStatus, hasPlants) => {
   if (moduleTypes.length === 0) return DEVICE_MODULE_IMAGES['LU-add-module'];
 
   const modulesPart = getDeviceImageModulesPart(moduleTypes);
+  if (onlineStatus === 'offline')
+    return DEVICE_MODULE_IMAGES[`${modulesPart}-offline`];
   const plantsPart = hasPlants ? 'with-plants' : 'no-plants';
   return DEVICE_MODULE_IMAGES[`${modulesPart}-online-${plantsPart}`];
 };
 
 const DeviceCard = ({ device, onCardPress, onSettingsIconPress }) => {
-  const { name, modules, plantsCount } = device;
+  const { name, modules, plantsCount, onlineStatus } = device;
 
   const moduleTypes = modules.map((module) =>
     module.type === 'main' ? 'LU' : 'UU'
@@ -53,14 +60,14 @@ const DeviceCard = ({ device, onCardPress, onSettingsIconPress }) => {
       </TouchableOpacity>
       <ScalableImage
         style={getDeviceImageStyle(moduleTypes)}
-        source={getDeviceImageSource(moduleTypes, hasPlants)}
+        source={getDeviceImageSource(moduleTypes, onlineStatus, hasPlants)}
         resizeMode="contain"
       />
       <View style={styles.nameContainer}>
         <Text style={styles.name}>{name}</Text>
         <ScalableImage
           style={styles.connectionStatusIcon}
-          source={require('assets/icons/connected.png')}
+          source={ONLINE_STATUS_TO_ICON[onlineStatus]}
           resizeMode="contain"
         />
       </View>

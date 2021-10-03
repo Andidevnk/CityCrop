@@ -21,18 +21,20 @@ const prepareDevices = (devices) =>
       0
     ),
     modules: prepareModules(device.modules, device),
+    onlineStatus: 'online', // TODO: Remove when provided by backend
   }));
 const prepareModules = (modules, device) =>
   modules.map((module) => ({
     ...module,
     id: module._id,
     plants: preparePlants(module.grid),
-    status: 'on', // TODO: Make this functional
     serialNumber: module.serial_number,
     measurements: {
       ...module.measurements,
       ...device.measurements,
     },
+    powerStatus: 'on', // TODO: Remove when provided by backend
+    onlineStatus: 'online', // TODO: Remove when provided by backend
   }));
 const preparePlants = (plants) =>
   plants.map((plant) => ({
