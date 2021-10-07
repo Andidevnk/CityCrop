@@ -13,11 +13,9 @@ import { getPlant, getPlantImage } from 'shared/utilities';
 import useBooleanState from 'shared/hooks/useBooleanState';
 import { deletePlantAsync } from 'shared/store/plants/actions';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
+import ConfirmationModal from 'shared/components/ConfirmationModal';
 import ProgressRing from './ProgressRing';
 import DeletePlantBtnIcon from './DeletePlantBtnIcon';
-import TouchableTextIcon from 'shared/components/TouchableTextIcon';
-import ConfirmationModalWithFeedback from './ConfirmationModalWithFeedback';
-import HarvestFeedbackModal from './HarvestFeedbackModal';
 
 const dateDiffInDays = (date1, date2) => {
   // Discard the time and time-zone information.
@@ -41,17 +39,8 @@ const PlantScreen = ({
     openConfirmationModal,
     closeConfirmationModal,
   ] = useBooleanState(false);
-  const [
-    harvestFeedbackModalVisible,
-    openHarvestFeedbackModal,
-    closeHarvestFeedbackModal,
-  ] = useBooleanState(false);
 
   const dispatch = useDispatch();
-  const navigateToGiveFeedbackScreen = () =>
-    navigation.navigate('Give Feedback', { plantName: plant.name });
-  const replaceWithGiveFeedbackScreen = () =>
-    navigation.replace('Give Feedback', { plantName: plant.name });
   const deletePlant = useCallback(() => {
     setIsDeleteLoading(true);
     dispatch(deletePlantAsync(deviceId, moduleId, position))
@@ -61,7 +50,7 @@ const PlantScreen = ({
   const harvestPlant = () => {
     setIsHarvestLoading(true);
     dispatch(deletePlantAsync(deviceId, moduleId, position))
-      .then(() => openHarvestFeedbackModal())
+      .then(() => navigation.goBack())
       .finally(() => setIsHarvestLoading(false));
   };
 
@@ -91,29 +80,10 @@ const PlantScreen = ({
 
   return (
     <View style={styles.container}>
-      <ConfirmationModalWithFeedback
+      <ConfirmationModal
         visible={isConfirmationModalVisible}
         onAcceptPress={deletePlant}
-        onGiveFeedbackPress={() => {
-          closeConfirmationModal();
-          navigateToGiveFeedbackScreen();
-        }}
         onRequestClose={closeConfirmationModal}
-      />
-      <HarvestFeedbackModal
-        visible={harvestFeedbackModalVisible}
-        onAcceptPress={() => {
-          closeHarvestFeedbackModal();
-          replaceWithGiveFeedbackScreen();
-        }}
-        onCancelPress={() => {
-          closeHarvestFeedbackModal();
-          navigation.goBack();
-        }}
-        onRequestClose={() => {
-          closeHarvestFeedbackModal();
-          navigation.goBack();
-        }}
       />
 
       <View style={[styles.imageContainer, ShadowStyles.shadow2]}>
@@ -159,14 +129,6 @@ const PlantScreen = ({
         loading={isHarvestLoading}
         onPress={harvestPlant}
       />
-      <TouchableTextIcon
-        style={styles.giveFeedbackTextContainer}
-        textStyle={styles.giveFeedbackText}
-        icon="chevron-forward"
-        onPress={navigateToGiveFeedbackScreen}
-      >
-        Give Feedback
-      </TouchableTextIcon>
     </View>
   );
 };
@@ -184,18 +146,6 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#FFFFFF',
     borderRadius: 10,
-  },
-  giveFeedbackTextContainer: {
-    marginTop: 10,
-    paddingLeft: 10,
-    justifyContent: 'center',
-  },
-  giveFeedbackText: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#18191F',
-    includeFontPadding: false,
-    textAlignVertical: 'center',
   },
 });
 
