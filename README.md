@@ -1,3 +1,19 @@
+# CityCrop Mobile App
+
+## Getting Started
+
+First, open your terminal and install the expo-cli:
+
+```bash
+npm install --global expo-cli
+```
+
+Then start the application with:
+
+```bash
+expo start
+```
+
 ## Create a new staging release
 
 Create release in staging channel with new version
