@@ -2,19 +2,28 @@
 
 ## Getting Started
 
-First, open your terminal and install the expo-cli:
+Install `yarn`, if you do not already have it installed.
+
+Run the following to install all the necessary packages:
+
+```bash
+yarn install
+```
+
+Then install the expo-cli:
 
 ```bash
 npm install --global expo-cli
 ```
 
-Then start the application with:
+And start the application with:
 
 ```bash
 expo start
 ```
 
-## Create a new staging release
+## Advanced
+### Create a new staging release 🧪
 
 Create release in staging channel with new version
 
@@ -32,7 +41,7 @@ Creates binary for Transporter using latest version from staging channel
 expo build:ios --release-channel staging --no-publish
 ```
 
-## Create a new production release
+### Create a new production release 🚀
 
 Increment app version:
 
