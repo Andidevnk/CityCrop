@@ -1,23 +1,31 @@
 const axios = require('axios');
 
-const SLACK_MAIN_WEBHOOK_URL =
-  'https://hooks.slack.com/services/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'; // Channel: app-updates
-const SLACK_TEST_WEBHOOK_URL =
-  'https://hooks.slack.com/services/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'; // Channel: Panos
-const SLACK_WEBHOOK_URL =
-  process.argv[2] === '--main'
-    ? SLACK_MAIN_WEBHOOK_URL
-    : SLACK_TEST_WEBHOOK_URL;
-
+// Change message data here
 const DATA = {
   changes: [
-    'Added new Feedback screen and prompt users to give feedback in popups.',
+    'Added support for online/offline device and module images (Mocked for now)',
   ],
   expoUrl:
     'https://expo.dev/@panagiotis.plytas/citycrop?release-channel=staging',
   iosTestFlightVersion: '3.0.15',
 };
 DATA.formattedChanges = DATA.changes.map((change) => `• ${change}\n`).join('');
+
+// Constants
+const SLACK_MAIN_WEBHOOK_URL =
+  'https://hooks.slack.com/services/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'; // Channel: app-updates
+const SLACK_TEST_WEBHOOK_URL =
+  'https://hooks.slack.com/services/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'; // Channel: Panos
+const OTA_TESTING_ΤΕΧΤ = `Over-the-air update on version ${DATA.iosTestFlightVersion}.\nSimply open the app and the update will be\ndownloaded in the background, after a few\nseconds close the app and reopen it.\nThe update should now be applied.`;
+const NEW_VERSION_TESTING_TEXT = `Download version ${DATA.iosTestFlightVersion} from TestFlight.`;
+const ARGS_MAPPING = {
+  '--app-updates': SLACK_MAIN_WEBHOOK_URL,
+  '--panos': SLACK_TEST_WEBHOOK_URL,
+  '--ios-ota': OTA_TESTING_ΤΕΧΤ,
+  '--ios-new-version': NEW_VERSION_TESTING_TEXT,
+};
+const SLACK_WEBHOOK_URL = ARGS_MAPPING[process.argv[2]];
+const IOS_TESTING_TEXT = ARGS_MAPPING[process.argv[3]];
 
 const data = {
   blocks: [
@@ -64,7 +72,7 @@ const data = {
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `*On iOS*\nDownload version ${DATA.iosTestFlightVersion} from TestFlight.`,
+        text: `*On iOS*\n${IOS_TESTING_TEXT}`,
       },
     },
   ],
