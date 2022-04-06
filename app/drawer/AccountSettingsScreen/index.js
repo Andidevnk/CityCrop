@@ -118,6 +118,12 @@ const AccountSettingsScreen = () => {
       </View>
       <LightGreenBtn
         style={{ marginTop: 30 }}
+        title="Download Manual"
+        loading={isLoading}
+        //onPress={updateMe}
+      />
+      <LightGreenBtn
+        style={{ marginTop: 30 }}
         title="Save"
         loading={isLoading}
         onPress={updateMe}
