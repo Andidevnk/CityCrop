@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View,Alert,Linking } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-
+import * as IntentLauncher from 'expo-intent-launcher';
 import { arePasswordsValid } from 'shared/utilities';
 import { selectMe } from 'shared/store/users/selectors';
 import { updateMeAsync } from 'shared/store/users/actions';
@@ -11,6 +11,10 @@ import KeyboardAvoidingScrollView from 'shared/components/KeyboardAvoidingScroll
 import IconTextInput from 'shared/components/IconTextInput';
 import LightGreenBtn from 'shared/components/LightGreenBtn';
 import UserProfileImagePicker from './UserProfileImagePicker';
+import * as FileSystem from 'expo-file-system';
+import * as Permissions from 'expo-permissions';
+import * as MediaLibrary from 'expo-media-library';
+import { WebView } from 'react-native-webview';
 
 const AccountSettingsScreen = () => {
   const me = useSelector(selectMe());
@@ -25,6 +29,58 @@ const AccountSettingsScreen = () => {
   const isMounted = useIsMounted();
 
   const dispatch = useDispatch();
+
+  const saveFile = async () =>  {
+
+    // try {
+
+    //   const cUri = await FileSystem.getContentUriAsync("http://www.africau.edu/images/default/sample.pdf");
+                 
+    //   await IntentLauncher.startActivityAsync("android.intent.action.VIEW", {
+    //       data: cUri,
+    //       flags: 1,
+    //       type: "application/pdf",
+    //   });
+    // }catch(e){
+    //     console.log(e.message);
+    // }
+
+    // FileSystem.getContentUriAsync()
+    // .then(cUri => {
+    //   console.log("cUri",cUri);
+    //   IntentLauncher.startActivityAsync('android.intent.action.VIEW',{
+    //     data:cUri.uri,
+    //     flags:1,
+    //     type:'application/pdf'
+    //   })
+    // })
+    
+   const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
+    
+
+    if(status === "granted") {
+      FileSystem.downloadAsync('http://www.africau.edu/images/default/sample.pdf',FileSystem.documentDirectory + 'CityCropManual.pdf')
+      .then( async ({uri}) => {
+        console.log("uri",uri);
+        const permissions = await MediaLibrary.getPermissionsAsync()
+        console.log("permissions",permissions);
+        if(permissions.status === "granted") {
+          console.log("aaa");
+          const contentURL = await FileSystem.getContentUriAsync(uri)
+          console.log('contentURL',contentURL);
+          await MediaLibrary.createAssetAsync(contentURL);
+          await Linking.openURL(contentURL)
+         //let a = await MediaLibrary.createAssetAsync(uri,{encoding: FileSystem.EncodingType.UTF8})
+        // console.log("a",a);
+        //  if(a.uri) {
+        //    Alert.alert("Manual Download Successfully!")
+        //  }
+        } 
+      }).catch((err) => {
+        console.log("err",err);
+      })
+    }
+  }
   const updateMe = () => {
     // Passwords should match
     if (
@@ -60,7 +116,9 @@ const AccountSettingsScreen = () => {
           style={styles.userProfileImagePicker}
           onPickImagePress={() => console.log('pick image')}
         />
-
+        {/* <WebView
+        source={{ uri: "assest/files/CityCrop-Manual.pdf" }}
+        /> */}
         {isMounted && ( // Solves the autofill bug
           <>
             <View style={[styles.row, styles.input]}>
@@ -120,7 +178,7 @@ const AccountSettingsScreen = () => {
         style={{ marginTop: 30 }}
         title="Download Manual"
         loading={isLoading}
-        //onPress={updateMe}
+        onPress={saveFile}
       />
       <LightGreenBtn
         style={{ marginTop: 30 }}
